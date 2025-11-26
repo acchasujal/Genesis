@@ -1,18 +1,28 @@
 // src/components/Scene3D.tsx
-import React, { useRef, useMemo, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { MotionValue } from 'framer-motion';
 import * as THREE from 'three';
 
+// Import the petal sprite that exists in your repo.
+// If you want a different sprite, replace this import with your file.
+import petalSprite from '../assets/9a37286e101197d978dc518f5bf9258b949db55b.png';
+
 interface SakuraPetalSystemProps {
   count: number;
-  color: string;
+  color: string;      // used as tint
   size: number;
   speed: number;
   windStrength: number;
   depthLayer: number;
 }
 
+/**
+ * SakuraPetalSystem:
+ * - uses a Points geometry + PointsMaterial with a texture map (sprite)
+ * - updates BufferAttribute positions in useFrame
+ * - disposes geometry/material/texture on unmount
+ */
 function SakuraPetalSystem({
   count,
   color,
@@ -24,7 +34,10 @@ function SakuraPetalSystem({
   const meshRef = useRef<THREE.Points | null>(null);
   const windRef = useRef({ x: 0, z: 0, phase: 0 });
 
-  // Precompute particle arrays
+  // Load petal texture via r3f's useLoader (memoized by fiber)
+  const petalTexture = useLoader(THREE.TextureLoader, petalSprite);
+
+  // Precompute particle arrays (positions, velocities, rotations, phases)
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const velocities = new Float32Array(count * 3);
@@ -49,7 +62,7 @@ function SakuraPetalSystem({
     return { positions, velocities, rotations, phases, scales };
   }, [count, speed, depthLayer]);
 
-  // Geometry + material created in JS (avoids JSX prop typing issues)
+  // Create geometry and material instances once
   const geometry = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(particles.positions, 3));
@@ -57,19 +70,56 @@ function SakuraPetalSystem({
   }, [particles, count]);
 
   const material = useMemo(() => {
-    return new THREE.PointsMaterial({
+    const mat = new THREE.PointsMaterial({
       size,
-      color,
+      map: petalTexture,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.9,
       sizeAttenuation: true,
       depthWrite: false,
       blending: THREE.NormalBlending,
+      // Use vertex colors if you want varied tints in future:
+      // vertexColors: false,
     });
-  }, [size, color]);
 
+    // tint the sprite using color by multiplying a Color onto material.color
+    try {
+      mat.color = new THREE.Color(color);
+    } catch {
+      // if invalid color string, leave default
+    }
+
+    // ensure the texture uses correct alpha handling
+    if (petalTexture) {
+      petalTexture.encoding = THREE.sRGBEncoding;
+      petalTexture.needsUpdate = true;
+    }
+
+    return mat;
+  }, [size, color, petalTexture]);
+
+  // Dispose geometry/material/texture on unmount to prevent leaks
+  useEffect(() => {
+    return () => {
+      try {
+        geometry.dispose();
+      } catch {}
+      try {
+        material.dispose();
+      } catch {}
+      try {
+        if (petalTexture && typeof petalTexture.dispose === 'function') {
+          petalTexture.dispose();
+        }
+      } catch {}
+    };
+    // petalTexture included intentionally to dispose if it changed
+  }, [geometry, material, petalTexture]);
+
+  // Update positions each frame
   useFrame((_, delta) => {
     if (!meshRef.current) return;
+
     const posAttr = meshRef.current.geometry.getAttribute('position') as THREE.BufferAttribute;
     const positions = posAttr.array as Float32Array;
 
@@ -119,7 +169,6 @@ function CameraController({ mouseX, mouseY }: { mouseX: number; mouseY: number }
     state.camera.position.y += (targetY + 5 - state.camera.position.y) * 0.02;
     state.camera.lookAt(0, 0, 0);
   });
-
   return null;
 }
 
@@ -128,12 +177,22 @@ function AtmosphericSky() {
 
   // create the material instance in JS to avoid JSX prop typing issues
   const skyMaterial = useMemo(() => {
-    return new THREE.MeshBasicMaterial({
+    const m = new THREE.MeshBasicMaterial({
       color: new THREE.Color('#1a2332'),
       transparent: true,
       opacity: 0.35,
     });
+    return m;
   }, []);
+
+  // Dispose skyMaterial when component unmounts
+  useEffect(() => {
+    return () => {
+      try {
+        skyMaterial.dispose();
+      } catch {}
+    };
+  }, [skyMaterial]);
 
   useFrame((state) => {
     if (!meshRef.current) return;
@@ -172,14 +231,11 @@ export default function Scene3D({ scrollProgress }: Scene3DProps) {
     });
   };
 
+  // Guard rendering on server / non-browser environments
   if (typeof window === 'undefined') return null;
 
   return (
-    <div
-      className="fixed inset-0 z-0"
-      onMouseMove={handleMouseMove}
-      style={{ pointerEvents: 'auto' }}
-    >
+    <div className="fixed inset-0 z-0" onMouseMove={handleMouseMove} style={{ pointerEvents: 'auto' }}>
       <Canvas camera={{ position: [0, 5, 15], fov: 60 }} gl={{ alpha: true, antialias: true }}>
         <ambientLight intensity={0.2} />
         <pointLight position={[10, 10, 10]} intensity={0.25} color={new THREE.Color('#C33B33')} />
@@ -196,3 +252,4 @@ export default function Scene3D({ scrollProgress }: Scene3DProps) {
     </div>
   );
 }
+
