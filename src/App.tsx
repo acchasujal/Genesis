@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// src/App.tsx
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -10,14 +11,17 @@ import Prizes from './components/Prizes';
 import Sponsors from './components/Sponsors';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
-import Scene3D from './components/Scene3D';
 import KatanaTransition from './components/KatanaTransition';
 import Registration from './components/Registration';
+import ErrorBoundary from './ErrorBoundary';
 
-export default function App() {
+// Lazy-load the heavy 3D scene so it doesn't block initial render
+const Scene3D = lazy(() => import('./components/Scene3D'));
+
+export default function App(): JSX.Element {
   const { scrollYProgress } = useScroll();
-  const [currentSection, setCurrentSection] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
+  const [currentSection, setCurrentSection] = useState<number>(0);
+  const [transitioning, setTransitioning] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +36,7 @@ export default function App() {
           if (currentSection !== index) {
             setTransitioning(true);
             setCurrentSection(index);
+            // two timeouts to match original feel
             setTimeout(() => setTransitioning(false), 700);
             setTimeout(() => setTransitioning(false), 1200);
           }
@@ -45,12 +50,21 @@ export default function App() {
 
   return (
     <div className="relative bg-[#0E0E0E] text-white overflow-x-hidden">
-      {/* 3D Background Scene with sakura petals */}
-      <Scene3D scrollProgress={scrollYProgress} />
-      
+      {/* 3D Background Scene with sakura petals (lazy + guarded) */}
+      <ErrorBoundary>
+        <Suspense
+          fallback={
+            // small invisible placeholder so layout isn't affected; change if you prefer a loader
+            <div aria-hidden className="pointer-events-none" />
+          }
+        >
+          <Scene3D scrollProgress={scrollYProgress} />
+        </Suspense>
+      </ErrorBoundary>
+
       {/* Navigation */}
       <Navbar />
-      
+
       {/* Cinematic Samurai Transition Effect */}
       <KatanaTransition active={transitioning} />
 
