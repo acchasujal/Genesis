@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Brain, DollarSign, Link, Shield, Leaf, Heart } from 'lucide-react';
 
 const tracks = [

@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { useInView } from 'motion/react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Sparkles, Zap, Target } from 'lucide-react';
 

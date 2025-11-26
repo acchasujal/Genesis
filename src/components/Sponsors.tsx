@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 const previousSponsors = [
   { name: 'GeeksforGeeks', logo: 'https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png' },

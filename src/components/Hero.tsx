@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import heroImage from 'figma:asset/9a37286e101197d978dc518f5bf9258b949db55b.png';
 
 export default function Hero() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Mail, User, Building2, Users, Phone, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function Registration() {

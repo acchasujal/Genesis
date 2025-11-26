@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Calendar, Users, Award, MapPin } from 'lucide-react';
 
 export default function Sidebar() {
