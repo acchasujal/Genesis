@@ -215,7 +215,7 @@ export default function Footer() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="mb-2">© 2026 Quest-IT, VESIT. All rights reserved.</p>
+          <p className="mb-2">Quest-IT, VESIT. All rights reserved.</p>
           <p className="text-sm">Built with care for innovators, by innovators</p>
         </motion.div>
       </div>

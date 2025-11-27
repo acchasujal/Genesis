@@ -146,7 +146,7 @@ export default function AboutUs() {
             About Quest-IT
           </h3>
           <p className="mb-4 leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
-            Quest-IT is the Computer Engineering Department's technical committee at VESIT, 
+            Quest-IT is the Information Technology Department's technical committee at VESIT, 
             dedicated to organizing innovative events that challenge and inspire students.
           </p>
           <p className="leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
