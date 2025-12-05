@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Calendar, Users, Code, Trophy } from 'lucide-react';
+import { TiltCard } from './ui/TiltCard';
 
 const timelineEvents = [
   {
@@ -98,32 +99,26 @@ export default function Timeline() {
                   viewport={{ once: true }}
                 >
                   {/* Icon container */}
-                  <motion.div
-                    className="relative mx-auto mb-8 w-20 h-20 border-2 flex items-center justify-center"
+                  <TiltCard
+                    className="relative mx-auto mb-8 w-20 h-20 border-2 flex items-center justify-center rounded-xl bg-slate-950"
                     style={{
-                      backgroundColor: '#0E0E0E',
                       borderColor: event.color,
                       boxShadow: `0 4px 16px rgba(0, 0, 0, 0.5)`,
                     }}
-                    whileHover={{ scale: 1.2, y: -10 }}
-                    transition={{ duration: 0.3 }}
+                    rotateAmplitude={15}
+                    scaleOnHover={1.15}
                   >
                     <Icon size={32} style={{ color: event.color }} />
-                  </motion.div>
+                  </TiltCard>
 
                   {/* Content card */}
-                  <motion.div
-                    className="p-6 backdrop-blur-xl border-l-4"
+                  <TiltCard
+                    className="p-6 backdrop-blur-xl border-l-4 bg-slate-900/70 rounded-lg"
                     style={{
-                      backgroundColor: 'rgba(14, 14, 14, 0.7)',
                       borderLeftColor: event.color,
                       boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
                     }}
-                    whileHover={{
-                      scale: 1.05,
-                      y: -10,
-                      boxShadow: `0 8px 24px rgba(0, 0, 0, 0.6), inset -2px 0 12px ${event.color}40`,
-                    }}
+                    rotateAmplitude={10}
                   >
                     <h3 className="text-xl mb-2" style={{ color: event.color }}>
                       {event.title}
@@ -134,7 +129,7 @@ export default function Timeline() {
                     <p className="text-sm" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
                       {event.description}
                     </p>
-                  </motion.div>
+                  </TiltCard>
                 </motion.div>
               );
             })}
@@ -172,25 +167,24 @@ export default function Timeline() {
                   viewport={{ once: true }}
                 >
                   {/* Icon */}
-                  <motion.div
-                    className="relative flex-shrink-0 w-16 h-16 border-2 flex items-center justify-center"
+                  <TiltCard
+                    className="relative flex-shrink-0 w-16 h-16 border-2 flex items-center justify-center rounded-lg bg-slate-950"
                     style={{
-                      backgroundColor: '#0E0E0E',
                       borderColor: event.color,
                     }}
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ duration: 0.3 }}
+                    rotateAmplitude={15}
+                    scaleOnHover={1.15}
                   >
                     <Icon size={28} style={{ color: event.color }} />
-                  </motion.div>
+                  </TiltCard>
 
                   {/* Content */}
-                  <div
-                    className="flex-1 p-6 border-l-4"
+                  <TiltCard
+                    className="flex-1 p-6 border-l-4 bg-slate-900/70 rounded-lg"
                     style={{
-                      backgroundColor: 'rgba(14, 14, 14, 0.7)',
                       borderLeftColor: event.color,
                     }}
+                    rotateAmplitude={8}
                   >
                     <h3 className="text-xl mb-2" style={{ color: event.color }}>
                       {event.title}
@@ -201,7 +195,7 @@ export default function Timeline() {
                     <p className="text-sm" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
                       {event.description}
                     </p>
-                  </div>
+                  </TiltCard>
                 </motion.div>
               );
             })}

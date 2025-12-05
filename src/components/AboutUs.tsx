@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { TiltCard } from './ui/TiltCard';
 
 export default function AboutUs() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -98,70 +99,80 @@ export default function AboutUs() {
       >
         {/* About VESIT */}
         <motion.div
-          style={{ 
-            y: y1,
-            backgroundColor: 'rgba(14, 14, 14, 0.6)',
-            borderLeftColor: '#C33B33',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(195, 59, 51, 0.2)',
-          }}
-          className="relative p-6 sm:p-8 backdrop-blur-xl border-l-4"
-          whileHover={{ scale: 1.02, x: 10 }}
-          transition={{ duration: 0.3 }}
+          style={{ y: y1 }}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
         >
-          <h3 className="text-2xl sm:text-3xl mb-4" style={{ color: '#C33B33' }}>
-            About VESIT
-          </h3>
-          <p className="mb-4 leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
-            Vivekanand Education Society's Institute of Technology (VESIT) is a premier engineering institution in Mumbai, 
-            known for academic excellence and innovation.
-          </p>
-          <p className="leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
-            With state-of-the-art facilities and a culture of fostering creativity, 
-            VESIT empowers students to push boundaries and achieve remarkable milestones in technology and research.
-          </p>
-
-          {/* Corner accent */}
-          <div
-            className="absolute top-0 right-0 w-16 h-16 opacity-10"
+          <TiltCard
+            className="relative p-6 sm:p-8 backdrop-blur-xl border-l-4 bg-slate-900/60 rounded-lg"
             style={{
-              background: 'linear-gradient(135deg, #C33B33, transparent)',
-              clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
+              borderLeftColor: '#C33B33',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(195, 59, 51, 0.2)',
             }}
-          />
+            rotateAmplitude={10}
+          >
+            <h3 className="text-2xl sm:text-3xl mb-4" style={{ color: '#C33B33' }}>
+              About VESIT
+            </h3>
+            <p className="mb-4 leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
+              Vivekanand Education Society's Institute of Technology (VESIT) is a premier engineering institution in Mumbai, 
+              known for academic excellence and innovation.
+            </p>
+            <p className="leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
+              With state-of-the-art facilities and a culture of fostering creativity, 
+              VESIT empowers students to push boundaries and achieve remarkable milestones in technology and research.
+            </p>
+
+            {/* Corner accent */}
+            <div
+              className="absolute top-0 right-0 w-16 h-16 opacity-10"
+              style={{
+                background: 'linear-gradient(135deg, #C33B33, transparent)',
+                clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
+              }}
+            />
+          </TiltCard>
         </motion.div>
 
         {/* About Quest-IT */}
         <motion.div
-          style={{ 
-            y: y2,
-            backgroundColor: 'rgba(14, 14, 14, 0.6)',
-            borderLeftColor: '#4D8B86',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(77, 139, 134, 0.2)',
-          }}
-          className="relative p-6 sm:p-8 backdrop-blur-xl border-l-4"
-          whileHover={{ scale: 1.02, x: 10 }}
-          transition={{ duration: 0.3 }}
+          style={{ y: y2 }}
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
         >
-          <h3 className="text-2xl sm:text-3xl mb-4" style={{ color: '#4D8B86' }}>
-            About Quest-IT
-          </h3>
-          <p className="mb-4 leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
-            Quest-IT is the Information Technology Department's technical committee at VESIT, 
-            dedicated to organizing innovative events that challenge and inspire students.
-          </p>
-          <p className="leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
-            From hackathons to workshops, Quest-IT creates platforms where brilliant minds collaborate, 
-            learn, and build solutions that shape the future of technology.
-          </p>
-
-          {/* Corner accent */}
-          <div
-            className="absolute top-0 right-0 w-16 h-16 opacity-10"
+          <TiltCard
+            className="relative p-6 sm:p-8 backdrop-blur-xl border-l-4 bg-slate-900/60 rounded-lg"
             style={{
-              background: 'linear-gradient(135deg, #4D8B86, transparent)',
-              clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
+              borderLeftColor: '#4D8B86',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(77, 139, 134, 0.2)',
             }}
-          />
+            rotateAmplitude={10}
+          >
+            <h3 className="text-2xl sm:text-3xl mb-4" style={{ color: '#4D8B86' }}>
+              About Quest-IT
+            </h3>
+            <p className="mb-4 leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
+              Quest-IT is the Information Technology Department's technical committee at VESIT, 
+              dedicated to organizing innovative events that challenge and inspire students.
+            </p>
+            <p className="leading-relaxed text-sm sm:text-base" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
+              From hackathons to workshops, Quest-IT creates platforms where brilliant minds collaborate, 
+              learn, and build solutions that shape the future of technology.
+            </p>
+
+            {/* Corner accent */}
+            <div
+              className="absolute top-0 right-0 w-16 h-16 opacity-10"
+              style={{
+                background: 'linear-gradient(135deg, #4D8B86, transparent)',
+                clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
+              }}
+            />
+          </TiltCard>
         </motion.div>
       </motion.div>
 

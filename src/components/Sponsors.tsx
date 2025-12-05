@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { TiltCard } from './ui/TiltCard';
 
 const previousSponsors = [
   { name: 'GeeksforGeeks', logo: 'https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png' },
@@ -18,7 +19,6 @@ export default function Sponsors() {
   return (
     <section id="sponsors" className="relative min-h-screen py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Section heading with brush-stroke effect */}
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 50 }}
@@ -34,7 +34,6 @@ export default function Sponsors() {
             }}
           >
             Sponsors
-            {/* Brush stroke underline */}
             <motion.div
               className="absolute -bottom-2 left-0 w-full h-1"
               style={{
@@ -73,40 +72,33 @@ export default function Sponsors() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <motion.div
-                  className="relative p-6 backdrop-blur-xl border overflow-hidden flex items-center justify-center h-32"
+                <TiltCard
+                  className="relative p-6 backdrop-blur-xl rounded-xl overflow-hidden flex items-center justify-center h-40"
                   style={{
                     backgroundColor: 'rgba(14, 14, 14, 0.7)',
-                    borderColor: 'rgba(195, 59, 51, 0.3)',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
+                    border: '1px solid rgba(195, 59, 51, 0.3)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
                   }}
-                  whileHover={{
-                    scale: 1.05,
-                    borderColor: 'rgba(195, 59, 51, 0.6)',
-                    boxShadow: '0 6px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(195, 59, 51, 0.4)',
-                  }}
-                  transition={{ duration: 0.3 }}
+                  scaleOnHover={1.05}
+                  rotateAmplitude={12}
                 >
                   <img
                     src={sponsor.logo}
                     alt={sponsor.name}
-                    className="max-w-full max-h-16 object-contain filter brightness-90 group-hover:brightness-110 transition-all"
+                    className="max-w-full max-h-20 object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300"
                   />
-                  
-                  {/* Corner accent */}
+                  {/* Decorative corner accent */}
                   <div
-                    className="absolute top-0 right-0 w-8 h-8 opacity-20"
+                    className="absolute top-0 right-0 w-10 h-10 opacity-30 pointer-events-none"
                     style={{
                       background: 'linear-gradient(135deg, #C33B33, transparent)',
                       clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
                     }}
                   />
-                </motion.div>
-                
-                {/* Sponsor name tooltip */}
+                </TiltCard>
                 <motion.p
-                  className="text-center mt-3 text-sm"
-                  style={{ color: 'rgba(237, 232, 224, 0.7)' }}
+                  className="text-center mt-4 text-sm font-medium"
+                  style={{ color: 'rgba(237, 232, 224, 0.8)' }}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
@@ -138,37 +130,29 @@ export default function Sponsors() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <motion.div
-                  className="relative p-6 backdrop-blur-xl border overflow-hidden flex items-center justify-center h-32"
+                <TiltCard
+                  className="relative p-6 backdrop-blur-xl rounded-xl overflow-hidden flex items-center justify-center h-32"
                   style={{
                     backgroundColor: 'rgba(14, 14, 14, 0.6)',
-                    borderColor: 'rgba(77, 139, 134, 0.3)',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
+                    border: '1px solid rgba(77, 139, 134, 0.3)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
                   }}
-                  whileHover={{
-                    scale: 1.05,
-                    borderColor: 'rgba(77, 139, 134, 0.6)',
-                    boxShadow: '0 6px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(77, 139, 134, 0.4)',
-                  }}
-                  transition={{ duration: 0.3 }}
+                  scaleOnHover={1.05}
+                  rotateAmplitude={10}
                 >
                   <img
                     src={sponsor.logo}
                     alt={sponsor.name}
-                    className="max-w-full max-h-16 object-contain opacity-70 group-hover:opacity-90 transition-all"
+                    className="max-w-full max-h-16 object-contain opacity-70 group-hover:opacity-100 transition-all duration-300"
                   />
-                  
-                  {/* Corner accent */}
                   <div
-                    className="absolute top-0 right-0 w-8 h-8 opacity-20"
+                    className="absolute top-0 right-0 w-8 h-8 opacity-20 pointer-events-none"
                     style={{
                       background: 'linear-gradient(135deg, #4D8B86, transparent)',
                       clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
                     }}
                   />
-                </motion.div>
-                
-                {/* Sponsor name tooltip */}
+                </TiltCard>
                 <motion.p
                   className="text-center mt-3 text-sm"
                   style={{ color: 'rgba(237, 232, 224, 0.6)' }}
@@ -184,7 +168,6 @@ export default function Sponsors() {
         </motion.div>
       </div>
 
-      {/* Sakura petal accent - continuity from above sections */}
       <motion.div
         className="absolute top-1/4 right-1/4 w-4 h-4 rounded-full pointer-events-none"
         style={{ backgroundColor: '#FFC6D0', opacity: 0.5 }}
@@ -194,11 +177,7 @@ export default function Sponsors() {
           rotate: [0, 360],
           opacity: [0.5, 0],
         }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
       />
       <motion.div
         className="absolute bottom-1/3 left-1/4 w-3 h-3 rounded-full pointer-events-none"
@@ -209,12 +188,7 @@ export default function Sponsors() {
           rotate: [0, -360],
           opacity: [0.4, 0],
         }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: 'linear',
-          delay: 2,
-        }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'linear', delay: 2 }}
       />
     </section>
   );

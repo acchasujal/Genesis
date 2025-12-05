@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { TiltCard } from './ui/TiltCard';
 
 export default function AboutGenesis() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -229,61 +230,67 @@ export default function AboutGenesis() {
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
-                className="relative p-6 backdrop-blur-xl border-l-4"
-                style={{
-                  backgroundColor: 'rgba(14, 14, 14, 0.7)',
-                  borderLeftColor: stat.color,
-                  boxShadow: `0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px ${stat.color}20`,
-                }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05, x: 10 }}
               >
-                <div className="text-3xl mb-2" style={{ color: stat.color }}>
-                  {stat.value}
-                </div>
-                <div className="text-sm" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
-                  {stat.label}
-                </div>
+                <TiltCard
+                  className="relative p-6 backdrop-blur-xl border-l-4 bg-slate-900/70 rounded-lg"
+                  style={{
+                    borderLeftColor: stat.color,
+                    boxShadow: `0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px ${stat.color}20`,
+                  }}
+                  rotateAmplitude={12}
+                  scaleOnHover={1.08}
+                >
+                  <div className="text-3xl mb-2" style={{ color: stat.color }}>
+                    {stat.value}
+                  </div>
+                  <div className="text-sm" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
+                    {stat.label}
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
 
           {/* Tracks List */}
           <motion.div
-            className="mt-8 p-6 backdrop-blur-xl border-t-2"
-            style={{
-              backgroundColor: 'rgba(14, 14, 14, 0.7)',
-              borderTopColor: '#C33B33',
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(195, 59, 51, 0.2)',
-            }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl mb-4" style={{ color: '#4D8B86' }}>
-              Focus Tracks
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {['AI', 'FinTech', 'Blockchain', 'Cybersecurity', 'Sustainability', 'Healthcare'].map(
-                (track) => (
-                  <span
-                    key={track}
-                    className="px-4 py-2 text-sm"
-                    style={{
-                      backgroundColor: 'rgba(195, 59, 51, 0.15)',
-                      color: '#EDE8E0',
-                      border: '1px solid rgba(195, 59, 51, 0.3)',
-                    }}
-                  >
-                    {track}
-                  </span>
-                )
-              )}
-            </div>
+            <TiltCard
+              className="mt-8 p-6 backdrop-blur-xl border-t-2 bg-slate-900/70 rounded-lg"
+              style={{
+                borderTopColor: '#C33B33',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(195, 59, 51, 0.2)',
+              }}
+              rotateAmplitude={8}
+            >
+              <h3 className="text-xl mb-4" style={{ color: '#4D8B86' }}>
+                Focus Tracks
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {['AI', 'FinTech', 'Blockchain', 'Cybersecurity', 'Sustainability', 'Healthcare'].map(
+                  (track) => (
+                    <span
+                      key={track}
+                      className="px-4 py-2 text-sm"
+                      style={{
+                        backgroundColor: 'rgba(195, 59, 51, 0.15)',
+                        color: '#EDE8E0',
+                        border: '1px solid rgba(195, 59, 51, 0.3)',
+                      }}
+                    >
+                      {track}
+                    </span>
+                  )
+                )}
+              </div>
+            </TiltCard>
           </motion.div>
         </div>
       </motion.div>

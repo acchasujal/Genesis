@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Trophy, Medal } from 'lucide-react';
+import { TiltCard } from './ui/TiltCard';
 
 const prizeCategories = [
   {
@@ -69,19 +70,14 @@ export default function Prizes() {
                 viewport={{ once: true }}
                 style={{ scale: prize.scale }}
               >
-                <motion.div
-                  className="relative p-8 backdrop-blur-xl border-t-4 overflow-hidden"
+                <TiltCard
+                  className="relative p-8 backdrop-blur-xl border-t-4 overflow-hidden bg-slate-900/80 rounded-lg"
                   style={{
-                    backgroundColor: 'rgba(14, 14, 14, 0.8)',
                     borderTopColor: prize.color,
                     boxShadow: `0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px ${prize.color}30`,
                   }}
-                  whileHover={{
-                    scale: 1.05,
-                    y: -20,
-                    boxShadow: `0 12px 48px rgba(0, 0, 0, 0.8), 0 0 0 1.5px ${prize.color}60`,
-                  }}
-                  transition={{ duration: 0.3 }}
+                  rotateAmplitude={12}
+                  scaleOnHover={1.08}
                 >
                   {/* Floating icon */}
                   <motion.div
@@ -110,7 +106,7 @@ export default function Prizes() {
 
                   {/* Bottom accent line */}
                   <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: prize.color }} />
-                </motion.div>
+                </TiltCard>
 
                 {/* Winner badge for Gold */}
                 {prize.tier === 'Gold' && (
@@ -136,38 +132,41 @@ export default function Prizes() {
 
         {/* Additional Info */}
         <motion.div
-          className="max-w-3xl mx-auto p-8 backdrop-blur-xl border-l-4"
-          style={{
-            backgroundColor: 'rgba(14, 14, 14, 0.7)',
-            borderLeftColor: '#C33B33',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(195, 59, 51, 0.2)',
-          }}
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl text-center mb-4" style={{ color: '#C33B33' }}>
-            Additional Perks
-          </h3>
-          <div className="grid md:grid-cols-2 gap-6" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#C33B33' }} />
-              <p>Certificates for all participants</p>
+          <TiltCard
+            className="max-w-3xl mx-auto p-8 backdrop-blur-xl border-l-4 bg-slate-900/70 rounded-2xl"
+            style={{
+              borderLeftColor: '#C33B33',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(195, 59, 51, 0.2)',
+            }}
+            rotateAmplitude={8}
+          >
+            <h3 className="text-2xl text-center mb-4" style={{ color: '#C33B33' }}>
+              Additional Perks
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#C33B33' }} />
+                <p>Certificates for all participants</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#4D8B86' }} />
+                <p>Networking with industry leaders</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#C33B33' }} />
+                <p>Mentorship from experts</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#4D8B86' }} />
+                <p>Exciting sponsor goodies</p>
+              </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#4D8B86' }} />
-              <p>Networking with industry leaders</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#C33B33' }} />
-              <p>Mentorship from experts</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#4D8B86' }} />
-              <p>Exciting sponsor goodies</p>
-            </div>
-          </div>
+          </TiltCard>
         </motion.div>
       </div>
 
