@@ -1,26 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TiltCard } from './ui/TiltCard';
+import CircularGallery from './CircularGallery';
 
 const previousSponsors = [
-  { name: 'GeeksforGeeks', logo: 'https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png' },
-  { name: 'Scrimba', logo: 'https://avatars.githubusercontent.com/u/28915900?s=200&v=4' },
-  { name: 'Network Marvels', logo: 'https://via.placeholder.com/150/4D8B86/FFFFFF?text=NM' },
+  { name: 'Unstop', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/branding-guidelines/icon/unstop-icon-800x800.png' },
+  { name: 'GeeksforGeeks', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/GeeksForGeeks_logo.png/1280px-GeeksForGeeks_logo.png' },
+  { name: 'Admit Abroad ', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv4CRROP-YMYVuN87iSnfNE5efPANk_WL5qOCxwMAhx4K-PitFoL5pD49aoJ2Sf3QeTv0&usqp=CAU' },
+  { name: 'Trade Diary', logo: 'https://tradediary.in/assets/images/logo-dark.png' },
 ];
 
 const currentSponsors = [
-  { name: 'Gemini', logo: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg' },
-  { name: 'Interview Buddy', logo: 'https://via.placeholder.com/150/C33B33/FFFFFF?text=IB' },
-  { name: 'Unstop', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/logo_new.svg' },
-  { name: 'Give My Certificate', logo: 'https://via.placeholder.com/150/4D8B86/FFFFFF?text=GMC' },
+  { name: '.xyz', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/.xyz_logo.svg/2560px-.xyz_logo.svg.png' },
+  { name: 'ShwarmaJi', logo: 'https://shawarmaji.co.in/assets/img/food-pics/logo.png' },
+  { name: 'Mcdonalds', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/36/McDonald%27s_Golden_Arches.svg' },
+  { name: 'InterviewCake', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/opportunity/gallery/60aba3315a79b_ic.png?d=600x600' },
+  { name: 'Fueler', logo: 'https://avatars.githubusercontent.com/u/91483435?s=280&v=4' },
+  { name: 'Gemini', logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png' },
+  { name: 'Interview Buddy', logo: 'https://interviewbuddy.net/favicon.png' },
+  { name: 'Give My Certificate', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPcYIJAWI9_tnLby1dQV-dmGtCSv4HdFubbQ&s' },
+];
+
+// Convert sponsors to CircularGallery format
+const galleryItems = [
+  ...currentSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name })),
+  ...previousSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name })),
 ];
 
 export default function Sponsors() {
   return (
-    <section id="sponsors" className="relative min-h-screen py-20 px-4">
+    <section id="sponsors" className="relative py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -51,119 +62,22 @@ export default function Sponsors() {
           </p>
         </motion.div>
 
-        {/* Current Sponsors */}
+        {/* Sponsor Gallery */}
         <motion.div
-          className="mb-20"
+          className="mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl md:text-3xl text-center mb-12" style={{ color: '#4D8B86' }}>
-            Current Sponsors
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {currentSponsors.map((sponsor, index) => (
-              <motion.div
-                key={sponsor.name}
-                className="relative group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <TiltCard
-                  className="relative p-6 backdrop-blur-xl rounded-xl overflow-hidden flex items-center justify-center h-40"
-                  style={{
-                    backgroundColor: 'rgba(14, 14, 14, 0.7)',
-                    border: '1px solid rgba(195, 59, 51, 0.3)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-                  }}
-                  scaleOnHover={1.05}
-                  rotateAmplitude={12}
-                >
-                  <img
-                    src={sponsor.logo}
-                    alt={sponsor.name}
-                    className="max-w-full max-h-20 object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300"
-                  />
-                  {/* Decorative corner accent */}
-                  <div
-                    className="absolute top-0 right-0 w-10 h-10 opacity-30 pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(135deg, #C33B33, transparent)',
-                      clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
-                    }}
-                  />
-                </TiltCard>
-                <motion.p
-                  className="text-center mt-4 text-sm font-medium"
-                  style={{ color: 'rgba(237, 232, 224, 0.8)' }}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                >
-                  {sponsor.name}
-                </motion.p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Previous Sponsors */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl md:text-3xl text-center mb-12" style={{ color: '#4D8B86' }}>
-            Previous Sponsors
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {previousSponsors.map((sponsor, index) => (
-              <motion.div
-                key={sponsor.name}
-                className="relative group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <TiltCard
-                  className="relative p-6 backdrop-blur-xl rounded-xl overflow-hidden flex items-center justify-center h-32"
-                  style={{
-                    backgroundColor: 'rgba(14, 14, 14, 0.6)',
-                    border: '1px solid rgba(77, 139, 134, 0.3)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-                  }}
-                  scaleOnHover={1.05}
-                  rotateAmplitude={10}
-                >
-                  <img
-                    src={sponsor.logo}
-                    alt={sponsor.name}
-                    className="max-w-full max-h-16 object-contain opacity-70 group-hover:opacity-100 transition-all duration-300"
-                  />
-                  <div
-                    className="absolute top-0 right-0 w-8 h-8 opacity-20 pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(135deg, #4D8B86, transparent)',
-                      clipPath: 'polygon(100% 0, 100% 100%, 0 0)',
-                    }}
-                  />
-                </TiltCard>
-                <motion.p
-                  className="text-center mt-3 text-sm"
-                  style={{ color: 'rgba(237, 232, 224, 0.6)' }}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                >
-                  {sponsor.name}
-                </motion.p>
-              </motion.div>
-            ))}
+          <div style={{ height: '600px', position: 'relative' }}>
+            <CircularGallery
+              items={galleryItems}
+              bend={0.0}
+              textColor="#ffffff"
+              borderRadius={0.05}
+              scrollEase={0.02}
+            />
           </div>
         </motion.div>
       </div>

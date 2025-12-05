@@ -97,103 +97,58 @@ export default function Footer() {
             </motion.div>
           </div>
 
-          {/* Right: Contact & Organizers */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-            {/* Organizers */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-xl mb-6" style={{ color: '#C33B33' }}>
-                Organizers
-              </h4>
-              <div className="space-y-4">
-                <motion.div
-                  className="p-4 backdrop-blur-xl border-l-2"
-                  style={{
-                    backgroundColor: 'rgba(14, 14, 14, 0.7)',
-                    borderLeftColor: '#C33B33',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(195, 59, 51, 0.2)',
-                  }}
-                  whileHover={{ scale: 1.05, x: 10 }}
-                >
-                  <p style={{ color: '#EDE8E0' }}>Anish Tawade</p>
-                  <p className="text-sm" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
-                    Lead Organizer
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="p-4 backdrop-blur-xl border-l-2"
-                  style={{
-                    backgroundColor: 'rgba(14, 14, 14, 0.7)',
-                    borderLeftColor: '#4D8B86',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(77, 139, 134, 0.2)',
-                  }}
-                  whileHover={{ scale: 1.05, x: 10 }}
-                >
-                  <p style={{ color: '#EDE8E0' }}>Varun Rahatgaonkar</p>
-                  <p className="text-sm" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
-                    Lead Organizer
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
+          {/* Right: Contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-xl mb-6" style={{ color: '#4D8B86' }}>
+              Get in Touch
+            </h4>
+            <div className="space-y-4">
+              <motion.a
+                href="mailto:questit@ves.ac.in"
+                className="flex items-center gap-3 p-4 backdrop-blur-xl border transition-all"
+                style={{
+                  backgroundColor: 'rgba(14, 14, 14, 0.7)',
+                  borderColor: 'rgba(195, 59, 51, 0.3)',
+                  color: 'rgba(237, 232, 224, 0.85)',
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  x: 10,
+                  borderColor: '#4D8B86',
+                  color: '#EDE8E0',
+                }}
+              >
+                <Mail size={20} style={{ color: '#4D8B86' }} />
+                <span>questit@ves.ac.in</span>
+              </motion.a>
 
-            {/* Contact */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-xl mb-6" style={{ color: '#4D8B86' }}>
-                Get in Touch
-              </h4>
-              <div className="space-y-4">
-                <motion.a
-                  href="mailto:questit@ves.ac.in"
-                  className="flex items-center gap-3 p-4 backdrop-blur-xl border transition-all"
-                  style={{
-                    backgroundColor: 'rgba(14, 14, 14, 0.7)',
-                    borderColor: 'rgba(195, 59, 51, 0.3)',
-                    color: 'rgba(237, 232, 224, 0.85)',
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                    x: 10,
-                    borderColor: '#4D8B86',
-                    color: '#EDE8E0',
-                  }}
-                >
-                  <Mail size={20} style={{ color: '#4D8B86' }} />
-                  <span>questit@ves.ac.in</span>
-                </motion.a>
-
-                <motion.a
-                  href="https://instagram.com/questit_cell"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-4 backdrop-blur-xl border transition-all"
-                  style={{
-                    backgroundColor: 'rgba(14, 14, 14, 0.7)',
-                    borderColor: 'rgba(195, 59, 51, 0.3)',
-                    color: 'rgba(237, 232, 224, 0.85)',
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                    x: 10,
-                    borderColor: '#C33B33',
-                    color: '#EDE8E0',
-                  }}
-                >
-                  <Instagram size={20} style={{ color: '#C33B33' }} />
-                  <span>@questit_cell</span>
-                </motion.a>
-              </div>
-            </motion.div>
-          </div>
+              <motion.a
+                href="https://instagram.com/questit_cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-4 backdrop-blur-xl border transition-all"
+                style={{
+                  backgroundColor: 'rgba(14, 14, 14, 0.7)',
+                  borderColor: 'rgba(195, 59, 51, 0.3)',
+                  color: 'rgba(237, 232, 224, 0.85)',
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  x: 10,
+                  borderColor: '#C33B33',
+                  color: '#EDE8E0',
+                }}
+              >
+                <Instagram size={20} style={{ color: '#C33B33' }} />
+                <span>@questit_cell</span>
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
 
         {/* Divider - katana line */}

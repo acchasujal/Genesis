@@ -7,7 +7,6 @@ import AboutUs from './components/AboutUs';
 import AboutGenesis from './components/AboutGenesis';
 import Tracks from './components/Tracks';
 import Timeline from './components/Timeline';
-import Prizes from './components/Prizes';
 import Sponsors from './components/Sponsors';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -75,7 +74,6 @@ export default function App(): JSX.Element {
         <AboutGenesis />
         <Tracks />
         <Timeline />
-        <Prizes />
         <Sponsors />
         <FAQ />
         <Registration />

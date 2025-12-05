@@ -274,7 +274,7 @@ export default function AboutGenesis() {
                 Focus Tracks
               </h3>
               <div className="flex flex-wrap gap-3">
-                {['AI', 'FinTech', 'Blockchain', 'Cybersecurity', 'Sustainability', 'Healthcare'].map(
+                {['AI', 'FinTech', 'Blockchain'].map(
                   (track) => (
                     <span
                       key={track}

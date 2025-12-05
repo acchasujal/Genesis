@@ -44,7 +44,7 @@ export default function Timeline() {
   const lineProgress = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-20 px-4">
+    <section ref={sectionRef} className="relative min-h-screen pt-10 pb-20 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-20"

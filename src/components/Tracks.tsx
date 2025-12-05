@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Brain, DollarSign, Link, Shield, Leaf, Heart } from 'lucide-react';
+import { Brain, DollarSign, Link } from 'lucide-react';
 import { TiltCard } from './ui/TiltCard';
+import { TrackPopup } from './TrackPopup';
 
 const tracks = [
   {
@@ -22,31 +23,14 @@ const tracks = [
     color: '#C33B33',
     description: 'Smart Contracts, DeFi, Web3 Applications',
   },
-  {
-    name: 'Cybersecurity',
-    icon: Shield,
-    color: '#4D8B86',
-    description: 'Threat Detection, Encryption, Network Security',
-  },
-  {
-    name: 'Sustainability',
-    icon: Leaf,
-    color: '#C33B33',
-    description: 'Green Tech, Climate Solutions, Resource Optimization',
-  },
-  {
-    name: 'Healthcare',
-    icon: Heart,
-    color: '#4D8B86',
-    description: 'HealthTech, Medical AI, Patient Care Systems',
-  },
 ];
 
 export default function Tracks() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedTrack, setSelectedTrack] = useState<number | null>(null);
 
   return (
-    <section id="tracks" className="relative min-h-screen py-20 px-4">
+    <section id="tracks" className="relative min-h-screen pt-20 pb-8 px-4">
       {/* Parallax sakura petals */}
       <motion.div
         className="absolute top-32 left-1/4 w-3 h-3 rounded-full pointer-events-none"
@@ -107,6 +91,7 @@ export default function Tracks() {
                 viewport={{ once: true }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                onClick={() => setSelectedTrack(index)}
               >
                 <TiltCard
                   className="relative p-8 backdrop-blur-xl border-l-4 overflow-hidden transition-all duration-300"
@@ -167,6 +152,15 @@ export default function Tracks() {
         className="absolute top-1/4 left-0 w-full h-px rotate-1"
         style={{ backgroundColor: 'rgba(195, 59, 51, 0.2)' }}
       />
+
+      {/* Track Popup */}
+      {selectedTrack !== null && (
+        <TrackPopup
+          isOpen={selectedTrack !== null}
+          onClose={() => setSelectedTrack(null)}
+          track={tracks[selectedTrack]}
+        />
+      )}
     </section>
   );
 }
