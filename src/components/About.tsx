@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Sparkles, Zap, Target } from 'lucide-react';
+import { TiltCard } from './ui/TiltCard';
 
 export function About() {
   const ref = useRef(null);
@@ -55,16 +56,21 @@ export function About() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FF6600]/10 to-transparent rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="relative bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm hover:border-[#FF6600]/50 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#FF6600] to-[#FF8833] flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform">
-                  <Sparkles className="w-7 h-7 text-white" />
+              <TiltCard
+                className="relative bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm hover:border-[#FF6600]/50 transition-all"
+                rotateAmplitude={12}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#FF6600]/10 to-transparent rounded-2xl"></div>
+                <div className="relative">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#FF6600] to-[#FF8833] flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform">
+                    <Sparkles className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-2xl text-white mb-4">VESIT</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Vivekanand Education Society's Institute of Technology is one of Mumbai's premier engineering colleges, fostering innovation and technical excellence since its inception.
+                  </p>
                 </div>
-                <h3 className="text-2xl text-white mb-4">VESIT</h3>
-                <p className="text-gray-400 leading-relaxed">
-                  Vivekanand Education Society's Institute of Technology is one of Mumbai's premier engineering colleges, fostering innovation and technical excellence since its inception.
-                </p>
-              </div>
+              </TiltCard>
             </motion.div>
 
             <motion.div
@@ -73,16 +79,21 @@ export function About() {
               transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#00E0FF]/10 to-transparent rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="relative bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm hover:border-[#00E0FF]/50 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00E0FF] to-[#00B8D4] flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform">
-                  <Zap className="w-7 h-7 text-white" />
+              <TiltCard
+                className="relative bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm hover:border-[#00E0FF]/50 transition-all"
+                rotateAmplitude={12}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00E0FF]/10 to-transparent rounded-2xl"></div>
+                <div className="relative">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00E0FF] to-[#00B8D4] flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform">
+                    <Zap className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-2xl text-white mb-4">Quest-IT</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    VESIT's premier technical committee dedicated to organizing cutting-edge events, workshops, and hackathons that push the boundaries of innovation.
+                  </p>
                 </div>
-                <h3 className="text-2xl text-white mb-4">Quest-IT</h3>
-                <p className="text-gray-400 leading-relaxed">
-                  VESIT's premier technical committee dedicated to organizing cutting-edge events, workshops, and hackathons that push the boundaries of innovation.
-                </p>
-              </div>
+              </TiltCard>
             </motion.div>
 
             <motion.div
@@ -91,16 +102,21 @@ export function About() {
               transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#8F00FF]/10 to-transparent rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="relative bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm hover:border-[#8F00FF]/50 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#8F00FF] to-[#B24BF3] flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform">
-                  <Target className="w-7 h-7 text-white" />
+              <TiltCard
+                className="relative bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm hover:border-[#8F00FF]/50 transition-all"
+                rotateAmplitude={12}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#8F00FF]/10 to-transparent rounded-2xl"></div>
+                <div className="relative">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#8F00FF] to-[#B24BF3] flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform">
+                    <Target className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-2xl text-white mb-4">GENESIS 2026</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Our flagship 30-hour hackathon where innovation meets execution. This year's DHH Music × Tech theme merges cultural expression with cutting-edge technology.
+                  </p>
                 </div>
-                <h3 className="text-2xl text-white mb-4">GENESIS 2026</h3>
-                <p className="text-gray-400 leading-relaxed">
-                  Our flagship 30-hour hackathon where innovation meets execution. This year's DHH Music × Tech theme merges cultural expression with cutting-edge technology.
-                </p>
-              </div>
+              </TiltCard>
             </motion.div>
           </div>
 
@@ -111,9 +127,12 @@ export function About() {
             transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FF6600]/5 via-[#00E0FF]/5 to-[#8F00FF]/5 rounded-3xl blur-3xl"></div>
-            <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-950/80 border border-slate-800 rounded-3xl p-12 backdrop-blur-sm">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
+            <TiltCard
+              className="relative bg-gradient-to-br from-slate-900/80 to-slate-950/80 border border-slate-800 rounded-3xl p-12 backdrop-blur-sm"
+              rotateAmplitude={8}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#FF6600]/5 via-[#00E0FF]/5 to-[#8F00FF]/5 rounded-3xl blur-3xl"></div>
+              <div className="relative grid md:grid-cols-2 gap-12 items-center">
                 <motion.div style={{ y }}>
                   <div className="text-[#00E0FF] uppercase tracking-[0.3em] text-sm mb-4">Why Genesis?</div>
                   <h3 className="text-4xl md:text-5xl text-white mb-6"
@@ -151,7 +170,7 @@ export function About() {
                   </div>
                 </div>
               </div>
-            </div>
+            </TiltCard>
           </motion.div>
         </div>
       </div>
