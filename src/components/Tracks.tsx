@@ -30,31 +30,8 @@ export default function Tracks() {
   const [selectedTrack, setSelectedTrack] = useState<number | null>(null);
 
   return (
-    <section id="tracks" className="relative min-h-screen pt-20 pb-8 px-4">
-      {/* Parallax sakura petals */}
-      <motion.div
-        className="absolute top-32 left-1/4 w-3 h-3 rounded-full pointer-events-none"
-        style={{ backgroundColor: '#FFC6D0', opacity: 0.5 }}
-        animate={{
-          y: [0, 300],
-          x: [0, -50],
-          rotate: [0, 360],
-          opacity: [0.5, 0],
-        }}
-        transition={{ duration: 13, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        className="absolute bottom-32 right-1/3 w-2 h-2 rounded-full pointer-events-none"
-        style={{ backgroundColor: '#E99AAA', opacity: 0.4 }}
-        animate={{
-          y: [0, -200],
-          x: [0, 40],
-          rotate: [0, -360],
-          opacity: [0.4, 0],
-        }}
-        transition={{ duration: 16, repeat: Infinity, ease: 'linear', delay: 2 }}
-      />
-
+    <section id="tracks" className="relative min-h-screen py-20 px-4">
+      {/* Background elements */}
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -107,8 +84,10 @@ export default function Tracks() {
                   springOptions={{
                     stiffness: 260,
                     damping: 20,
-                    mass: 0.5, // Significantly reduced mass for faster response
+                    mass: 0.5,
                   }}
+                  spotlight={true}
+                  spotlightColor={`${track.color}20`}
                 >
                   <motion.div
                     className="mb-6"
@@ -147,11 +126,6 @@ export default function Tracks() {
           })}
         </div>
       </div>
-
-      <div
-        className="absolute top-1/4 left-0 w-full h-px rotate-1"
-        style={{ backgroundColor: 'rgba(195, 59, 51, 0.2)' }}
-      />
 
       {/* Track Popup */}
       {selectedTrack !== null && (
