@@ -101,7 +101,7 @@ export default function Hero() {
             alt="GENESIS"
             className="mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 40, scale: 1.2 }}
+            animate={{ opacity: 1, y: 0, scale: 1.2 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
             style={{
               width: '100%',
