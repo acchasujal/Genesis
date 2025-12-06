@@ -18,7 +18,7 @@ export default function Hero() {
         }}
       />
 
-      {/* Dark gradient overlay for contrast */}
+      {/* --- CHANGE 1: Overlay made transparent so image is full opacity --- */}
       <div 
         className="absolute inset-0" 
         style={{
@@ -26,7 +26,7 @@ export default function Hero() {
         }}
       />
 
-      {/* Lightweight CSS Katana Animation - No 3D */}
+      {/* Lightweight CSS Katana Animation */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-80 h-1 origin-left pointer-events-none hidden md:block"
         style={{
@@ -67,7 +67,7 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* Optimized Sakura Petals - CSS Transform Based (40-60 particles) */}
+      {/* Sakura Petals */}
       {Array.from({ length: 50 }).map((_, i) => {
         const delay = Math.random() * 10;
         const duration = 15 + Math.random() * 10;
@@ -109,7 +109,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
         >
-          {/* GENESIS Title - Japanese/Samurai Font */}
+          {/* GENESIS Title */}
           <motion.h1
             className="mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 30 }}
@@ -121,15 +121,16 @@ export default function Hero() {
               fontWeight: 700,
               color: '#FAF7F2',
               letterSpacing: '-0.02em',
-              textShadow: '0 4px 24px rgba(0, 0, 0, 0.8), 2px 2px 0 rgba(195, 59, 51, 0.3)',
-              WebkitTextStroke: '1px rgba(195, 59, 51, 0.2)',
+              // --- CHANGE 2: Stronger multi-layer text shadow for readability ---
+              textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 8px 32px rgba(0,0,0,0.8), 2px 2px 0 rgba(195, 59, 51, 0.5)',
+              WebkitTextStroke: '1px rgba(195, 59, 51, 0.4)',
               lineHeight: 1,
             }}
           >
             GENESIS
           </motion.h1>
 
-          {/* Coming Soon - Clean Sans-Serif */}
+          {/* Coming Soon */}
           <motion.p
             className="text-xl sm:text-2xl md:text-4xl mb-6 sm:mb-10"
             initial={{ opacity: 0, y: 20 }}
@@ -137,9 +138,10 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             style={{ 
               fontFamily: '"Space Grotesk", "Inter", sans-serif',
-              color: '#4D8B86',
+              color: '#6EE7B7', 
               fontWeight: 500,
-              textShadow: '0 2px 12px rgba(0, 0, 0, 0.6)',
+              // --- CHANGE 3: Added hard black shadow behind the teal glow ---
+              textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 20px rgba(110, 231, 183, 0.6)',
               fontSize: 'clamp(1.25rem, 4vw, 2.25rem)',
             }}
           >
@@ -154,8 +156,9 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
             style={{ 
               fontFamily: '"Space Grotesk", sans-serif',
-              color: 'rgba(250, 247, 242, 0.9)',
-              textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
+              color: 'rgba(250, 247, 242, 1)', // Made text fully opaque
+              // --- CHANGE 4: Stronger, tighter shadows for small text ---
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.9), 0 4px 12px rgba(0, 0, 0, 0.6)',
             }}
           >
             <p className="text-lg sm:text-xl md:text-2xl" style={{ fontWeight: 600 }}>
@@ -165,7 +168,7 @@ export default function Hero() {
               30-hour offline hackathon — VESIT Mumbai
             </p>
             <p style={{ 
-              color: 'rgba(250, 247, 242, 0.7)', 
+              color: 'rgba(250, 247, 242, 0.9)', 
               fontSize: 'clamp(0.75rem, 2vw, 1rem)',
               marginTop: '0.5rem',
             }}>
@@ -197,12 +200,13 @@ export default function Hero() {
                 fontFamily: '"Space Grotesk", sans-serif',
                 fontWeight: 500,
                 clipPath: 'polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%)',
-                boxShadow: '0 4px 16px rgba(195, 59, 51, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3)',
+                // Added a stronger shadow to the button too so it doesn't blend in
+                boxShadow: '0 4px 20px rgba(0,0,0,0.5), 0 4px 16px rgba(195, 59, 51, 0.4)',
                 minHeight: '44px',
                 minWidth: '150px',
               }}
             >
-              <span className="relative z-10">Register Now</span>
+              <span className="relative z-10" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>Register Now</span>
               <motion.div
                 className="absolute inset-0"
                 style={{ backgroundColor: '#4D8B86' }}
@@ -227,8 +231,9 @@ export default function Hero() {
           <div 
             className="w-5 h-8 sm:w-6 sm:h-10 border-2 rounded-full flex items-start justify-center p-1.5 sm:p-2" 
             style={{ 
-              borderColor: 'rgba(77, 139, 134, 0.6)',
-              boxShadow: '0 0 8px rgba(77, 139, 134, 0.2)',
+              borderColor: 'rgba(77, 139, 134, 0.8)',
+              backgroundColor: 'rgba(0,0,0,0.3)', // Added slight background to indicator for visibility
+              boxShadow: '0 0 8px rgba(77, 139, 134, 0.4)',
             }}
           >
             <motion.div
