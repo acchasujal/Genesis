@@ -433,6 +433,7 @@ class App {
   }
 
   update() {
+    this.scroll.target += 0.08;
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
     if (this.medias) {
