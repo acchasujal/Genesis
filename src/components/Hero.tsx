@@ -1,32 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// @ts-ignore: Cannot find module '../assets/lunchbreak.png' or its corresponding type declarations.
+// @ts-ignore: Cannot find module '../assets/lunchbreak.png'
 import heroImage from '../assets/lunchbreak.png';
+// --- CHANGE 1: Import your title image here ---
+// @ts-ignore: Update this path to your actual image file
+import titleImage from '../assets/genesis_title.png'; 
 
 export default function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Preload hero image for CLS optimization */}
+      
+      {/* 1. LOAD THE FONTS (Cinzel is still used for subtitles) */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+      `}</style>
+
+      {/* Preload hero image */}
       <link rel="preload" as="image" href={heroImage} />
 
-      {/* Hero Background Image - Lunch Break album art */}
+      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url(${heroImage})`,
           willChange: 'auto',
+          filter: 'none',
         }}
       />
 
-      {/* --- CHANGE 1: Overlay made transparent so image is full opacity --- */}
+      {/* Dark Overlay */}
       <div 
         className="absolute inset-0" 
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)'
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)'
         }}
       />
 
-      {/* Lightweight CSS Katana Animation */}
+      {/* --- BACKGROUND ANIMATIONS (Katana & Sakura) --- */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-80 h-1 origin-left pointer-events-none hidden md:block"
         style={{
@@ -35,57 +45,32 @@ export default function Hero() {
           boxShadow: '0 0 20px rgba(250, 247, 242, 0.3)',
         }}
         initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ 
-          scaleX: [0, 1, 1],
-          opacity: [0, 0.8, 0],
-        }}
-        transition={{
-          duration: 2.5,
-          times: [0, 0.5, 1],
-          repeat: Infinity,
-          repeatDelay: 10,
-          ease: 'easeInOut',
-        }}
+        animate={{ scaleX: [0, 1, 1], opacity: [0, 0.8, 0] }}
+        transition={{ duration: 2.5, times: [0, 0.5, 1], repeat: Infinity, repeatDelay: 10, ease: 'easeInOut' }}
       >
-        {/* Metallic shine effect */}
         <motion.div
           className="absolute inset-0"
           style={{
             background: 'linear-gradient(to right, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%)',
             filter: 'blur(1px)',
           }}
-          animate={{
-            x: ['0%', '100%'],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 1.2,
-            repeat: Infinity,
-            repeatDelay: 10,
-            ease: 'easeOut',
-          }}
+          animate={{ x: ['0%', '100%'], opacity: [0, 1, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 10, ease: 'easeOut' }}
         />
       </motion.div>
 
       {/* Sakura Petals */}
       {Array.from({ length: 50 }).map((_, i) => {
-        const delay = Math.random() * 10;
-        const duration = 15 + Math.random() * 10;
-        const leftPosition = Math.random() * 100;
         const size = 4 + Math.random() * 6;
-        
         return (
           <motion.div
             key={i}
             className="absolute pointer-events-none rounded-full"
             style={{
-              width: `${size}px`,
-              height: `${size}px`,
-              left: `${leftPosition}%`,
-              top: '-10px',
+              width: `${size}px`, height: `${size}px`,
+              left: `${Math.random() * 100}%`, top: '-10px',
               backgroundColor: ['#FFC6D0', '#E99AAA', '#F2B9C3'][i % 3],
               opacity: 0.4 + Math.random() * 0.3,
-              willChange: 'transform',
             }}
             animate={{
               y: ['0vh', '110vh'],
@@ -93,8 +78,8 @@ export default function Hero() {
               rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)],
             }}
             transition={{
-              duration,
-              delay,
+              duration: 15 + Math.random() * 10,
+              delay: Math.random() * 10,
               repeat: Infinity,
               ease: 'linear',
             }}
@@ -102,117 +87,118 @@ export default function Hero() {
         );
       })}
 
-      {/* Content - Centered */}
-      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+      {/* --- MAIN CONTENT --- */}
+      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="w-full flex flex-col items-center"
         >
-          {/* GENESIS Title */}
-          <motion.h1
+          {/* --- CHANGE 2: IMAGE REPLACES TITLE TEXT --- */}
+          <motion.img
+            src={titleImage}
+            alt="GENESIS"
             className="mb-4 sm:mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 40, scale: 1.2 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
             style={{
-              fontSize: 'clamp(3rem, 15vw, 10rem)',
-              fontFamily: '"Sawarabi Mincho", "Noto Serif JP", serif',
-              fontWeight: 700,
-              color: '#FAF7F2',
-              letterSpacing: '-0.02em',
-              // --- CHANGE 2: Stronger multi-layer text shadow for readability ---
-              textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 8px 32px rgba(0,0,0,0.8), 2px 2px 0 rgba(195, 59, 51, 0.5)',
-              WebkitTextStroke: '1px rgba(195, 59, 51, 0.4)',
-              lineHeight: 1,
+              width: '100%',
+              maxWidth: '900px', // Limits size on large screens
+              height: 'auto',
+              // Optional: Adds a shadow to the image itself to make it pop
+              filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))', 
             }}
-          >
-            GENESIS
-          </motion.h1>
+          />
 
-          {/* Coming Soon */}
+          {/* SUBTITLE */}
           <motion.p
-            className="text-xl sm:text-2xl md:text-4xl mb-6 sm:mb-10"
+            className="mb-8"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            animate={{ opacity: 1, y: -80 }}
+            transition={{ duration: 1, delay: 0.6 }}
             style={{ 
-              fontFamily: '"Space Grotesk", "Inter", sans-serif',
-              color: '#6EE7B7', 
-              fontWeight: 500,
-              // --- CHANGE 3: Added hard black shadow behind the teal glow ---
-              textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 20px rgba(110, 231, 183, 0.6)',
-              fontSize: 'clamp(1.25rem, 4vw, 2.25rem)',
+              fontFamily: '"Cinzel", serif',
+              color: '#FFFFFF', 
+              fontWeight: 700,
+              textShadow: '0 2px 10px rgba(0,0,0,0.8)',
+              fontSize: 'clamp(1.5rem, 5vw, 3rem)',
+              letterSpacing: '0.1em',
             }}
           >
-            Coming Soon
+            <span style={{ borderBottom: '2px solid #D31043', paddingBottom: '5px' }}>
+              COMING SOON
+            </span>
           </motion.p>
 
-          {/* Event Details */}
+          {/* DETAILS SECTION */}
           <motion.div
-            className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 space-y-1 sm:space-y-2"
+            className="flex flex-col items-center gap-3 mb-10" 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            animate={{ opacity: 1, y: -80 }}
+            transition={{ duration: 1, delay: 0.9 }}
             style={{ 
-              fontFamily: '"Space Grotesk", sans-serif',
-              color: 'rgba(250, 247, 242, 1)', // Made text fully opaque
-              // --- CHANGE 4: Stronger, tighter shadows for small text ---
-              textShadow: '0 1px 3px rgba(0, 0, 0, 0.9), 0 4px 12px rgba(0, 0, 0, 0.6)',
+              fontFamily: '"Cinzel", serif',
+              color: '#fff',
             }}
           >
-            <p className="text-lg sm:text-xl md:text-2xl" style={{ fontWeight: 600 }}>
-              6–7 February 2026
-            </p>
-            <p style={{ fontSize: 'clamp(0.875rem, 2.5vw, 1.25rem)' }}>
-              30-hour offline hackathon — VESIT Mumbai
-            </p>
-            <p style={{ 
-              color: 'rgba(250, 247, 242, 0.9)', 
-              fontSize: 'clamp(0.75rem, 2vw, 1rem)',
-              marginTop: '0.5rem',
+            {/* Date Pill */}
+            <div style={{
+               background: '#BE1E2D', 
+               padding: '10px 35px',  
+               borderRadius: '50px',
+               boxShadow: '0 4px 15px rgba(190, 30, 45, 0.4)',
+               fontWeight: 700,
+               fontSize: '1.4rem',
+               letterSpacing: '1px'
             }}>
-              Vivekanand Education Society's Institute of Technology
-            </p>
+               6–7 FEB 2026
+            </div>
+
+            {/* Hackathon Text */}
+            <div style={{
+               fontSize: '1.2rem',
+               textShadow: '0 2px 4px rgba(0,0,0,0.9)',
+               fontWeight: 600,
+               marginTop: '5px',
+               letterSpacing: '2px',
+               color: '#FAF7F2'
+            }}>
+               30-HOUR HACKATHON
+            </div>
           </motion.div>
 
-          {/* Register Button */}
+          {/* REGISTER BUTTON */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            animate={{ opacity: 1, y: -80 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
             className="relative inline-block"
           >
             <motion.button
               onClick={() => {
                 const element = document.getElementById('register');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="relative px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg overflow-hidden"
+              className="relative px-16 sm:px-24 py-4 text-xl overflow-hidden group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              transition={{ duration: 0.2 }}
               style={{
-                background: '#C33B33',
+                background: 'transparent',
                 color: '#FAF7F2',
-                fontFamily: '"Space Grotesk", sans-serif',
-                fontWeight: 500,
-                clipPath: 'polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%)',
-                // Added a stronger shadow to the button too so it doesn't blend in
-                boxShadow: '0 4px 20px rgba(0,0,0,0.5), 0 4px 16px rgba(195, 59, 51, 0.4)',
-                minHeight: '44px',
-                minWidth: '150px',
+                fontFamily: '"Cinzel", serif',
+                fontWeight: 700,
+                border: '2px solid #BE1E2D',
+                borderRadius: '4px',
+                boxShadow: '0 0 15px rgba(190, 30, 45, 0.3)',
+                minWidth: '280px', 
               }}
             >
-              <span className="relative z-10" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>Register Now</span>
-              <motion.div
-                className="absolute inset-0"
-                style={{ backgroundColor: '#4D8B86' }}
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '0%' }}
-                transition={{ duration: 0.3 }}
+              <span className="relative z-10">REGISTER NOW</span>
+              <div 
+                className="absolute inset-0 bg-[#BE1E2D] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"
+                style={{ zIndex: 0 }}
               />
             </motion.button>
           </motion.div>
@@ -220,29 +206,15 @@ export default function Hero() {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.7, 0.7], y: [0, 8, 0] }}
-          transition={{ 
-            opacity: { delay: 2, duration: 0.8 },
-            y: { repeat: Infinity, duration: 2.5, ease: 'easeInOut' } 
-          }}
+          animate={{ opacity: [0, 1, 1], y: [0, 10, 0] }}
+          transition={{ opacity: { delay: 2, duration: 1 }, y: { repeat: Infinity, duration: 2 } }}
         >
-          <div 
-            className="w-5 h-8 sm:w-6 sm:h-10 border-2 rounded-full flex items-start justify-center p-1.5 sm:p-2" 
-            style={{ 
-              borderColor: 'rgba(77, 139, 134, 0.8)',
-              backgroundColor: 'rgba(0,0,0,0.3)', // Added slight background to indicator for visibility
-              boxShadow: '0 0 8px rgba(77, 139, 134, 0.4)',
-            }}
-          >
-            <motion.div
-              className="w-1 h-2 rounded-full"
-              style={{ backgroundColor: '#4D8B86' }}
-              animate={{ y: [0, 12, 0] }}
-              transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
-            />
+          <div className="text-white opacity-70" style={{ fontFamily: '"Cinzel", serif', fontSize: '0.9rem' }}>
+            SCROLL
           </div>
+          <div className="w-1 h-8 bg-gradient-to-b from-red-600 to-transparent mx-auto mt-2 rounded-full" />
         </motion.div>
       </div>
     </section>
