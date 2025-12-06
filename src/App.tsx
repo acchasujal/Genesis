@@ -1,6 +1,6 @@
-// src/App.tsx
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll } from 'framer-motion';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
@@ -14,7 +14,7 @@ import KatanaTransition from './components/KatanaTransition';
 import Registration from './components/Registration';
 import ErrorBoundary from './ErrorBoundary';
 
-// Lazy-load the heavy 3D scene so it doesn't block initial render
+// Lazy-load the heavy 3D scene
 const Scene3D = lazy(() => import('./components/Scene3D'));
 
 export default function App(): JSX.Element {
@@ -22,6 +22,29 @@ export default function App(): JSX.Element {
   const [currentSection, setCurrentSection] = useState<number>(0);
   const [transitioning, setTransitioning] = useState<boolean>(false);
 
+  // Initialize Lenis Smooth Scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  // Section Tracking (Decoupled from Transition Trigger)
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section');
@@ -33,11 +56,9 @@ export default function App(): JSX.Element {
 
         if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
           if (currentSection !== index) {
-            setTransitioning(true);
             setCurrentSection(index);
-            // two timeouts to match original feel
-            setTimeout(() => setTransitioning(false), 700);
-            setTimeout(() => setTransitioning(false), 1200);
+            // Note: We removed the auto-triggering of setTransitioning(true) here
+            // to make the scrolling feel smoother and less interruptive.
           }
         }
       });
@@ -49,25 +70,27 @@ export default function App(): JSX.Element {
 
   return (
     <div className="relative bg-[#0E0E0E] text-white overflow-x-hidden">
-      {/* 3D Background Scene with sakura petals (lazy + guarded) */}
+      {/* Global Noise Overlay for Texture */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-[1]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E")`,
+          opacity: 0.4,
+          mixBlendMode: 'overlay'
+        }}
+      />
+
+      {/* 3D Background Scene */}
       <ErrorBoundary>
-        <Suspense
-          fallback={
-            // small invisible placeholder so layout isn't affected; change if you prefer a loader
-            <div aria-hidden className="pointer-events-none" />
-          }
-        >
+        <Suspense fallback={<div aria-hidden className="pointer-events-none" />}>
           <Scene3D scrollProgress={scrollYProgress} />
         </Suspense>
       </ErrorBoundary>
 
-      {/* Navigation */}
       <Navbar />
 
-      {/* Cinematic Samurai Transition Effect */}
       <KatanaTransition active={transitioning} />
 
-      {/* Main Content */}
       <div className="relative z-10">
         <Hero />
         <AboutUs />
