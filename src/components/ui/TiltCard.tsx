@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion, useSpring, useTransform, SpringOptions } from 'framer-motion';
+import { motion, useSpring, useTransform, useMotionTemplate, SpringOptions } from 'framer-motion';
 import { cn } from './utils';
 
 interface TiltCardProps {
@@ -10,6 +10,8 @@ interface TiltCardProps {
   scaleOnHover?: number;
   depthZ?: number;
   springOptions?: SpringOptions;
+  spotlight?: boolean;
+  spotlightColor?: string;
 }
 
 export function TiltCard({
@@ -20,19 +22,23 @@ export function TiltCard({
   scaleOnHover = 1.05,
   depthZ = 50,
   springOptions,
+  spotlight = false,
+  spotlightColor = "rgba(255, 255, 255, 0.1)",
 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Default spring configuration (smooth/heavy)
-  const defaultSpringConfig = { stiffness: 100, damping: 30, mass: 2 };
-  
-  // Use provided config or fallback to default
+  // Default spring configuration (snappy but smooth)
+  const defaultSpringConfig = { stiffness: 200, damping: 20, mass: 1 };
   const config = springOptions || defaultSpringConfig;
 
-  // Mouse position springs
+  // Normalized mouse position for rotation (-0.5 to 0.5)
   const x = useSpring(0, config);
   const y = useSpring(0, config);
+
+  // Pixel-based mouse position for spotlight
+  const mouseX = useSpring(0, config);
+  const mouseY = useSpring(0, config);
 
   // Transform springs to rotation values
   const rotateX = useTransform(y, [-0.5, 0.5], [rotateAmplitude, -rotateAmplitude]);
@@ -48,12 +54,16 @@ export function TiltCard({
     const width = rect.width;
     const height = rect.height;
 
-    // Calculate position relative to center (-0.5 to 0.5)
-    const mouseX = (e.clientX - rect.left) / width - 0.5;
-    const mouseY = (e.clientY - rect.top) / height - 0.5;
+    // Calculate normalized position
+    const normalizedX = (e.clientX - rect.left) / width - 0.5;
+    const normalizedY = (e.clientY - rect.top) / height - 0.5;
 
-    x.set(mouseX);
-    y.set(mouseY);
+    x.set(normalizedX);
+    y.set(normalizedY);
+
+    // Calculate pixel position for spotlight
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
   };
 
   const handleMouseEnter = () => {
@@ -66,6 +76,7 @@ export function TiltCard({
     x.set(0);
     y.set(0);
     scale.set(1);
+    // Reset spotlight to center or off-screen if desired, usually leaving it is fine
   };
 
   return (
@@ -86,10 +97,29 @@ export function TiltCard({
           rotateY,
           scale,
           transformStyle: 'preserve-3d',
-          ...style, // Ensure custom styles (borders, backgrounds) are applied
+          ...style,
         }}
-        className={cn(className)}
+        className={cn("relative", className)}
       >
+        {/* Dynamic Spotlight Overlay */}
+        {spotlight && (
+          <motion.div
+            className="absolute inset-0 z-10 pointer-events-none rounded-xl"
+            style={{
+              background: useMotionTemplate`
+                radial-gradient(
+                  600px circle at ${mouseX}px ${mouseY}px,
+                  ${spotlightColor},
+                  transparent 40%
+                )
+              `,
+              opacity: isHovered ? 1 : 0,
+            }}
+            transition={{ duration: 0.3 }}
+          />
+        )}
+
+        {/* Content Container */}
         <div
           style={{
             transform: `translateZ(${depthZ}px)`,
