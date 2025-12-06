@@ -78,6 +78,8 @@ export default function Prizes() {
                   }}
                   rotateAmplitude={12}
                   scaleOnHover={1.08}
+                  spotlight={true}
+                  spotlightColor={`${prize.color}25`}
                 >
                   {/* Floating icon */}
                   <motion.div
@@ -144,6 +146,8 @@ export default function Prizes() {
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(195, 59, 51, 0.2)',
             }}
             rotateAmplitude={8}
+            spotlight={true}
+            spotlightColor="rgba(195, 59, 51, 0.15)"
           >
             <h3 className="text-2xl text-center mb-4" style={{ color: '#C33B33' }}>
               Additional Perks
@@ -169,16 +173,6 @@ export default function Prizes() {
           </TiltCard>
         </motion.div>
       </div>
-
-      {/* Diagonal accent lines */}
-      <div
-        className="absolute top-1/3 left-0 w-full h-px rotate-1"
-        style={{ backgroundColor: 'rgba(195, 59, 51, 0.15)' }}
-      />
-      <div
-        className="absolute bottom-1/3 right-0 w-full h-px -rotate-1"
-        style={{ backgroundColor: 'rgba(77, 139, 134, 0.15)' }}
-      />
     </section>
   );
 }
