@@ -65,7 +65,7 @@ const timelineEvents = [
     date: 'December 2025 - January 2026',
     description: 'Open registration for all aspiring innovators',
     color: '#C33B33',
-    position: 'left', // Keep Left
+    position: 'left',
   },
   {
     icon: Users,
@@ -73,7 +73,7 @@ const timelineEvents = [
     date: 'Late January 2026',
     description: 'Selection of finalist teams based on ideas',
     color: '#4D8B86',
-    position: 'right', // CHANGE THIS TO 'right'
+    position: 'right',
   },
   {
     icon: Code,
@@ -81,7 +81,7 @@ const timelineEvents = [
     date: '6-7 February 2026',
     description: '30 hours of intense coding and innovation',
     color: '#C33B33',
-    position: 'left', // Keep Left
+    position: 'left',
   },
   {
     icon: Trophy,
@@ -89,7 +89,7 @@ const timelineEvents = [
     date: '7 February 2026',
     description: 'Present your solutions and win amazing prizes',
     color: '#4D8B86',
-    position: 'right', // CHANGE THIS TO 'right'
+    position: 'right',
   },
 ];
 
@@ -156,17 +156,16 @@ export default function Timeline() {
                 <motion.div
                   key={event.title}
                   className="relative w-full"
-                  // Animation: slide in from left if position is left, right if right
                   initial={{ opacity: 0, x: event.position === 'left' ? -100 : 100 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="relative flex items-center w-full">
+                  <div className="relative flex items-center justify-between w-full">
                     
                     {/* LEFT SIDE CONTENT */}
-                    {event.position === 'left' && (
-                      <div className="pr-8" style={{ width: 'calc(50% - 32px)' }}>
+                    <div className="pr-8" style={{ width: 'calc(50% - 32px)', visibility: event.position === 'left' ? 'visible' : 'hidden' }}>
+                      {event.position === 'left' && (
                         <TiltCard
                           className="p-6 backdrop-blur-xl border-2 rounded-2xl h-full w-full"
                           style={{
@@ -190,8 +189,8 @@ export default function Timeline() {
                             {event.description}
                           </p>
                         </TiltCard>
-                      </div>
-                    )}
+                      )}
+                    </div>
 
                     {/* CENTRAL DOT */}
                     <div 
@@ -219,8 +218,8 @@ export default function Timeline() {
                     </div>
 
                     {/* RIGHT SIDE CONTENT */}
-                    {event.position === 'right' && (
-                      <div className="pl-8 ml-auto" style={{ width: 'calc(50% - 32px)' }}>
+                    <div className="pl-8" style={{ width: 'calc(50% - 32px)', visibility: event.position === 'right' ? 'visible' : 'hidden' }}>
+                      {event.position === 'right' && (
                         <TiltCard
                           className="p-6 backdrop-blur-xl border-2 rounded-2xl h-full w-full"
                           style={{
@@ -244,8 +243,8 @@ export default function Timeline() {
                             {event.description}
                           </p>
                         </TiltCard>
-                      </div>
-                    )}
+                      )}
+                    </div>
 
                   </div>
                 </motion.div>
