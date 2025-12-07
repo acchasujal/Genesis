@@ -1,323 +1,404 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Calendar, Users, Code, Trophy } from 'lucide-react';
+import { Calendar, Users, Code, Trophy, Flag } from 'lucide-react';
 
-// --- TiltCard Component ---
-interface TiltCardProps {
-  children: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  rotateAmplitude?: number;
-  scaleOnHover?: number;
-}
-
-const TiltCard: React.FC<TiltCardProps> = ({ 
-  children, 
-  className = '', 
-  style = {}, 
-  rotateAmplitude = 10, 
-  scaleOnHover = 1.05 
-}) => {
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -rotateAmplitude;
-    const rotateY = ((x - centerX) / centerX) * rotateAmplitude;
-    setRotate({ x: rotateX, y: rotateY });
-  };
-
-  const handleMouseLeave = () => {
-    setRotate({ x: 0, y: 0 });
-    setIsHovered(false);
-  };
-
-  return (
-    <motion.div
-      className={className}
-      style={style}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      animate={{
-        rotateX: rotate.x,
-        rotateY: rotate.y,
-        scale: isHovered ? scaleOnHover : 1,
-      }}
-      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-// --- Updated Data: All positions set to 'left' ---
-const timelineEvents = [
+const timelineData = [
   {
+    id: 1,
     icon: Calendar,
     title: 'Registration',
-    date: 'December 2025 - January 2026',
+    date: 'Dec 2025 - Jan 2026',
+    fullDate: 'December 2025 - January 2026',
     description: 'Open registration for all aspiring innovators',
     color: '#C33B33',
-    position: 'left',
   },
   {
+    id: 2,
     icon: Users,
     title: 'Shortlisting',
-    date: 'Late January 2026',
+    date: 'Late Jan 2026',
+    fullDate: 'Late January 2026',
     description: 'Selection of finalist teams based on ideas',
     color: '#4D8B86',
-    position: 'right',
   },
   {
+    id: 3,
     icon: Code,
     title: 'Hackathon',
-    date: '6-7 February 2026',
+    date: '6-7 Feb 2026',
+    fullDate: '6-7 February 2026',
     description: '30 hours of intense coding and innovation',
     color: '#C33B33',
-    position: 'left',
   },
   {
+    id: 4,
     icon: Trophy,
     title: 'Final Pitch',
-    date: '7 February 2026',
+    date: '7 Feb 2026',
+    fullDate: '7 February 2026',
     description: 'Present your solutions and win amazing prizes',
     color: '#4D8B86',
-    position: 'right',
   },
 ];
 
-// --- Main Timeline Component ---
 export default function Timeline() {
-  const sectionRef = useRef(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
+    target: containerRef,
+    offset: ['start 0.5', 'end 0.8'],
   });
 
-  const lineProgress = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
+  const beamHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const flagY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen pt-10 pb-20 px-4 bg-slate-950">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Header Section */}
+    <section
+      ref={containerRef}
+      style={{
+        position: 'relative',
+        padding: '5rem 1rem',
+        backgroundColor: '#0E0E0E',
+      }}
+    >
+      {/* Sakura petals */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          top: '25%',
+          right: '25%',
+          width: '12px',
+          height: '12px',
+          borderRadius: '50%',
+          backgroundColor: '#FFC6D0',
+          opacity: 0.4,
+          pointerEvents: 'none',
+        }}
+        animate={{
+          y: [0, 200],
+          x: [0, -50],
+          rotate: [0, 360],
+          opacity: [0.4, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
+      />
+      <motion.div
+        style={{
+          position: 'absolute',
+          bottom: '33%',
+          left: '25%',
+          width: '8px',
+          height: '8px',
+          borderRadius: '50%',
+          backgroundColor: '#E99AAA',
+          opacity: 0.3,
+          pointerEvents: 'none',
+        }}
+        animate={{
+          y: [0, 150],
+          x: [0, 40],
+          rotate: [0, -360],
+          opacity: [0.3, 0],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: 'linear',
+          delay: 2,
+        }}
+      />
+
+      <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+        {/* Header */}
         <motion.div
-          className="text-center mb-20"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          style={{
+            textAlign: 'center',
+            marginBottom: '5rem',
+          }}
         >
           <h2
-            className="text-4xl md:text-6xl mb-4 font-bold"
             style={{
+              fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
+              marginBottom: '1rem',
+              fontWeight: 700,
               background: 'linear-gradient(135deg, #C33B33, #4D8B86)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
             }}
           >
             Event Timeline
           </h2>
-          <p className="text-lg" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
+          <p
+            style={{
+              fontSize: 'clamp(1rem, 2vw, 1.125rem)',
+              color: 'rgba(237, 232, 224, 0.7)',
+            }}
+          >
             Your journey to innovation
           </p>
         </motion.div>
 
-        {/* Central Vertical Timeline */}
-        <div className="relative max-w-5xl mx-auto">
-          {/* Central vertical line */}
+        {/* Timeline */}
+        <div style={{ position: 'relative', paddingTop: '2rem', paddingBottom: '2rem' }}>
+          {/* Vertical Beam Container with rounded ends */}
           <div
-            className="absolute left-1/2 top-0 bottom-0 w-0.5 transform -translate-x-1/2"
-            style={{ backgroundColor: 'rgba(195, 59, 51, 0.2)' }}
+            style={{
+              position: 'absolute',
+              left: isMobile ? '1rem' : '2rem',
+              top: '3rem',
+              bottom: '3rem',
+              width: '3px',
+              backgroundColor: 'rgba(195, 59, 51, 0.15)',
+              borderRadius: '9999px',
+              overflow: 'visible',
+            }}
           >
-            <motion.div
-              className="w-full"
+            {/* Top gradient fade */}
+            <div
               style={{
-                scaleY: lineProgress,
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '40px',
+                background: 'linear-gradient(to bottom, rgba(14, 14, 14, 1), transparent)',
+                zIndex: 2,
+              }}
+            />
+
+            {/* Animated beam */}
+            <motion.div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: beamHeight,
                 transformOrigin: 'top',
-                background: 'linear-gradient(180deg, #C33B33, #4D8B86)',
+                background: 'linear-gradient(to bottom, #C33B33, #4D8B86)',
+                boxShadow: '0 0 15px rgba(195, 59, 51, 0.5)',
+                borderRadius: '9999px',
+              }}
+            />
+
+            {/* Race Flag at the tip of the beam */}
+            <motion.div
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: flagY,
+                transform: 'translate(-50%, -8px)',
+                zIndex: 10,
+              }}
+            >
+              <motion.div
+                animate={{
+                  rotate: [0, -5, 5, -5, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  backgroundColor: '#C33B33',
+                  boxShadow: '0 4px 12px rgba(195, 59, 51, 0.6), 0 0 20px rgba(195, 59, 51, 0.4)',
+                  border: '2px solid #0E0E0E',
+                }}
+              >
+                <Flag size={18} style={{ color: '#FAF7F2' }} strokeWidth={2.5} />
+              </motion.div>
+            </motion.div>
+
+            {/* Bottom gradient fade */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: '40px',
+                background: 'linear-gradient(to top, rgba(14, 14, 14, 1), transparent)',
+                zIndex: 2,
               }}
             />
           </div>
 
-          {/* Timeline events */}
-          <div className="space-y-24 relative z-10">
-            {timelineEvents.map((event, index) => {
-              const Icon = event.icon;
+          {/* Timeline Items */}
+          <div
+            style={{
+              paddingLeft: isMobile ? '3rem' : '5rem',
+            }}
+          >
+            {timelineData.map((item, index) => {
+              const Icon = item.icon;
 
               return (
                 <motion.div
-                  key={event.title}
-                  className="relative w-full"
-                  initial={{ opacity: 0, x: event.position === 'left' ? -100 : 100 }}
+                  key={item.id}
+                  initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  style={{
+                    position: 'relative',
+                    marginBottom: index < timelineData.length - 1 ? (isMobile ? '3rem' : '4rem') : 0,
+                  }}
                 >
-                  <div className="relative flex items-center justify-between w-full">
-                    
-                    {/* LEFT SIDE CONTENT */}
-                    <div className="pr-8" style={{ width: 'calc(50% - 32px)', visibility: event.position === 'left' ? 'visible' : 'hidden' }}>
-                      {event.position === 'left' && (
-                        <TiltCard
-                          className="p-6 backdrop-blur-xl border-2 rounded-2xl h-full w-full"
-                          style={{
-                            borderColor: event.color,
-                            backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                            boxShadow: `0 8px 32px ${event.color}40`,
-                          }}
-                          rotateAmplitude={8}
-                          scaleOnHover={1.05}
-                        >
-                          <div className="flex items-center gap-3 mb-3">
-                            <Icon size={20} style={{ color: event.color }} />
-                            <p className="text-sm font-semibold" style={{ color: event.color }}>
-                              {event.date}
-                            </p>
-                          </div>
-                          <h3 className="text-2xl font-bold mb-3 text-white">
-                            {event.title}
-                          </h3>
-                          <p className="text-sm leading-relaxed" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
-                            {event.description}
-                          </p>
-                        </TiltCard>
-                      )}
-                    </div>
-
-                    {/* CENTRAL DOT */}
-                    <div 
-                      className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center"
-                      style={{ zIndex: 20 }}
+                  {/* Date Badge - Desktop: Left of beam, Mobile: Above card */}
+                  {isMobile ? (
+                    // MOBILE: Date badge above the card
+                    <motion.div
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.15,
+                        type: 'spring',
+                        stiffness: 180,
+                      }}
+                      style={{
+                        marginBottom: '0.75rem',
+                        display: 'inline-block',
+                        backgroundColor: 'rgba(20, 20, 20, 0.85)',
+                        backdropFilter: 'blur(6px)',
+                        borderRadius: '0.5rem',
+                        border: `1px solid ${item.color}55`,
+                        padding: '0.5rem 0.75rem',
+                        fontSize: '0.75rem',
+                        fontWeight: 700,
+                        color: item.color,
+                      }}
                     >
-                      <TiltCard
-                        className="relative w-16 h-16 border-4 flex items-center justify-center rounded-full"
-                        style={{
-                          borderColor: event.color,
-                          backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                          boxShadow: `0 0 20px ${event.color}80, 0 0 40px ${event.color}40`,
-                        }}
-                        rotateAmplitude={15}
-                        scaleOnHover={1.2}
-                      >
-                        <div
-                          className="w-3 h-3 rounded-full"
-                          style={{
-                            backgroundColor: event.color,
-                            boxShadow: `0 0 10px ${event.color}`,
-                          }}
-                        />
-                      </TiltCard>
-                    </div>
+                      {item.date}
+                    </motion.div>
+                  ) : (
+                    // DESKTOP: Date badge to the left of beam, aligned with card top
+                    <motion.div
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.15,
+                        type: 'spring',
+                        stiffness: 180,
+                      }}
+                      style={{
+                        position: 'absolute',
+                        right: 'calc(100% + 3rem + 2px)', // Right edge of badge = beam left edge
+                        top: '2rem', // Align with card's top padding
+                        zIndex: 20,
+                        backgroundColor: 'rgba(20, 20, 20, 0.85)',
+                        backdropFilter: 'blur(6px)',
+                        borderRadius: '0.6rem',
+                        border: `1px solid ${item.color}55`,
+                        padding: '0.5rem 0.75rem',
+                        whiteSpace: 'nowrap',
+                        fontSize: '0.8rem',
+                        fontWeight: 700,
+                        color: item.color,
+                        textAlign: 'right',
+                      }}
+                    >
+                      {item.date}
+                    </motion.div>
+                  )}
 
-                    {/* RIGHT SIDE CONTENT */}
-                    <div className="pl-8" style={{ width: 'calc(50% - 32px)', visibility: event.position === 'right' ? 'visible' : 'hidden' }}>
-                      {event.position === 'right' && (
-                        <TiltCard
-                          className="p-6 backdrop-blur-xl border-2 rounded-2xl h-full w-full"
-                          style={{
-                            borderColor: event.color,
-                            backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                            boxShadow: `0 8px 32px ${event.color}40`,
-                          }}
-                          rotateAmplitude={8}
-                          scaleOnHover={1.05}
-                        >
-                          <div className="flex items-center gap-3 mb-3">
-                            <Icon size={20} style={{ color: event.color }} />
-                            <p className="text-sm font-semibold" style={{ color: event.color }}>
-                              {event.date}
-                            </p>
-                          </div>
-                          <h3 className="text-2xl font-bold mb-3 text-white">
-                            {event.title}
-                          </h3>
-                          <p className="text-sm leading-relaxed" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
-                            {event.description}
-                          </p>
-                        </TiltCard>
-                      )}
-                    </div>
-
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Timeline (remains vertical/stacked) */}
-        <div className="md:hidden relative mt-16">
-          <div
-            className="absolute left-8 top-0 bottom-0 w-0.5"
-            style={{ backgroundColor: 'rgba(195, 59, 51, 0.2)' }}
-          >
-            <motion.div
-              className="w-full"
-              style={{
-                scaleY: lineProgress,
-                transformOrigin: 'top',
-                background: 'linear-gradient(180deg, #C33B33, #4D8B86)',
-              }}
-            />
-          </div>
-
-          <div className="space-y-12 relative z-10">
-            {timelineEvents.map((event, index) => {
-              const Icon = event.icon;
-              return (
-                <motion.div
-                  key={event.title}
-                  className="flex items-start gap-6"
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <TiltCard
-                    className="relative flex-shrink-0 w-16 h-16 border-4 flex items-center justify-center rounded-full"
+                  {/* Card with colored left border */}
+                  <motion.div
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.3 }}
                     style={{
-                      borderColor: event.color,
-                      backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                      boxShadow: `0 0 20px ${event.color}80`,
+                      position: 'relative',
+                      padding: isMobile ? '1.5rem' : '2rem',
+                      borderRadius: '0.75rem',
+                      backgroundColor: 'rgba(20, 20, 20, 0.9)',
+                      border: '1px solid rgba(60, 60, 60, 0.5)',
+                      borderLeft: `4px solid ${item.color}`,
+                      backdropFilter: 'blur(10px)',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
                     }}
-                    rotateAmplitude={15}
-                    scaleOnHover={1.15}
                   >
                     <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: event.color }}
-                    />
-                  </TiltCard>
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: isMobile ? '1rem' : '1.5rem',
+                      }}
+                    >
+                      {/* Icon */}
+                      <div
+                        style={{
+                          width: isMobile ? '48px' : '56px',
+                          height: isMobile ? '48px' : '56px',
+                          borderRadius: '0.5rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          backgroundColor: `${item.color}20`,
+                          border: `2px solid ${item.color}40`,
+                        }}
+                      >
+                        <Icon
+                          size={isMobile ? 24 : 28}
+                          style={{ color: item.color }}
+                          strokeWidth={2}
+                        />
+                      </div>
 
-                  <TiltCard
-                    className="flex-1 p-6 border-2 rounded-2xl"
-                    style={{
-                      borderColor: event.color,
-                      backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                    }}
-                    rotateAmplitude={8}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon size={18} style={{ color: event.color }} />
-                      <p className="text-sm font-semibold" style={{ color: event.color }}>
-                        {event.date}
-                      </p>
+                      {/* Content */}
+                      <div style={{ flex: 1 }}>
+                        <h3
+                          style={{
+                            fontSize: isMobile ? '1.25rem' : '1.5rem',
+                            fontWeight: 700,
+                            marginBottom: '0.5rem',
+                            color: '#EDE8E0',
+                          }}
+                        >
+                          {item.title}
+                        </h3>
+                        <p
+                          style={{
+                            fontSize: isMobile ? '0.875rem' : '1rem',
+                            lineHeight: '1.625',
+                            color: 'rgba(237, 232, 224, 0.85)',
+                          }}
+                        >
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 text-white">
-                      {event.title}
-                    </h3>
-                    <p className="text-sm" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
-                      {event.description}
-                    </p>
-                  </TiltCard>
+                  </motion.div>
                 </motion.div>
               );
             })}
