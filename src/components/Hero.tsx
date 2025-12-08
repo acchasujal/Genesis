@@ -212,7 +212,7 @@ export default function Hero() {
           transition={{ opacity: { delay: 2, duration: 1 }, y: { repeat: Infinity, duration: 2 } }}
         >
           <div className="text-white opacity-70" style={{ fontFamily: '"Cinzel", serif', fontSize: '0.9rem' }}>
-            SCROLL
+            
           </div>
           <div className="w-1 h-8 bg-gradient-to-b from-red-600 to-transparent mx-auto mt-2 rounded-full" />
         </motion.div>

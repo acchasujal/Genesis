@@ -71,10 +71,11 @@ export default function Tracks() {
                 onClick={() => setSelectedTrack(index)}
               >
                 <TiltCard
-                  className="relative p-8 backdrop-blur-xl border-l-4 overflow-hidden transition-all duration-300"
+                  className="relative p-8 backdrop-blur-xl border-l-4 overflow-hidden transition-all duration-300 flex flex-col h-full"
                   style={{
                     backgroundColor: 'rgba(14, 14, 14, 0.7)',
                     borderLeftColor: track.color,
+                    minHeight: '240px',
                     boxShadow:
                       hoveredIndex === index
                         ? `0 12px 40px rgba(0, 0, 0, 0.6), inset -3px 0 16px ${track.color}40`
