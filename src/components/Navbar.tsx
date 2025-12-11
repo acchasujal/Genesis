@@ -68,6 +68,11 @@ function attachImageCursor(imgSrc: string) {
   };
 }
 
+interface CustomButtonElement extends HTMLButtonElement {
+  _cursorCtl?: ReturnType<typeof attachImageCursor>;
+  _prevCursor?: string;
+}
+
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
@@ -165,7 +170,7 @@ export default function Navbar() {
             {/* Desktop CTA Button */}
             <motion.button
               className="hidden lg:block px-6 xl:px-8 py-2.5 text-sm xl:text-base tracking-wide"
-              onClick={() => scrollToSection('#register')}
+              onClick={(e) => scrollToSection('#register')}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as any;
                 el._prevCursor = el.style.cursor;
@@ -286,7 +291,17 @@ export default function Navbar() {
 
                 {/* Mobile CTA */}
                 <motion.button
-                  onClick={() => scrollToSection('#register')}
+                  onClick={(e) => {
+                    scrollToSection('#register');
+                    // Hide native cursor
+                    e.currentTarget.style.cursor = 'none';
+                    const el = e.currentTarget as CustomButtonElement;
+                    el.style.cursor = 'none';
+                    if(el._cursorCtl) {
+                     el._cursorCtl.remove();
+                     delete el._cursorCtl;
+                    }
+                  } } 
                   className="w-full mt-4 px-6 py-3 text-center"
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as any;

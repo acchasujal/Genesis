@@ -74,6 +74,11 @@ function attachImageCursor(imgSrc: string) {
   };
 }
 
+interface CustomButtonElement extends HTMLButtonElement {
+  _cursorCtl?: ReturnType<typeof attachImageCursor>;
+  _prevCursor?: string;
+}
+
 export default function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -262,9 +267,16 @@ export default function Hero() {
             className="relative inline-block"
           >
             <motion.button
-              onClick={() => {
+              onClick={(e) => {
                 const element = document.getElementById('register');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
+                e.currentTarget.style.cursor = 'none';
+                const el = e.currentTarget as CustomButtonElement;
+                el.style.cursor = 'none';
+                if(el._cursorCtl) {
+                  el._cursorCtl.remove();
+                  delete el._cursorCtl;
+                }
               }}
               className="relative px-16 sm:px-24 py-4 text-xl overflow-hidden group"
               onMouseEnter={(e) => {
