@@ -292,15 +292,15 @@ export default function Navbar() {
                 {/* Mobile CTA */}
                 <motion.button
                   onClick={(e) => {
-                    scrollToSection('#register');
-                    // Hide native cursor
-                    e.currentTarget.style.cursor = 'none';
+                     e.currentTarget.style.cursor = 'none';
                     const el = e.currentTarget as CustomButtonElement;
                     el.style.cursor = 'none';
                     if(el._cursorCtl) {
                      el._cursorCtl.remove();
                      delete el._cursorCtl;
                     }
+                    scrollToSection('#register');
+                   
                   } } 
                   className="w-full mt-4 px-6 py-3 text-center"
                   onMouseEnter={(e) => {
