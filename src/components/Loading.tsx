@@ -35,13 +35,14 @@ const JapaneseGateIntro: FC<JapaneseGateIntroProps> = ({ onFinish }) => {
         initial={{ scale: 1, y: 0 }}
         animate={{ scale: window.innerWidth < 500 ? 1 : scale, y: window.innerWidth < 500 ? 0 : 60*scale }}
         transition={ {delay: 0.7, duration: 1} }
-        onAnimationComplete={onFinish}>
+        >
         {/* LEFT GATE */}
         <motion.div
             style={{ ...styles.gate, ...styles.leftGate }}
             initial={{ x: 0 }}
             animate={{ x: "-105%" }}
             transition={{ delay: 1.6, duration: 1.4, ease: "easeInOut" }}
+            onAnimationComplete={onFinish}
         />
 
         {/* RIGHT GATE */}

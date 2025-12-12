@@ -11,7 +11,7 @@ export default function AppWithGateIntro({ children }: Props) {
 
   return (
     <>
-      <JapaneseGateIntro onFinish={() => setDone(true)} />
+      {!done && <JapaneseGateIntro onFinish={() => setDone(true)} />}
 
       <motion.div
       >
