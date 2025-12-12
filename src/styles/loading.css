@@ -1,0 +1,21 @@
+:root {
+  --zoom-scale: 1; /* default for desktops */
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --zoom-scale: 0.85; /* tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --zoom-scale: 0.7; /* phones */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --zoom-scale: 0.6; /* small phones */
+  }
+}

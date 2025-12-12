@@ -18,7 +18,7 @@ export default function Hero() {
       {/* Preload hero image */}
       <link rel="preload" as="image" href={heroImage} />
 
-      {/* Background Image */}
+      {/* Background Image */} 
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -29,11 +29,14 @@ export default function Hero() {
       />
 
       {/* Dark Overlay */}
-      <div 
+      <motion.div 
         className="absolute inset-0" 
         style={{
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)'
         }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.6, duration: 0.5 }}
       />
 
       {/* --- BACKGROUND ANIMATIONS (Katana & Sakura) --- */}
@@ -46,7 +49,7 @@ export default function Hero() {
         }}
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: [0, 1, 1], opacity: [0, 0.8, 0] }}
-        transition={{ duration: 2.5, times: [0, 0.5, 1], repeat: Infinity, repeatDelay: 10, ease: 'easeInOut' }}
+        transition={{ duration: 2.9, times: [0, 0.5, 1], repeat: Infinity, repeatDelay: 10, ease: 'easeInOut' }}
       >
         <motion.div
           className="absolute inset-0"
@@ -92,7 +95,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
+          transition={{ delay: 2,duration: 1.2, ease: 'easeOut' }}
           className="w-full flex flex-col items-center"
         >
           {/* --- CHANGE 2: IMAGE REPLACES TITLE TEXT --- */}
@@ -102,7 +105,7 @@ export default function Hero() {
             className="mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1.2 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 1, delay: 2.3, ease: "easeOut" }}
             style={{
               width: '100%',
               maxWidth: '900px', // Limits size on large screens
