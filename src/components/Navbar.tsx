@@ -2,6 +2,77 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+const cursorImageUrl = new URL('../assets/Pi7_cropper (1).png', import.meta.url).href;
+
+// Helper: attach an image element that follows the mouse with smooth lerp and fade
+function attachImageCursor(imgSrc: string) {
+  const img = document.createElement('img');
+  img.src = imgSrc;
+  img.style.position = 'fixed';
+  img.style.left = '0px';
+  img.style.top = '0px';
+  img.style.width = '20px';
+  img.style.height = '20px';
+  img.style.pointerEvents = 'none';
+  img.style.transform = 'translate(-50%, -50%)';
+  img.style.zIndex = '99999';
+  img.style.opacity = '0';
+  img.style.transition = 'opacity 180ms ease, transform 80ms linear';
+  img.className = 'custom-hover-cursor';
+  document.body.appendChild(img);
+
+  let targetX = 0;
+  let targetY = 0;
+  let curX = 0;
+  let curY = 0;
+  let rafId: number | null = null;
+
+  function update() {
+    curX += (targetX - curX) * 0.5;
+    curY += (targetY - curY) * 0.5;
+    img.style.transform = `translate(-50%, -50%) translate(${curX}px, ${curY}px)`;
+    rafId = requestAnimationFrame(update);
+  }
+
+  function onMove(e: MouseEvent) {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    if (rafId === null) update();
+  }
+
+  requestAnimationFrame(() => {
+    img.style.opacity = '1';
+  });
+
+  window.addEventListener('mousemove', onMove);
+
+  function setPosition(x: number, y: number) {
+    targetX = x;
+    targetY = y;
+    curX = x;
+    curY = y;
+    img.style.transform = `translate(-50%, -50%) translate(${curX}px, ${curY}px)`;
+    if (rafId === null) update();
+  }
+
+  return {
+    setPosition,
+    remove() {
+      window.removeEventListener('mousemove', onMove);
+      if (rafId) cancelAnimationFrame(rafId);
+      img.style.opacity = '0';
+      setTimeout(() => {
+        if (img && img.parentElement) img.parentElement.removeChild(img);
+      }, 180);
+    }
+  };
+}
+
+interface CustomButtonElement extends HTMLButtonElement {
+  _cursorCtl?: ReturnType<typeof attachImageCursor>;
+  _prevCursor?: string;
+}
+
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
@@ -61,7 +132,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <motion.div
-              className="text-xl sm:text-2xl tracking-tight cursor-pointer"
+              className="text-xl sm:text-2xl tracking-tight cursor-pointer flex items-center gap-2"
               style={{ color: '#EDE8E0', fontWeight: 600 }}
               whileHover={{ scale: 1.05 }}
               onClick={() => scrollToSection('#home')}
@@ -99,7 +170,29 @@ export default function Navbar() {
             {/* Desktop CTA Button */}
             <motion.button
               className="hidden lg:block px-6 xl:px-8 py-2.5 text-sm xl:text-base tracking-wide"
-              onClick={() => scrollToSection('#register')}
+              onClick={(e) => scrollToSection('#register')}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as any;
+                el._prevCursor = el.style.cursor;
+                el.style.cursor = 'none';
+                el._cursorCtl = attachImageCursor(cursorImageUrl);
+                if (el._cursorCtl && typeof el._cursorCtl.setPosition === 'function') {
+                  el._cursorCtl.setPosition(e.clientX, e.clientY);
+                }
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as any;
+                if (el._cursorCtl) {
+                  el._cursorCtl.remove();
+                  delete el._cursorCtl;
+                }
+                if (typeof el._prevCursor !== 'undefined') {
+                  el.style.cursor = el._prevCursor;
+                  delete el._prevCursor;
+                } else {
+                  el.style.cursor = '';
+                }
+              }}
               style={{
                 backgroundColor: '#C33B33',
                 color: '#FAF7F2',
@@ -198,8 +291,41 @@ export default function Navbar() {
 
                 {/* Mobile CTA */}
                 <motion.button
-                  onClick={() => scrollToSection('#register')}
+                  onClick={(e) => {
+                     e.currentTarget.style.cursor = 'none';
+                    const el = e.currentTarget as CustomButtonElement;
+                    el.style.cursor = 'none';
+                    if(el._cursorCtl) {
+                     el._cursorCtl.remove();
+                     delete el._cursorCtl;
+                    }
+                    scrollToSection('#register');
+                   
+                  } } 
                   className="w-full mt-4 px-6 py-3 text-center"
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as any;
+                    // hide native cursor for this element and store previous value
+                    el._prevCursor = el.style.cursor;
+                    el.style.cursor = 'none';
+                    el._cursorCtl = attachImageCursor(cursorImageUrl);
+                    if (el._cursorCtl && typeof el._cursorCtl.setPosition === 'function') {
+                      el._cursorCtl.setPosition(e.clientX, e.clientY);
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as any;
+                    if (el._cursorCtl) {
+                      el._cursorCtl.remove();
+                      delete el._cursorCtl;
+                    }
+                    if (typeof el._prevCursor !== 'undefined') {
+                      el.style.cursor = el._prevCursor;
+                      delete el._prevCursor;
+                    } else {
+                      el.style.cursor = '';
+                    }
+                  }}
                   style={{
                     backgroundColor: '#C33B33',
                     color: '#FAF7F2',
