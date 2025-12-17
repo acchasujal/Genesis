@@ -2,12 +2,14 @@ import { FC, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import "../styles/loading.css"
 import doorOpenSfx from "../assets/door-open-107728.mp3";
+import "../styles/loading.css";
 
 interface JapaneseGateIntroProps {
   onFinish: () => void;
 }
 
 const JapaneseGateIntro: FC<JapaneseGateIntroProps> = ({ onFinish }) => {
+  const gateRef = useRef<HTMLDivElement | null>(null);
 
   const [scale, setScale] = useState(1);
   const doorAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -31,15 +33,36 @@ const JapaneseGateIntro: FC<JapaneseGateIntroProps> = ({ onFinish }) => {
       audio.currentTime = 0;
     };
   }, []);
+  const [scene, setScene] = useState({
+    scale: 1,
+    y: 0,
+  });
 
   useEffect(() => {
     const update = () => {
-      const aspect = Math.min(1.3, (window.innerHeight/1000));
-      setScale(Math.max(1, aspect*1.6));
+      if (!gateRef.current) return;
 
-      console.log(aspect, window.innerHeight);
-      
+      const rect = gateRef.current.getBoundingClientRect();
+
+      // 1️⃣ Device-safe zoom (width-based, clamped)
+      const scale = Math.min(
+        1.4,
+        Math.max(1.1, window.innerWidth / 1200)
+      );
+
+      // 2️⃣ Object-anchored vertical centering
+      const gateY = rect.top + rect.height / 2;
+      const viewY = window.innerHeight / 2;
+
+      let dy = viewY - gateY;
+
+      // 3️⃣ Perceptual design offset (scale-aware)
+      const DESIGN_Y_OFFSET = 40; // tweak once if needed
+      dy += DESIGN_Y_OFFSET * scale;
+
+      setScene({ scale, y: dy });
     };
+
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
@@ -47,63 +70,46 @@ const JapaneseGateIntro: FC<JapaneseGateIntroProps> = ({ onFinish }) => {
 
   return (
     <motion.div style={styles.container}>
-
-    <motion.div style={{
-    height: "100vh",
-    width: "100vw",
-    background: "transparent",
-    overflow: "hidden"
-    }}
+      <motion.div
+        style={styles.scene}
         initial={{ scale: 1, y: 0 }}
-        animate={{ scale: window.innerWidth < 500 ? 1 : scale, y: window.innerWidth < 500 ? 0 : 60*scale }}
-        transition={ {delay: 0.7, duration: 1} }
-        >
-        {/* LEFT GATE */}
+        animate={
+          window.innerWidth < 500
+            ? { scale: 1, y: 0 }
+            : scene
+        }
+        transition={{
+          delay: 0.7,
+          duration: 1.2,
+          ease: [0.22, 1, 0.36, 1], // cinematic
+        }}
+      >
+        {/* LEFT GATE (ANCHOR) */}
         <motion.div
-            style={{ ...styles.gate, ...styles.leftGate }}
-            initial={{ x: 0 }}
-            animate={{ x: "-105%" }}
-            transition={{ delay: 1.6, duration: 1.4, ease: "easeInOut" }}
-            onAnimationComplete={onFinish}
+          ref={gateRef}
+          style={{ ...styles.gate, ...styles.leftGate }}
+          initial={{ x: 0 }}
+          animate={{ x: "-105%" }}
+          transition={{ delay: 1.6, duration: 1.4, ease: "easeInOut" }}
+          onAnimationComplete={onFinish}
         />
 
         {/* RIGHT GATE */}
         <motion.div
-            style={{ ...styles.gate, ...styles.rightGate }}
-            initial={{ x: 0 }}
-            animate={{ x: "105%" }}
-            transition={{ delay: 1.6, duration: 1.4, ease: "easeInOut" }}
+          style={{ ...styles.gate, ...styles.rightGate }}
+          initial={{ x: 0 }}
+          animate={{ x: "105%" }}
+          transition={{ delay: 1.6, duration: 1.4, ease: "easeInOut" }}
         />
-    </motion.div>
-
-      {/* Optional Logo */}
-      {/* <motion.div
-        style={{
-            position: "absolute", // <- make it positioned so zIndex works
-            inset: 0,             // <- full-viewport
-            width: "100vw",
-            height: "100vh",
-            backgroundImage: `url("/bg.png")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            zIndex: -1    // <- put behind gates (give gates a higher zIndex if needed)
-        }}
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1 }}
-        // transition={{ duration: 3 }}
-      >
-        
-      </motion.div> */}
+      </motion.div>
     </motion.div>
   );
 };
 
 export default JapaneseGateIntro;
 
-// ------------------------------
-// STYLES
-// ------------------------------
+
+
 const styles: Record<string, React.CSSProperties> = {
   container: {
     position: "fixed",
@@ -114,37 +120,31 @@ const styles: Record<string, React.CSSProperties> = {
     zIndex: 99,
   },
 
+  scene: {
+    height: "100vh",
+    width: "100vw",
+    overflow: "hidden",
+    transformOrigin: "center center",
+    willChange: "transform",
+  },
+
   gate: {
     position: "absolute",
     top: 0,
     height: "100%",
     width: "50%",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   },
 
-  // Wood texture optional — remove if you want flat color
   leftGate: {
     left: 0,
-    backgroundImage:
-      "url('/door2.png')", // Japanese wood texture
-    backgroundPosition: "top right"
-  },
-  rightGate: {
-    right: 0,
-    backgroundImage:
-      "url('/door3.png')",
-    backgroundPosition: "top left"
+    backgroundImage: "url('/door2.png')",
+    backgroundPosition: "top right",
   },
 
-  logo: {
-    position: "absolute",
-    inset: 0,
-    fontSize: "4rem",
-    color: "white",
-    fontFamily: "serif",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    pointerEvents: "none",
+  rightGate: {
+    right: 0,
+    backgroundImage: "url('/door3.png')",
+    backgroundPosition: "top left",
   },
 };
