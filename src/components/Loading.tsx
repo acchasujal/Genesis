@@ -1,6 +1,7 @@
-import { FC, useState , useEffect} from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import "../styles/loading.css"
+import doorOpenSfx from "../assets/door-open-107728.mp3";
 
 interface JapaneseGateIntroProps {
   onFinish: () => void;
@@ -9,6 +10,27 @@ interface JapaneseGateIntroProps {
 const JapaneseGateIntro: FC<JapaneseGateIntroProps> = ({ onFinish }) => {
 
   const [scale, setScale] = useState(1);
+  const doorAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Play gate opening sound in sync with the door animation
+  useEffect(() => {
+    const audio = new Audio(doorOpenSfx);
+    audio.volume = 0.5; // keep volume low
+    doorAudioRef.current = audio;
+
+    // Match the animation delay (1.6s) so the sound starts as doors move
+    const timer = window.setTimeout(() => {
+      audio.play().catch((err) => {
+        console.log("Gate SFX blocked by autoplay policy", err);
+      });
+    }, 1600);
+
+    return () => {
+      window.clearTimeout(timer);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
 
   useEffect(() => {
     const update = () => {

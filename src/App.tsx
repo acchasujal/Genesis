@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy, useRef } from 'react';
 import { useScroll } from 'framer-motion';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar';
@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import KatanaTransition from './components/KatanaTransition';
 import Registration from './components/Registration';
 import ErrorBoundary from './ErrorBoundary';
+import backgroundMusic from './assets/traditional-japanese-2-437931_2MiIiv30 (1).mp3';
 
 // Lazy-load the heavy 3D scene
 const Scene3D = lazy(() => import('./components/Scene3D'));
@@ -21,6 +22,7 @@ export default function App(): JSX.Element {
   const { scrollYProgress } = useScroll();
   const [currentSection, setCurrentSection] = useState<number>(0);
   const [transitioning, setTransitioning] = useState<boolean>(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Initialize Lenis Smooth Scroll
   useEffect(() => {
@@ -41,6 +43,41 @@ export default function App(): JSX.Element {
 
     return () => {
       lenis.destroy();
+    };
+  }, []);
+
+  // Background Music Effect
+  useEffect(() => {
+    const audio = new Audio(backgroundMusic);
+    audio.loop = false;
+    audio.volume = 0.5; // Low volume (20%)
+    audioRef.current = audio;
+
+    // Attempt to play the audio
+    const playAudio = () => {
+      audio.play().catch((error) => {
+        console.log('Autoplay prevented. User interaction required:', error);
+      });
+    };
+
+    // Try to play immediately
+    playAudio();
+
+    // If autoplay is blocked, play on first user interaction
+    const handleInteraction = () => {
+      playAudio();
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+
+    document.addEventListener('click', handleInteraction);
+    document.addEventListener('keydown', handleInteraction);
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
     };
   }, []);
 
