@@ -18,6 +18,7 @@ const currentSponsors = [
   { name: 'Gemini', logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png' },
   { name: 'Interview Buddy', logo: 'https://interviewbuddy.net/favicon.png' },
   { name: 'Give My Certificate', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPcYIJAWI9_tnLby1dQV-dmGtCSv4HdFubbQ&s' },
+  { name: 'Gina Drinks', logo: 'src/assets/Gina-drinks.jpeg' }
 ];
 
 // Convert sponsors to CircularGallery format
