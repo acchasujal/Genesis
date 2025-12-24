@@ -244,6 +244,7 @@ export default function Hero() {
                30-HOUR HACKATHON
             </div>
           </motion.div> */}
+            
 
           {/* REGISTER BUTTON */}
           <motion.div
