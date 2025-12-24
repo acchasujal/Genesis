@@ -233,7 +233,7 @@ export default function Hero() {
             </div>
 
             {/* Hackathon Text */}
-            <div style={{
+            {/* <div style={{
                fontSize: '1.2rem',
                textShadow: '0 2px 4px rgba(0,0,0,0.9)',
                fontWeight: 600,
@@ -243,7 +243,7 @@ export default function Hero() {
             }}>
                30-HOUR HACKATHON
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* REGISTER BUTTON */}
           <motion.div
