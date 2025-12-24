@@ -229,7 +229,7 @@ export default function Hero() {
                fontSize: '1.4rem',
                letterSpacing: '1px'
             }}>
-               6–7 FEB 2026
+               TBD
             </div>
 
             {/* Hackathon Text */}
