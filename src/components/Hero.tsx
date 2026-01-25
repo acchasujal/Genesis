@@ -263,13 +263,16 @@ export default function Hero() {
               style={{
                 fontFamily: '"Cinzel", serif',
                 color: '#FAF7F2',
-                fontSize: '1.2rem',
-                fontWeight: 700,
-                opacity: 0.9
+                fontSize: '2.2rem',
+                fontWeight: 400,
+                opacity: 0.8,
+                transform: 'translateY(-2px)',
+                textShadow: '0 0 8px rgba(255,255,255,0.35)'
               }}
             >
               &
             </span>
+
 
             <img
               src={bmcLogo}
@@ -310,7 +313,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 2.3, ease: "easeOut" }}
             style={{
               width: '100%',
-              maxWidth: '420px',
+              maxWidth: '460px',
               height: 'auto',
               display: 'block',
               filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))',
@@ -363,16 +366,25 @@ export default function Hero() {
 
             <motion.button
               onClick={(e) => {
-                const element = document.getElementById('register');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-                e.currentTarget.style.cursor = 'none';
+                e.preventDefault();
+
                 const el = e.currentTarget as CustomButtonElement;
-                el.style.cursor = 'none';
+
+                // clean up custom cursor
                 if (el._cursorCtl) {
                   el._cursorCtl.remove();
                   delete el._cursorCtl;
                 }
+                el.style.cursor = '';
+
+                // open Unstop registration page
+                window.open(
+                  'https://unstop.com/p/genesis-2026-vivekanand-education-societys-institute-of-technology-vesit-mumbai-1626873',
+                  '_blank',
+                  'noopener,noreferrer'
+                );
               }}
+
               className="relative px-12 sm:px-20 py-3 text-lg overflow-hidden group"
               onMouseEnter={(e) => {
                 const el = e.currentTarget as any;
