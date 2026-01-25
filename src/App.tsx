@@ -93,14 +93,14 @@ export default function App(): JSX.Element {
 
       <div className="relative z-10">
         <Hero />
-        <AboutUs />
+        {/* <AboutUs />
         <AboutGenesis />
         <Tracks />
         <Timeline />
         <Sponsors />
         <FAQ />
         <Registration />
-        <Footer />
+        <Footer /> */}
       </div>
     </div>
   );

@@ -236,7 +236,7 @@ export default function Hero() {
               letterSpacing: '2px',
               color: '#FAF7F2'
             }}>
-              24-HOUR HACKATHON
+              30-HOUR HACKATHON
             </div>
           </motion.div>
 
