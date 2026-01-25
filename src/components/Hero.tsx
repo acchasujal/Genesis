@@ -8,7 +8,8 @@ import titleImage from '../assets/genesis_title.png';
 // @ts-ignore: Import cursor image
 const cursorImageUrl = new URL('../assets/Pi7_cropper (1).png', import.meta.url).href;
 
-// import Quest_Logo from '../assets/QuestIT_transparent.png';
+// @ts-ignore: Asset exists
+import questLogo from '../assets/QuestIT_transparent.png';
 
 // Helper: attach an image element that follows the mouse with smooth lerp and fade
 function attachImageCursor(imgSrc: string) {
@@ -82,16 +83,17 @@ interface CustomButtonElement extends HTMLButtonElement {
 export default function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      
+
       {/* 1. LOAD THE FONTS (Cinzel is still used for subtitles) */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+
       `}</style>
 
       {/* Preload hero image */}
       <link rel="preload" as="image" href={heroImage} />
 
-      {/* Background Image */} 
+      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -102,8 +104,8 @@ export default function Hero() {
       />
 
       {/* Dark Overlay */}
-      <motion.div 
-        className="absolute inset-0" 
+      <motion.div
+        className="absolute inset-0"
         style={{
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)'
         }}
@@ -111,6 +113,8 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 2.6, duration: 0.5 }}
       />
+
+
 
       {/* --- BACKGROUND ANIMATIONS (Katana & Sakura) --- */}
       <motion.div
@@ -168,88 +172,79 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2,duration: 1.2, ease: 'easeOut' }}
+          transition={{ delay: 2, duration: 1.2, ease: 'easeOut' }}
           className="w-full flex flex-col items-center"
         >
-          {/* --- CHANGE 2: IMAGE REPLACES TITLE TEXT --- */}
+          {/* QuestIT Logo */}
+          <div className="flex flex-col items-center gap-1 mb-0 mt-16 sm:mt-24 relative z-50">
+            {/* @ts-ignore: Asset exists */}
+            <img
+              src={questLogo}
+              alt="QuestIT Logo"
+              style={{ width: '120px', height: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
+            />
+            <span style={{ fontFamily: '"Cinzel", serif', color: '#EDE8E0', fontSize: '1.2rem', letterSpacing: '0.1em' }}>Presents </span>
+          </div>
+
+          {/* Genesis Title Image */}
           <motion.img
             src={titleImage}
             alt="GENESIS"
-            className="mb-4 sm:mb-6"
+            className="mb-8 sm:mb-10 -mt-2 sm:-mt-4"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1.2 }}
+            animate={{ opacity: 1, x: -25, y: 0, scale: 1.1 }}
             transition={{ duration: 1, delay: 2.3, ease: "easeOut" }}
             style={{
-              width: '100%',
-              maxWidth: '900px', // Limits size on large screens
+              width: '120%',
+              maxWidth: '1000px',
               height: 'auto',
-              // Optional: Adds a shadow to the image itself to make it pop
-              filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))', 
+              display: 'block',
+              filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))',
             }}
           />
 
-          {/* SUBTITLE */}
-          <motion.p
-            className="mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: -80 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            style={{ 
-              fontFamily: '"Cinzel", serif',
-              color: '#FFFFFF', 
-              fontWeight: 700,
-              textShadow: '0 2px 10px rgba(0,0,0,0.8)',
-              fontSize: 'clamp(1.5rem, 5vw, 3rem)',
-              letterSpacing: '0.1em',
-            }}
-          >
-            <span style={{ borderBottom: '2px solid #D31043', paddingBottom: '5px' }}>
-              COMING SOON
-            </span>
-          </motion.p>
-
           {/* DETAILS SECTION */}
           <motion.div
-            className="flex flex-col items-center gap-3 mb-10" 
+            className="flex flex-col items-center gap-3 mb-10"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: -80 }}
-            transition={{ duration: 1, delay: 0.9 }}
-            style={{ 
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 2.8 }}
+            style={{
               fontFamily: '"Cinzel", serif',
               color: '#fff',
             }}
           >
             {/* Date Pill */}
             <div style={{
-               background: '#BE1E2D', 
-               padding: '10px 35px',  
-               borderRadius: '50px',
-               boxShadow: '0 4px 15px rgba(190, 30, 45, 0.4)',
-               fontWeight: 700,
-               fontSize: '1.4rem',
-               letterSpacing: '1px'
+              background: '#BE1E2D',
+              padding: '10px 35px',
+              borderRadius: '50px',
+              boxShadow: '0 4px 15px rgba(190, 30, 45, 0.4)',
+              fontWeight: 700,
+              fontSize: '1.4rem',
+              letterSpacing: '1px'
             }}>
-               6–7 FEB 2026
+              6–7 FEB 2026
             </div>
 
             {/* Hackathon Text */}
             <div style={{
-               fontSize: '1.2rem',
-               textShadow: '0 2px 4px rgba(0,0,0,0.9)',
-               fontWeight: 600,
-               marginTop: '5px',
-               letterSpacing: '2px',
-               color: '#FAF7F2'
+              fontSize: '1.2rem',
+              textShadow: '0 2px 4px rgba(0,0,0,0.9)',
+              fontWeight: 600,
+              marginTop: '5px',
+              letterSpacing: '2px',
+              color: '#FAF7F2'
             }}>
-               30-HOUR HACKATHON
+              24-HOUR HACKATHON
             </div>
           </motion.div>
 
           {/* REGISTER BUTTON */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: -80 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 3.6 }}
             className="relative inline-block"
           >
             <motion.button
@@ -259,7 +254,7 @@ export default function Hero() {
                 e.currentTarget.style.cursor = 'none';
                 const el = e.currentTarget as CustomButtonElement;
                 el.style.cursor = 'none';
-                if(el._cursorCtl) {
+                if (el._cursorCtl) {
                   el._cursorCtl.remove();
                   delete el._cursorCtl;
                 }
@@ -304,7 +299,7 @@ export default function Hero() {
               }}
             >
               <span className="relative z-10">REGISTER NOW</span>
-              <div 
+              <div
                 className="absolute inset-0 bg-[#BE1E2D] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"
                 style={{ zIndex: 0, pointerEvents: 'none' }}
               />
@@ -320,7 +315,7 @@ export default function Hero() {
           transition={{ opacity: { delay: 2, duration: 1 }, y: { repeat: Infinity, duration: 2 } }}
         >
           <div className="text-white opacity-70" style={{ fontFamily: '"Cinzel", serif', fontSize: '0.9rem' }}>
-            
+
           </div>
           <div className="w-1 h-8 bg-gradient-to-b from-red-600 to-transparent mx-auto mt-2 rounded-full" />
         </motion.div>
