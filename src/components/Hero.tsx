@@ -16,6 +16,12 @@ import vesitLogo from '../assets/Vesit-logo.png';
 import iicLogo from '../assets/iic.png';
 // @ts-ignore: Asset exists
 import iic2Logo from '../assets/iic2.png';
+// @ts-ignore: Asset exists
+import hours24Img from '../assets/24hours.png';
+// @ts-ignore: Asset exists
+import dateImg from '../assets/date.png';
+
+
 
 
 // Helper: attach an image element that follows the mouse with smooth lerp and fade
@@ -236,31 +242,63 @@ export default function Hero() {
           className="w-full flex flex-col items-center"
         >
           {/* 1. QuestIT Logo + Presents */}
-          <div className="flex flex-col items-center gap-0.5 mb-4 mt-8 relative z-50">
-            {/* @ts-ignore: Asset exists */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px'
+            }}
+          >
             <img
               src={questLogo}
               alt="QuestIT Logo"
-              style={{ width: '90px', height: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
+              style={{
+                width: '90px',
+                height: 'auto',
+                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))'
+              }}
             />
+
             <span
               style={{
                 fontFamily: '"Cinzel", serif',
                 color: '#FAF7F2',
-                fontSize: '1rem',
-                letterSpacing: '0.28em',
-                fontWeight: 800,
-                textTransform: 'uppercase',
-                textShadow: `
+                fontSize: '1.2rem',
+                fontWeight: 700,
+                opacity: 0.9
+              }}
+            >
+              &
+            </span>
+
+            <img
+              src={bmcLogo}
+              alt="BMC Logo"
+              style={{
+                width: '70px',
+                height: 'auto',
+                mixBlendMode: 'screen',
+                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))'
+              }}
+            />
+          </div>
+
+          <span
+            style={{
+              fontFamily: '"Cinzel", serif',
+              color: '#FAF7F2',
+              fontSize: '1rem',
+              letterSpacing: '0.28em',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              textShadow: `
                 0 1px 2px rgba(0,0,0,0.8),
                 0 0 8px rgba(255,255,255,0.15)
               `
-              }}
-            >
-              Presents
-            </span>
-
-          </div>
+            }}
+          >
+            Presents
+          </span>
 
           {/* 2. Genesis Title Image (Reduced size for better viewport fit) */}
           <motion.img
@@ -279,41 +317,9 @@ export default function Hero() {
             }}
           />
 
-          {/* 3. In Collaboration With + BMC Logo */}
-          <motion.div
-            className="flex flex-col items-center gap-2 mb-8"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.5 }}
-          >
-            <span style={{
-              fontFamily: '"Cinzel", serif',
-              color: '#FAF7F2',
-              fontSize: '0.9rem',
-              letterSpacing: '0.22em',
-              fontWeight: 600,
-              opacity: 0.95
-            }}>
-              IN COLLABORATION WITH
-            </span>
-
-            {/* @ts-ignore: Asset exists */}
-            <img
-              src={bmcLogo}
-              alt="BMC Logo"
-              style={{
-                width: '65px',
-                height: 'auto',
-                mixBlendMode: 'screen',
-                filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.2))'
-              }}
-            />
-          </motion.div>
-
-
           {/* 4. DETAILS SECTION */}
           <motion.div
-            className="flex flex-col items-center gap-2 mb-7"
+            className="flex items-center gap-6 mb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.8 }}
@@ -322,39 +328,39 @@ export default function Hero() {
               color: '#fff',
             }}
           >
-            {/* Date Pill */}
-            <div style={{
-              background: '#BE1E2D',
-              padding: '7px 26px',
-              borderRadius: '50px',
-              boxShadow: '0 4px 15px rgba(190, 30, 45, 0.4)',
-              fontWeight: 700,
-              fontSize: '1rem',
-              letterSpacing: '1px'
-            }}>
-              6–7 FEB 2026
-            </div>
+            {/* Date Image */}
+            <img
+              src={dateImg}
+              alt="Event Date"
+              style={{
+                height: '65px',
+                width: 'auto',
+                filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))'
+              }}
+            />
 
-            {/* Hackathon Text */}
-            <div style={{
-              fontSize: '0.9rem',
-              textShadow: '0 2px 4px rgba(0,0,0,0.9)',
-              fontWeight: 600,
-              marginTop: '2px',
-              letterSpacing: '2px',
-              color: '#FAF7F2'
-            }}>
-              24-HOUR HACKATHON
-            </div>
+            {/* 24 Hours Image */}
+            <img
+              src={hours24Img}
+              alt="24 Hours Hackathon"
+              style={{
+                height: '65px',
+                width: 'auto',
+                filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))'
+              }}
+            />
           </motion.div>
+
+
 
           {/* 5. REGISTER BUTTON */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 3.6 }}
-            className="relative inline-block"
+            className="relative inline-block mt-4"
           >
+
             <motion.button
               onClick={(e) => {
                 const element = document.getElementById('register');
