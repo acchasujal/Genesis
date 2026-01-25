@@ -1,8 +1,6 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 // @ts-ignore: Cannot find module '../assets/lunchbreak.png'
 import heroImage from '../assets/lunchbreak.png';
-// --- CHANGE 1: Import your title image here ---
 // @ts-ignore: Update this path to your actual image file
 import titleImage from '../assets/genesis_title.png';
 // @ts-ignore: Import cursor image
@@ -10,6 +8,8 @@ const cursorImageUrl = new URL('../assets/Pi7_cropper (1).png', import.meta.url)
 
 // @ts-ignore: Asset exists
 import questLogo from '../assets/QuestIT_transparent.png';
+// @ts-ignore: Asset exists
+import bmcLogo from '../assets/bmc-logo.png';
 
 // Helper: attach an image element that follows the mouse with smooth lerp and fade
 function attachImageCursor(imgSrc: string) {
@@ -35,7 +35,6 @@ function attachImageCursor(imgSrc: string) {
   let rafId: number | null = null;
 
   function update() {
-    // faster lerp for snappier feeling
     curX += (targetX - curX) * 0.5;
     curY += (targetY - curY) * 0.5;
     img.style.transform = `translate(-50%, -50%) translate(${curX}px, ${curY}px)`;
@@ -48,9 +47,7 @@ function attachImageCursor(imgSrc: string) {
     if (rafId === null) update();
   }
 
-  // show immediately (avoid gap) — caller should initialize position via setPosition
   img.style.opacity = '1';
-
   window.addEventListener('mousemove', onMove);
 
   function setPosition(x: number, y: number) {
@@ -84,10 +81,9 @@ export default function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-      {/* 1. LOAD THE FONTS (Cinzel is still used for subtitles) */}
+      {/* 1. LOAD THE FONTS */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
-
       `}</style>
 
       {/* Preload hero image */}
@@ -107,16 +103,14 @@ export default function Hero() {
       <motion.div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)'
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%)'
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.6, duration: 0.5 }}
       />
 
-
-
-      {/* --- BACKGROUND ANIMATIONS (Katana & Sakura) --- */}
+      {/* --- BACKGROUND ANIMATIONS --- */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-80 h-1 origin-left pointer-events-none hidden md:block"
         style={{
@@ -168,44 +162,75 @@ export default function Hero() {
       })}
 
       {/* --- MAIN CONTENT --- */}
-      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
+      {/* Increased top padding to pt-48 to ensure content clearly starts below the navbar */}
+      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-screen pt-48 pb-10">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1.2, ease: 'easeOut' }}
           className="w-full flex flex-col items-center"
         >
-          {/* QuestIT Logo */}
-          <div className="flex flex-col items-center gap-1 mb-0 mt-16 sm:mt-24 relative z-50">
+          {/* 1. QuestIT Logo + Presents */}
+          <div className="flex flex-col items-center gap-1 mb-4 mt-8 relative z-50">
             {/* @ts-ignore: Asset exists */}
             <img
               src={questLogo}
               alt="QuestIT Logo"
-              style={{ width: '120px', height: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
+              style={{ width: '90px', height: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
             />
-            <span style={{ fontFamily: '"Cinzel", serif', color: '#EDE8E0', fontSize: '1.2rem', letterSpacing: '0.1em' }}>Presents </span>
+            <span style={{ fontFamily: '"Cinzel", serif', color: '#EDE8E0', fontSize: '0.85rem', letterSpacing: '0.15em', fontWeight: 700 }}>Presents </span>
           </div>
 
-          {/* Genesis Title Image */}
+          {/* 2. Genesis Title Image (Reduced size for better viewport fit) */}
           <motion.img
             src={titleImage}
             alt="GENESIS"
-            className="mb-8 sm:mb-10 -mt-2 sm:-mt-4"
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, x: -25, y: 0, scale: 1.1 }}
+            className="mb-4"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, x: -20, y: 0, scale: 1 }}
             transition={{ duration: 1, delay: 2.3, ease: "easeOut" }}
             style={{
-              width: '120%',
-              maxWidth: '1000px',
+              width: '100%',
+              maxWidth: '420px',
               height: 'auto',
               display: 'block',
               filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))',
             }}
           />
 
-          {/* DETAILS SECTION */}
+          {/* 3. In Collaboration With + BMC Logo */}
           <motion.div
-            className="flex flex-col items-center gap-3 mb-10"
+            className="flex flex-col items-center gap-2 mb-8"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 2.5 }}
+          >
+            <span style={{
+              fontFamily: '"Cinzel", serif',
+              color: '#EDE8E0',
+              fontSize: '0.75rem',
+              letterSpacing: '0.15em',
+              opacity: 0.85
+            }}>
+              IN COLLABORATION WITH
+            </span>
+            {/* @ts-ignore: Asset exists */}
+            <img
+              src={bmcLogo}
+              alt="BMC Logo"
+              style={{
+                width: '65px',
+                height: 'auto',
+                mixBlendMode: 'screen',
+                filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.2))'
+              }}
+            />
+          </motion.div>
+
+
+          {/* 4. DETAILS SECTION */}
+          <motion.div
+            className="flex flex-col items-center gap-2 mb-7"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.8 }}
@@ -217,11 +242,11 @@ export default function Hero() {
             {/* Date Pill */}
             <div style={{
               background: '#BE1E2D',
-              padding: '10px 35px',
+              padding: '7px 26px',
               borderRadius: '50px',
               boxShadow: '0 4px 15px rgba(190, 30, 45, 0.4)',
               fontWeight: 700,
-              fontSize: '1.4rem',
+              fontSize: '1rem',
               letterSpacing: '1px'
             }}>
               6–7 FEB 2026
@@ -229,18 +254,18 @@ export default function Hero() {
 
             {/* Hackathon Text */}
             <div style={{
-              fontSize: '1.2rem',
+              fontSize: '0.9rem',
               textShadow: '0 2px 4px rgba(0,0,0,0.9)',
               fontWeight: 600,
-              marginTop: '5px',
+              marginTop: '2px',
               letterSpacing: '2px',
               color: '#FAF7F2'
             }}>
-              30-HOUR HACKATHON
+              24-HOUR HACKATHON
             </div>
           </motion.div>
 
-          {/* REGISTER BUTTON */}
+          {/* 5. REGISTER BUTTON */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -259,13 +284,11 @@ export default function Hero() {
                   delete el._cursorCtl;
                 }
               }}
-              className="relative px-16 sm:px-24 py-4 text-xl overflow-hidden group"
+              className="relative px-12 sm:px-20 py-3 text-lg overflow-hidden group"
               onMouseEnter={(e) => {
                 const el = e.currentTarget as any;
-                // hide native cursor for this element and store previous value
                 el._prevCursor = el.style.cursor;
                 el.style.cursor = 'none';
-                // attach and keep controller on element and immediately position it
                 el._cursorCtl = attachImageCursor(cursorImageUrl);
                 if (el._cursorCtl && typeof el._cursorCtl.setPosition === 'function') {
                   el._cursorCtl.setPosition(e.clientX, e.clientY);
@@ -277,7 +300,6 @@ export default function Hero() {
                   el._cursorCtl.remove();
                   delete el._cursorCtl;
                 }
-                // restore previous cursor
                 if (typeof el._prevCursor !== 'undefined') {
                   el.style.cursor = el._prevCursor;
                   delete el._prevCursor;
@@ -295,7 +317,7 @@ export default function Hero() {
                 border: '2px solid #BE1E2D',
                 borderRadius: '4px',
                 boxShadow: '0 0 15px rgba(190, 30, 45, 0.3)',
-                minWidth: '280px',
+                minWidth: '220px',
               }}
             >
               <span className="relative z-10">REGISTER NOW</span>
@@ -309,14 +331,11 @@ export default function Hero() {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 1], y: [0, 10, 0] }}
           transition={{ opacity: { delay: 2, duration: 1 }, y: { repeat: Infinity, duration: 2 } }}
         >
-          <div className="text-white opacity-70" style={{ fontFamily: '"Cinzel", serif', fontSize: '0.9rem' }}>
-
-          </div>
           <div className="w-1 h-8 bg-gradient-to-b from-red-600 to-transparent mx-auto mt-2 rounded-full" />
         </motion.div>
       </div>

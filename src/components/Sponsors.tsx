@@ -2,29 +2,26 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import CircularGallery from './CircularGallery';
 
-const previousSponsors = [
-  { name: 'Unstop', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/branding-guidelines/icon/unstop-icon-800x800.png' },
-  { name: 'GeeksforGeeks', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/GeeksForGeeks_logo.png/1280px-GeeksForGeeks_logo.png' },
-  { name: 'Admit Abroad ', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv4CRROP-YMYVuN87iSnfNE5efPANk_WL5qOCxwMAhx4K-PitFoL5pD49aoJ2Sf3QeTv0&usqp=CAU' },
-  { name: 'Trade Diary', logo: 'https://tradediary.in/assets/images/logo-dark.png' },
-];
 
 const currentSponsors = [
-  { name: '.xyz', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/.xyz_logo.svg/2560px-.xyz_logo.svg.png' },
-  { name: 'ShwarmaJi', logo: 'https://shawarmaji.co.in/assets/img/food-pics/logo.png' },
   { name: 'Mcdonalds', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/36/McDonald%27s_Golden_Arches.svg' },
-  { name: 'InterviewCake', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/opportunity/gallery/60aba3315a79b_ic.png?d=600x600' },
-  { name: 'Fueler', logo: 'https://avatars.githubusercontent.com/u/91483435?s=280&v=4' },
-  { name: 'Gemini', logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png' },
-  { name: 'Interview Buddy', logo: 'https://interviewbuddy.net/favicon.png' },
+  { name: 'ShwarmaJi', logo: 'https://shawarmaji.co.in/assets/img/food-pics/logo.png' },
+  { name: 'Unstop', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/branding-guidelines/icon/unstop-icon-800x800.png' },
   { name: 'Give My Certificate', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPcYIJAWI9_tnLby1dQV-dmGtCSv4HdFubbQ&s' },
-  { name: 'Gina Drinks', logo: '/Gina-drinks.jpeg' }
+  { name: 'Gemini', logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png' },
+  { name: 'Hinflon', logo: '' },
+  { name: '.xyz', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/.xyz_logo.svg/2560px-.xyz_logo.svg.png' },
+  { name: 'O2O', logo: '	https://www.o2o.ind.in/assets/img/logo.svg' },
+  { name: 'Coding Gurus', logo: '' },
+  { name: 'BMC', logo: 'https://www.mcgm.gov.in/com.mcgm.newframework/images/logo_V1.png' },
+  { name: 'SUD Life', logo: 'https://dxwkpt4djlxwl.cloudfront.net/SUD_JV_Logo_cdce13ed61.svg' },
+  { name: 'Nova AI', logo: 'https://novaapp.ai/_next/image?url=%2F_next%2Fstat…o.68348154faa05c8b769d8d4edff1ccaf.svg&w=256&q=75' },
+  { name: 'Cyrene AI', logo: '' }
 ];
 
 // Convert sponsors to CircularGallery format
 const galleryItems = [
-  ...currentSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name })),
-  ...previousSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name })),
+  ...currentSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name }))
 ];
 
 export default function Sponsors() {
