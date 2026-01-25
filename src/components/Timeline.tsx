@@ -7,8 +7,8 @@ const timelineData = [
     id: 1,
     icon: Calendar,
     title: 'Registration',
-    date: 'Dec 2025 - Jan 2026',
-    fullDate: 'December 2025 - January 2026',
+    date: '19th Jan 2026',
+    fullDate: '',
     description: 'Open registration for all aspiring innovators',
     color: '#C33B33',
   },
@@ -16,7 +16,7 @@ const timelineData = [
     id: 2,
     icon: Users,
     title: 'Shortlisting',
-    date: 'Late Jan 2026',
+    date: '2nd Feb 2026',
     fullDate: 'Late January 2026',
     description: 'Selection of finalist teams based on ideas',
     color: '#4D8B86',
@@ -49,7 +49,7 @@ export default function Timeline() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);

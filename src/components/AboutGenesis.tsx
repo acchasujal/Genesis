@@ -215,7 +215,7 @@ export default function AboutGenesis() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            GENESIS is a 30-hour offline hackathon bringing together the brightest minds to innovate,
+            GENESIS is a 24-hour offline hackathon bringing together the brightest minds to innovate,
             collaborate, and create groundbreaking solutions. Join us for an intense weekend of coding,
             learning, and building the future.
           </motion.p>
@@ -226,7 +226,7 @@ export default function AboutGenesis() {
               { label: 'Registrations', value: '1000+', color: '#C33B33' },
               { label: 'Finalist Teams', value: '45+', color: '#4D8B86' },
               { label: 'Organizers', value: '40+', color: '#C33B33' },
-              { label: 'Tech Tracks', value: '6', color: '#4D8B86' },
+              { label: 'Tech Tracks', value: '3', color: '#4D8B86' },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
