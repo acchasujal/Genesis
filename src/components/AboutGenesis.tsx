@@ -223,9 +223,9 @@ export default function AboutGenesis() {
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-6">
             {[
-              { label: 'Registrations', value: '1000+', color: '#C33B33' },
-              { label: 'Finalist Teams', value: '45+', color: '#4D8B86' },
-              { label: 'Organizers', value: '40+', color: '#C33B33' },
+              { label: 'Registrations', value: '500+', color: '#C33B33' },
+              { label: 'Finalist Teams', value: '50', color: '#4D8B86' },
+              { label: 'Organizing Members', value: '40', color: '#C33B33' },
               { label: 'Tech Tracks', value: '3', color: '#4D8B86' },
             ].map((stat, index) => (
               <motion.div

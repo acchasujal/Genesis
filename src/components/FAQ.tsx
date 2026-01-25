@@ -5,11 +5,11 @@ import { ChevronDown } from 'lucide-react';
 const faqs = [
   {
     question: 'Who can participate in GENESIS 2026?',
-    answer: 'GENESIS is open to all college students passionate about technology and innovation. Whether you\'re a beginner or an experienced developer, you\'re welcome to participate!',
+    answer: 'GENESIS is open to all VESIT students passionate about technology and innovation. Whether you\'re a beginner or an experienced developer, you\'re welcome to participate!',
   },
   {
     question: 'What is the team size?',
-    answer: 'Teams can have 2-4 members. You can form your own team or join others during the registration process. Solo participants will be matched with teams.',
+    answer: 'Teams can have 3-4 members. You can form your own team or join others during the registration process. Solo participants will be matched with teams.',
   },
   {
     question: 'Is this an offline event?',
@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: 'What are the prize categories?',
-    answer: 'Prizes are awarded in three tiers: Bronze (₹5,000), Silver (₹10,000), and Gold (₹25,000). Winners in each track also receive special recognition and certificates.',
+    answer: 'TBA',
   },
   {
     question: 'Will certificates be provided?',
@@ -29,11 +29,11 @@ const faqs = [
   },
   {
     question: 'What should I bring to the hackathon?',
-    answer: 'Bring your laptop, chargers, student ID, and your enthusiasm! We\'ll provide meals, snacks, WiFi, and workspace. Optional: sleeping bags if you plan to code through the night!',
+    answer: 'Bring your laptop, chargers, student ID, and your enthusiasm! We\'ll provide snacks, WiFi, and workspace.',
   },
   {
     question: 'Will there be mentors available?',
-    answer: 'Absolutely! We\'ll have industry experts and experienced mentors available throughout the 30 hours to guide you, answer questions, and help refine your ideas.',
+    answer: 'Absolutely! We\'ll have industry experts and experienced mentors available throughout the 24 hours to guide you, answer questions, and help refine your ideas.',
   },
 ];
 
@@ -54,8 +54,8 @@ export default function FAQ() {
   };
 
   return (
-    <section 
-      id="faq" 
+    <section
+      id="faq"
       className="relative py-20 px-4 overflow-hidden"
     >
       {/* REFINED AMBIENT LAYER - DIGITAL INCENSE RISING FROM TITLE */}
