@@ -10,6 +10,13 @@ const cursorImageUrl = new URL('../assets/Pi7_cropper (1).png', import.meta.url)
 import questLogo from '../assets/QuestIT_transparent.png';
 // @ts-ignore: Asset exists
 import bmcLogo from '../assets/bmc-logo.png';
+// @ts-ignore: Asset exists
+import vesitLogo from '../assets/Vesit-logo.png';
+// @ts-ignore: Asset exists
+import iicLogo from '../assets/iic.png';
+// @ts-ignore: Asset exists
+import iic2Logo from '../assets/iic2.png';
+
 
 // Helper: attach an image element that follows the mouse with smooth lerp and fade
 function attachImageCursor(imgSrc: string) {
@@ -161,6 +168,64 @@ export default function Hero() {
         );
       })}
 
+      {/* VESIT Logo – Top Left (Genesis style) */}
+      <motion.div
+        className="absolute z-50 pointer-events-none"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 2.4, ease: 'easeOut' }}
+        style={{
+          left: '24px',
+          top: '96px'
+        }}
+      >
+        <img
+          src={vesitLogo}
+          alt="VESIT Logo"
+          style={{
+            width: '50px',
+            height: 'auto',
+            filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.5))'
+          }}
+        />
+      </motion.div>
+
+      {/* IIC Logos Group – Top Right (Genesis style) */}
+      <motion.div
+        className="absolute z-50 pointer-events-none flex items-center gap-6"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 2.4, ease: 'easeOut' }}
+        style={{
+          right: '24px',
+          top: '96px'
+        }}
+      >
+        {/* IIC (left of group) */}
+        <img
+          src={iicLogo}
+          alt="IIC Logo"
+          style={{
+            width: '70px',
+            height: 'auto',
+            filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.5))'
+          }}
+        />
+
+        {/* IIC2 (rightmost) */}
+        <img
+          src={iic2Logo}
+          alt="IIC2 Logo"
+          style={{
+            width: '90px',
+            height: 'auto',
+            filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.5))'
+          }}
+        />
+      </motion.div>
+
+
+
       {/* --- MAIN CONTENT --- */}
       {/* Increased top padding to pt-48 to ensure content clearly starts below the navbar */}
       <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-screen pt-48 pb-10">
@@ -171,14 +236,30 @@ export default function Hero() {
           className="w-full flex flex-col items-center"
         >
           {/* 1. QuestIT Logo + Presents */}
-          <div className="flex flex-col items-center gap-1 mb-4 mt-8 relative z-50">
+          <div className="flex flex-col items-center gap-0.5 mb-4 mt-8 relative z-50">
             {/* @ts-ignore: Asset exists */}
             <img
               src={questLogo}
               alt="QuestIT Logo"
               style={{ width: '90px', height: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
             />
-            <span style={{ fontFamily: '"Cinzel", serif', color: '#EDE8E0', fontSize: '0.85rem', letterSpacing: '0.15em', fontWeight: 700 }}>Presents </span>
+            <span
+              style={{
+                fontFamily: '"Cinzel", serif',
+                color: '#FAF7F2',
+                fontSize: '1rem',
+                letterSpacing: '0.28em',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                textShadow: `
+                0 1px 2px rgba(0,0,0,0.8),
+                0 0 8px rgba(255,255,255,0.15)
+              `
+              }}
+            >
+              Presents
+            </span>
+
           </div>
 
           {/* 2. Genesis Title Image (Reduced size for better viewport fit) */}
@@ -207,13 +288,15 @@ export default function Hero() {
           >
             <span style={{
               fontFamily: '"Cinzel", serif',
-              color: '#EDE8E0',
-              fontSize: '0.75rem',
-              letterSpacing: '0.15em',
-              opacity: 0.85
+              color: '#FAF7F2',
+              fontSize: '0.9rem',
+              letterSpacing: '0.22em',
+              fontWeight: 600,
+              opacity: 0.95
             }}>
               IN COLLABORATION WITH
             </span>
+
             {/* @ts-ignore: Asset exists */}
             <img
               src={bmcLogo}
