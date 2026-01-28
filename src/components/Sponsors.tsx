@@ -4,21 +4,20 @@ import CircularGallery from './CircularGallery';
 
 
 const currentSponsors = [
-  { name: 'ShwarmaJi', logo: 'public/sponsor_logos/shawarmaji-logo.png' },
-  { name: 'Unstop', logo: 'public/sponsor_logos/unstop-logo.png' },
-  { name: 'Give My Certificate', logo: 'public/sponsor_logos/givemycertificate.jpg' },
-  { name: 'Gemini', logo: 'public/sponsor_logos/gemini.png' },
-  { name: 'Hinflon', logo: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/A3QwgMQEXQHa5bB8/1-removebg-preview-A3QONZEbD6frZJRR.png' },
-  { name: '.xyz', logo: 'public/sponsor_logos/xyz.png' },
-  { name: 'O2O', logo: 'public/sponsor_logos/O2O.svg' },
-  { name: 'Coding Gurus', logo: 'public/sponsor_logos/Coding Gurus - Light Logo.png' },
-  { name: 'BMC', logo: 'public/sponsor_logos/bmc-logo.png' },
-  { name: 'SUD Life', logo: 'public/sponsor_logos/sudlife.svg' },
-  { name: 'Nova AI', logo: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/A3QwgMQEXQHa5bB8/1-removebg-preview-A3QONZEbD6frZJRR.png' },
-  { name: 'Cyrene AI', logo: 'public/sponsor_logos/CyreneAi.png' },
-  { name: 'Noah AI', logo: 'public/sponsor_logos/NoahAi.jpeg' },
-  { name: 'Ludex AI', logo: 'https://framerusercontent.com/images/G4jOTAF2zwvDfnADfOcm3ij2Zk8.png' },
-  { name: 'TigerPay X', logo: 'https://www.tigerpayx.com/assets/logo%20copy.svg' },
+  { name: 'ShwarmaJi', logo: '/sponsor_logos/shawarmaji-logo.png' },
+  { name: 'Unstop', logo: '/sponsor_logos/unstop-logo.png' },
+  { name: 'Give My Certificate', logo: '/sponsor_logos/givemycertificate.jpg' },
+  { name: 'Gemini', logo: '/sponsor_logos/gemini.png' },
+  { name: 'Hinflon', logo: '/sponsor_logos/hinflon.avif' },
+  { name: '.xyz', logo: '/sponsor_logos/xyz.png' },
+  { name: 'O2O', logo: '/sponsor_logos/O2O.svg' },
+  { name: 'Coding Gurus', logo: '/sponsor_logos/Coding Gurus - Light Logo.png' },
+  { name: 'BMC', logo: '/sponsor_logos/bmc-logo.png' },
+  { name: 'SUD Life', logo: '/sponsor_logos/sudlife.svg' },
+  { name: 'Cyrene AI', logo: '/sponsor_logos/CyreneAI.png' },
+  { name: 'Noah AI', logo: '/sponsor_logos/NoahAi.jpeg' },
+  { name: 'Ludex AI', logo: '/sponsor_logos/LudexAi.jpeg' },
+  { name: 'TigerPay X', logo: '/sponsor_logos/tigerpayx.svg' },
 ];
 
 // Convert sponsors to CircularGallery format
