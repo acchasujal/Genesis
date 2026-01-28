@@ -12,10 +12,10 @@ const tracks = [
     description: 'Machine Learning, Deep Learning, Computer Vision',
   },
   {
-    name: 'FinTech',
+    name: 'Sustainability',
     icon: DollarSign,
     color: '#4D8B86',
-    description: 'Digital Banking, Payment Systems, Financial Analytics',
+    description: 'Renewable Energy Systems, Circular Economy, ESG Analytics',
   },
   {
     name: 'Blockchain',

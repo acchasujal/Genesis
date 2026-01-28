@@ -21,9 +21,6 @@ import hours24Img from '../assets/24hours.png';
 // @ts-ignore: Asset exists
 import dateImg from '../assets/date.png';
 
-
-
-
 // Helper: attach an image element that follows the mouse with smooth lerp and fade
 function attachImageCursor(imgSrc: string) {
   const img = document.createElement('img');
@@ -146,29 +143,46 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* Sakura Petals */}
-      {Array.from({ length: 50 }).map((_, i) => {
-        const size = 4 + Math.random() * 6;
+      {/* --- FIERY SPARKS ANIMATION --- */}
+      {Array.from({ length: 60 }).map((_, i) => {
+        // Randomize size heavily for depth (some small embers, some big sparks)
+        const size = Math.random() * 4 + 1;
+        
         return (
           <motion.div
             key={i}
             className="absolute pointer-events-none rounded-full"
             style={{
-              width: `${size}px`, height: `${size}px`,
-              left: `${Math.random() * 100}%`, top: '-10px',
-              backgroundColor: ['#FFC6D0', '#E99AAA', '#F2B9C3'][i % 3],
-              opacity: 0.4 + Math.random() * 0.3,
+              width: `${size}px`, 
+              height: `${size}px`,
+              // Start from the bottom
+              left: `${Math.random() * 100}%`, 
+              top: '100%', 
+              // Fire Palette: Yellows, Oranges, Reds, white-hot centers
+              backgroundColor: ['#FFC300', '#FF5733', '#C70039', '#FFD700', '#ffffff'][i % 5],
+              // Add glow
+              boxShadow: `0 0 ${size * 2}px ${['#FF5733', '#FFC300'][i % 2]}`,
+              // Screen blend mode makes overlapping sparks look hotter/brighter
+              mixBlendMode: 'screen',
+              opacity: 0, 
             }}
             animate={{
-              y: ['0vh', '110vh'],
-              x: [0, (Math.random() - 0.5) * 100],
-              rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)],
+              // Move Upwards (Negative Y)
+              y: [0, Math.random() * -110 - 10 + 'vh'], 
+              // Drifting side to side (Waving heat)
+              x: [(Math.random() - 0.5) * 10, (Math.random() - 0.5) * 150],
+              // Fade in quickly, then fade out as they burn out
+              opacity: [0, 1, 1, 0],
+              // Shrink as they cool/die
+              scale: [1, Math.random() + 0.5, 0],
             }}
             transition={{
-              duration: 15 + Math.random() * 10,
-              delay: Math.random() * 10,
+              // Fire moves faster than falling petals
+              duration: Math.random() * 3 + 2, 
+              // Random delays to create a continuous stream
+              delay: Math.random() * 5,
               repeat: Infinity,
-              ease: 'linear',
+              ease: 'easeOut',
             }}
           />
         );
@@ -309,7 +323,7 @@ export default function Hero() {
             alt="GENESIS"
             className="mb-4"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, x: -20, y: 0, scale: 1 }}
+            animate={{ opacity: 1, x: -10, y: 0, scale: 1 }}
             transition={{ duration: 1, delay: 2.3, ease: "easeOut" }}
             style={{
               width: '100%',

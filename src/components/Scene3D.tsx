@@ -9,7 +9,7 @@ interface Scene3DProps {
 }
 
 /** Create a soft circular sprite as a THREE.CanvasTexture */
-function createCircleTexture(size = 64, innerColor = "rgba(255,182,193,1)", outerColor = "rgba(255,182,193,0)") {
+function createCircleTexture(size = 64, innerColor = "rgba(255, 0, 38, 1)", outerColor = "rgba(255,182,193,0)") {
   const canvas = document.createElement("canvas");
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d")!;
@@ -30,7 +30,7 @@ function createCircleTexture(size = 64, innerColor = "rgba(255,182,193,1)", oute
   const tex = new THREE.CanvasTexture(canvas);
   tex.minFilter = THREE.LinearFilter;
   tex.magFilter = THREE.LinearFilter;
-  tex.encoding = THREE.sRGBEncoding;
+  tex.colorSpace = THREE.SRGBColorSpace;
   tex.needsUpdate = true;
   return tex;
 }
@@ -74,7 +74,7 @@ function PetalLayer({ count, area, size, speed, depthOffset, texture }: PetalLay
       depthWrite: false,
       sizeAttenuation: true,
       opacity: 0.95,
-      color: new THREE.Color("#FFB6C1"),
+      color: new THREE.Color("#ff0228ff"),
     });
   }, [size, texture]);
 
