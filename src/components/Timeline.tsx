@@ -1,43 +1,132 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Calendar, Users, Code, Trophy, Flag } from 'lucide-react';
+import { Calendar, Users, Code, Trophy, Flag, Clock, Mic, CheckCircle, Coffee, Brain, Briefcase, Globe, Rocket, Target, Zap } from 'lucide-react';
 
 const timelineData = [
+  // SECTION 1: ONLINE ROUND
   {
     id: 1,
-    icon: Calendar,
-    title: 'Registration',
-    date: '19th Jan 2026',
-    fullDate: '',
-    description: 'Open registration for all aspiring innovators',
-    color: '#C33B33',
+    icon: Globe,
+    title: 'PHASE 1: ONLINE ROUND',
+    date: '28 Jan - 4 Feb',
+    description: 'The journey begins with the online abstract submission and selection process.',
+    color: '#C33B33', // Red
   },
   {
     id: 2,
-    icon: Users,
-    title: 'Shortlisting',
-    date: '2nd Feb 2026',
-    fullDate: 'Late January 2026',
-    description: 'Selection of finalist teams based on ideas',
-    color: '#4D8B86',
+    icon: Calendar,
+    title: 'Problem Statements',
+    date: '28 Jan | 6:00 PM',
+    description: 'Problem statements released. PPT submission begins.',
+    color: '#4D8B86', // Teal
   },
   {
     id: 3,
-    icon: Code,
-    title: 'Hackathon',
-    date: '6-7 Feb 2026',
-    fullDate: '6-7 February 2026',
-    description: '30 hours of intense coding and innovation',
-    color: '#C33B33',
+    icon: Clock,
+    title: 'PPT Submission',
+    date: '3 Feb | 11:59 PM',
+    description: 'Deadline for submitting project presentations.',
+    color: '#C33B33', 
   },
   {
     id: 4,
-    icon: Trophy,
-    title: 'Final Pitch',
-    date: '7 Feb 2026',
-    fullDate: '7 February 2026',
-    description: 'Present your solutions and win amazing prizes',
+    icon: CheckCircle,
+    title: 'Shortlisting',
+    date: '4 Feb | 8:00 PM',
+    description: 'Announcement of teams selected for the offline round.',
     color: '#4D8B86',
+  },
+
+  // SECTION 2: HACKATHON DAY 1
+  {
+    id: 5,
+    icon: Rocket,
+    title: 'PHASE 2: HACKATHON DAY 1',
+    date: '6 Feb',
+    description: 'The offline hackathon kicks off with 24 hours of coding.',
+    color: '#C33B33', 
+  },
+  {
+    id: 6,
+    icon: Users,
+    title: 'Team Registration',
+    date: '6 Feb | 8:00 AM',
+    description: 'Team registration and seating at the venue.',
+    color: '#4D8B86', 
+  },
+  {
+    id: 7,
+    icon: Mic,
+    title: 'Official Inauguration',
+    date: '6 Feb | 8:30 AM',
+    description: 'Opening remarks and rules briefing.',
+    color: '#C33B33', 
+  },
+  {
+    id: 8,
+    icon: Code,
+    title: 'Hackathon Begins',
+    date: '6 Feb | 9:00 AM',
+    description: 'The 24-hour coding challenge officially starts.',
+    color: '#4D8B86', 
+  },
+  {
+    id: 9,
+    icon: Coffee,
+    title: 'Lunch Break',
+    date: '6 Feb | 1:00 PM',
+    description: 'Mid-day break for participants.',
+    color: '#C33B33', 
+  },
+  {
+    id: 10,
+    icon: Brain,
+    title: 'Mentoring Round 1',
+    date: '6 Feb | 3:00 PM',
+    description: 'Feedback and guidance from industry mentors.',
+    color: '#4D8B86', 
+  },
+
+  // SECTION 3: HACKATHON DAY 2
+  {
+    id: 11,
+    icon: Flag,
+    title: 'PHASE 3: HACKATHON DAY 2',
+    date: '7 Feb',
+    description: 'Final evaluations, pitches, and the closing ceremony.',
+    color: '#C33B33', 
+  },
+  {
+    id: 12,
+    icon: Briefcase,
+    title: 'Judges Evaluation',
+    date: '7 Feb | 9:00 AM',
+    description: 'Technical assessment of progress and code.',
+    color: '#4D8B86', 
+  },
+  {
+    id: 13,
+    icon: Target,
+    title: '2nd Elimination',
+    date: '7 Feb | 12:30 PM',
+    description: 'Announcement of teams moving to the final pitch.',
+    color: '#C33B33', 
+  },
+  {
+    id: 14,
+    icon: Zap,
+    title: 'Final Pitch',
+    date: '7 Feb | 2:00 PM',
+    description: 'High-impact PPT and project presentations.',
+    color: '#4D8B86', 
+  },
+  {
+    id: 15,
+    icon: Trophy,
+    title: 'Results & Closing',
+    date: '7 Feb | 4:30 PM',
+    description: 'Winners announcement and Hackathon conclusion.',
+    color: '#C33B33', 
   },
 ];
 
