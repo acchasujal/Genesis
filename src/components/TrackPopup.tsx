@@ -23,7 +23,7 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
   const backgroundImages: { [key: string]: string } = {
     'AI': '/backgrounds/ai-bg.jpg',
     'Sustainability': '/backgrounds/fintech-bg.jpg',
-    'SereneAI': '/backgrounds/blockchain-bg.jpg'
+    'CyreneAI': '/backgrounds/blockchain-bg.jpg'
   };
 
   const bgUrl = backgroundImages[track.name];

@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: 'What are the prize categories?',
-    answer: 'Genesis features a total prize pool of ₹100k, including cash rewards of ₹50,000 for the top three teams in the AI and Sustainability domains . The Blockchain track offers 100USDC to the 4 winning teams, with goodies and exciting prizes to all participants.',
+    answer: 'Genesis features a total prize pool of ₹100k, including cash rewards of ₹50,000 for the top three teams in the AI and Sustainability domains . The Cyrene AI (Blockchain) track offers 100USDC to the 4 winning teams, with goodies and exciting prizes to all participants.',
   },
   {
     question: 'Will certificates be provided?',

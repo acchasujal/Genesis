@@ -33,11 +33,11 @@ const tracks = [
     ],
   },
   {
-    name: 'SereneAI',
+    name: 'CyreneAI',
     icon: Link,
     color: '#C33B33',
     description: 'Smart Contracts, DeFi, Web3 Applications',
-    psDescription: 'The SereneAI track is for those ready to push the limits of decentralization to solve tough trust and transparency issues. Dive into the world of smart contracts and distributed ledgers to build secure, unchangeable systems for everything from supply chains to digital identity.',
+    psDescription: 'The CyreneAI track is for those ready to push the limits of decentralization to solve tough trust and transparency issues. Dive into the world of smart contracts and distributed ledgers to build secure, unchangeable systems for everything from supply chains to digital identity.',
     problemStatements: [
       { id: 'B1', title: 'B01     ', url: 'https://docs.google.com/document/d/1WIk25HQ0ggmk01_HOMxNIVZMzlV98NkpndPZ4PiSaq0/edit?tab=t.lj1xy8p2jqhr' },
       { id: 'B2', title: 'B02     ', url: 'https://docs.google.com/document/d/1WIk25HQ0ggmk01_HOMxNIVZMzlV98NkpndPZ4PiSaq0/edit?tab=t.fuvt4ugkr9ud' },
