@@ -20,6 +20,9 @@ import iic2Logo from '../assets/iic2.png';
 import hours24Img from '../assets/24hours.png';
 // @ts-ignore: Asset exists
 import dateImg from '../assets/date.png';
+// @ts-ignore: Asset exists
+import mainDateImg from '../assets/maindate.png';
+
 
 // Helper: attach an image element that follows the mouse with smooth lerp and fade
 function attachImageCursor(imgSrc: string) {
@@ -335,6 +338,7 @@ export default function Hero() {
           />
 
           {/* 4. DETAILS SECTION */}
+          {/* 4. DETAILS SECTION */}
           <motion.div
             className="flex items-center justify-center gap-4 md:gap-6 mb-8 md:mb-10 flex-wrap md:flex-nowrap"
             initial={{ opacity: 0 }}
@@ -356,6 +360,17 @@ export default function Hero() {
               }}
             />
 
+            {/* Main Date Image */}
+            <img
+              src={mainDateImg}
+              alt="Main Event Date"
+              style={{
+                height: '35px',
+                width: 'auto',
+                filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))'
+              }}
+            />
+
             {/* 24 Hours Image */}
             <img
               src={hours24Img}
@@ -367,6 +382,7 @@ export default function Hero() {
               }}
             />
           </motion.div>
+
 
 
 
