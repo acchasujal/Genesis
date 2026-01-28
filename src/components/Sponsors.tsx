@@ -4,7 +4,7 @@ import CircularGallery from './CircularGallery';
 
 
 const currentSponsors = [
-  { name: 'ShwarmaJi', logo: '/sponsor_logos/shawarmaji-logo.png' },
+  { name: 'ShawarmaJi', logo: '/sponsor_logos/shawarmaji-logo.png' },
   { name: 'Unstop', logo: '/sponsor_logos/unstop-logo.png' },
   { name: 'Give My Certificate', logo: '/sponsor_logos/givemycertificate.jpg' },
   { name: 'Gemini', logo: '/sponsor_logos/gemini.png' },
