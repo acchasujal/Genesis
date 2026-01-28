@@ -18,7 +18,7 @@ const currentSponsors = [
   { name: 'Noah AI', logo: '/sponsor_logos/NoahAI.png' },
   { name: 'Ludex AI', logo: '/sponsor_logos/Pi7_cropper (1).png' },
   { name: 'TigerPay X', logo: '/sponsor_logos/tigerpayx.svg' },
-  { name: 'FAD', logo: '/sponsor_logos/fad.jpeg' },
+  { name: 'FAD', logo: '/sponsor_logos/Fad.png' },
 ];
 
 // Convert sponsors to CircularGallery format
