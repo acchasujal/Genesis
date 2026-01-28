@@ -327,7 +327,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 2.3, ease: "easeOut" }}
             style={{
               width: '100%',
-              maxWidth: '460px',
+              maxWidth: '560px',
               height: 'auto',
               display: 'block',
               filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))',
@@ -350,7 +350,7 @@ export default function Hero() {
               src={dateImg}
               alt="Event Date"
               style={{
-                height: '65px',
+                height: '60px',
                 width: 'auto',
                 filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))'
               }}
@@ -361,7 +361,7 @@ export default function Hero() {
               src={hours24Img}
               alt="24 Hours Hackathon"
               style={{
-                height: '65px',
+                height: '60px',
                 width: 'auto',
                 filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))'
               }}
