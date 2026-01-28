@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import '../styles/flickering.css';
 
 export default function Prizes() {
   const prizes = [
@@ -79,7 +78,7 @@ export default function Prizes() {
           {prizes.map((prize, index) => (
             <motion.div
               key={prize.track}
-              className={`relative group cursor-pointer ${prize.borderColor} flicker-card flicker-card-${index}`}
+              className={`relative group cursor-pointer ${prize.borderColor}`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -92,7 +91,6 @@ export default function Prizes() {
                 border: '1px solid rgba(190, 30, 45, 0.3)',
                 borderRadius: '8px',
                 padding: '2rem',
-                transition: 'all 0.3s ease',
               }}
             >
               {/* Glow effect on hover */}

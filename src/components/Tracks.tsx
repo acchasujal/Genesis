@@ -36,7 +36,7 @@ const tracks = [
     name: 'CyreneAI',
     icon: Link,
     color: '#C33B33',
-    description: 'Smart Contracts, DeFi, Web3 Applications',
+    description: 'Blockchain Domain -- Smart Contracts, DeFi, Web3 Applications',
     psDescription: 'The CyreneAI track is for those ready to push the limits of decentralization to solve tough trust and transparency issues. Dive into the world of smart contracts and distributed ledgers to build secure, unchangeable systems for everything from supply chains to digital identity.',
     problemStatements: [
       { id: 'B1', title: 'B01     ', url: 'https://docs.google.com/document/d/1WIk25HQ0ggmk01_HOMxNIVZMzlV98NkpndPZ4PiSaq0/edit?tab=t.lj1xy8p2jqhr' },
@@ -69,7 +69,6 @@ export default function Tracks() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/30 mb-6 backdrop-blur-sm"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
             </span>
             <span className="text-red-400 text-xs font-bold tracking-widest uppercase">
@@ -134,10 +133,6 @@ export default function Tracks() {
                     <div className="flex flex-col items-center gap-3 py-3 px-1.5 rounded-l-xl bg-white/5 border-y border-l border-white/10 backdrop-blur-md shadow-xl">
                       {/* Pulsing Dot */}
                       <span className="relative flex h-2 w-2">
-                        <span
-                          className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                          style={{ backgroundColor: track.color }}
-                        ></span>
                         <span
                           className="relative inline-flex rounded-full h-2 w-2"
                           style={{ backgroundColor: track.color }}
