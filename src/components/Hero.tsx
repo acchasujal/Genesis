@@ -193,7 +193,7 @@ export default function Hero() {
 
       {/* VESIT Logo – Top Left (Genesis style) */}
       <motion.div
-        className="absolute z-50 pointer-events-none"
+        className="absolute z-50 pointer-events-none hidden md:block"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 2.4, ease: 'easeOut' }}
@@ -215,7 +215,7 @@ export default function Hero() {
 
       {/* IIC Logos Group – Top Right (Genesis style) */}
       <motion.div
-        className="absolute z-50 pointer-events-none flex items-center gap-6"
+        className="absolute z-50 pointer-events-none hidden md:block items-center gap-6"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 2.4, ease: 'easeOut' }}
@@ -251,7 +251,7 @@ export default function Hero() {
 
       {/* --- MAIN CONTENT --- */}
       {/* Increased top padding to pt-48 to ensure content clearly starts below the navbar */}
-      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-screen pt-48 pb-10">
+      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-screen pt-[40rem] sm:pt-48 pb-10">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
