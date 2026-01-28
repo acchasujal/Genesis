@@ -184,7 +184,7 @@ export default function Prizes() {
               letterSpacing: '0.1em',
             }}
           >
-            Plus exciting goodies and swag for all participants
+            Plus Internship Opportunities, exciting goodies and swag for all participants
           </p>
         </motion.div>
       </div>

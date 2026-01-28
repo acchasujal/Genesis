@@ -9,6 +9,7 @@ interface TrackPopupProps {
     name: string;
     color: string;
     description: string;
+    psDescription?: string;
     problemStatements?: { id: string; title: string; url: string; }[];
   };
 }
@@ -22,7 +23,7 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
   const backgroundImages: { [key: string]: string } = {
     'AI': '/backgrounds/ai-bg.jpg',
     'Sustainability': '/backgrounds/fintech-bg.jpg',
-    'Blockchain': '/backgrounds/blockchain-bg.jpg'
+    'SereneAI': '/backgrounds/blockchain-bg.jpg'
   };
 
   const bgUrl = backgroundImages[track.name];
@@ -79,9 +80,7 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                 <div className="mt-6 p-4 bg-black/30 rounded-lg">
                   <h3 className="text-xl font-semibold mb-2">PS:</h3>
                   <p className="italic">
-                    This is a dummy postscript for the {track.name} track.
-                    Here you can add more detailed information, requirements, or
-                    any additional notes for participants.
+                    {track.psDescription || `This is the ${track.name} track. More details coming soon.`}
                   </p>
                 </div>
 
