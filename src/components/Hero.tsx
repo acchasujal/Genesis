@@ -147,28 +147,28 @@ export default function Hero() {
       {Array.from({ length: 60 }).map((_, i) => {
         // Randomize size heavily for depth (some small embers, some big sparks)
         const size = Math.random() * 4 + 1;
-        
+
         return (
           <motion.div
             key={i}
             className="absolute pointer-events-none rounded-full"
             style={{
-              width: `${size}px`, 
+              width: `${size}px`,
               height: `${size}px`,
               // Start from the bottom
-              left: `${Math.random() * 100}%`, 
-              top: '100%', 
+              left: `${Math.random() * 100}%`,
+              top: '100%',
               // Fire Palette: Yellows, Oranges, Reds, white-hot centers
               backgroundColor: ['#FFC300', '#FF5733', '#C70039', '#FFD700', '#ffffff'][i % 5],
               // Add glow
               boxShadow: `0 0 ${size * 2}px ${['#FF5733', '#FFC300'][i % 2]}`,
               // Screen blend mode makes overlapping sparks look hotter/brighter
               mixBlendMode: 'screen',
-              opacity: 0, 
+              opacity: 0,
             }}
             animate={{
               // Move Upwards (Negative Y)
-              y: [0, Math.random() * -110 - 10 + 'vh'], 
+              y: [0, Math.random() * -110 - 10 + 'vh'],
               // Drifting side to side (Waving heat)
               x: [(Math.random() - 0.5) * 10, (Math.random() - 0.5) * 150],
               // Fade in quickly, then fade out as they burn out
@@ -178,7 +178,7 @@ export default function Hero() {
             }}
             transition={{
               // Fire moves faster than falling petals
-              duration: Math.random() * 3 + 2, 
+              duration: Math.random() * 3 + 2,
               // Random delays to create a continuous stream
               delay: Math.random() * 5,
               repeat: Infinity,
@@ -336,7 +336,7 @@ export default function Hero() {
 
           {/* 4. DETAILS SECTION */}
           <motion.div
-            className="flex items-center gap-6 mb-10"
+            className="flex items-center justify-center gap-4 md:gap-6 mb-8 md:mb-10 flex-wrap md:flex-nowrap"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.8 }}
