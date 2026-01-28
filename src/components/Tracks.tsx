@@ -10,20 +10,40 @@ const tracks = [
     icon: Brain,
     color: '#C33B33',
     description: 'Machine Learning, Deep Learning, Computer Vision',
+    problemStatements: [
+      { id: 'AI1', title: 'AI01     ', url: '/pdfs/AI1.pdf' },
+      { id: 'AI2', title: 'AI02     ', url: '/pdfs/AI2.pdf' },
+      { id: 'AI3', title: 'AI03     ', url: '/pdfs/AI3.pdf' },
+      { id: 'AI4', title: 'AI04     ', url: '/pdfs/AI4.pdf' },
+      { id: 'AI5', title: 'AI05     ', url: '/pdfs/AI5.pdf' },
+    ],
   },
   {
     name: 'Sustainability',
     icon: DollarSign,
     color: '#4D8B86',
     description: 'Renewable Energy Systems, Circular Economy, ESG Analytics',
+    problemStatements: [
+      { id: 'S1', title: 'S01     ', url: '/pdfs/S1.pdf' },
+      { id: 'S2', title: 'S02     ', url: '/pdfs/S2.pdf' },
+      { id: 'S3', title: 'S03     ', url: '/pdfs/S3.pdf' },
+      { id: 'S4', title: 'S04     ', url: '/pdfs/S4.pdf' },
+    ],
   },
   {
     name: 'Blockchain',
     icon: Link,
     color: '#C33B33',
     description: 'Smart Contracts, DeFi, Web3 Applications',
+    problemStatements: [
+      { id: 'B1', title: 'B01     ', url: '/pdfs/B1.pdf' },
+      { id: 'B2', title: 'B02     ', url: '/pdfs/B2.pdf' },
+      { id: 'B3', title: 'B03     ', url: '/pdfs/B3.pdf' },
+      { id: 'B4', title: 'B04     ', url: '/pdfs/B4.pdf' },
+    ],
   },
 ];
+
 
 export default function Tracks() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
