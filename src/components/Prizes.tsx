@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import '../styles/flickering.css';
 
 export default function Prizes() {
   const prizes = [
@@ -78,7 +79,7 @@ export default function Prizes() {
           {prizes.map((prize, index) => (
             <motion.div
               key={prize.track}
-              className={`relative group cursor-pointer ${prize.borderColor}`}
+              className={`relative group cursor-pointer ${prize.borderColor} flicker-card flicker-card-${index}`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

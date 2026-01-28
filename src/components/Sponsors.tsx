@@ -15,8 +15,8 @@ const currentSponsors = [
   { name: 'BMC', logo: '/sponsor_logos/bmc-logo.png' },
   { name: 'SUD Life', logo: '/sponsor_logos/sudlife.svg' },
   { name: 'Cyrene AI', logo: '/sponsor_logos/CyreneAI.png' },
-  { name: 'Noah AI', logo: '/sponsor_logos/NoahAi.jpeg' },
-  { name: 'Ludex AI', logo: '/sponsor_logos/LudexAi.jpeg' },
+  { name: 'Noah AI', logo: '/sponsor_logos/NoahAI.png' },
+  { name: 'Ludex AI', logo: '/sponsor_logos/Pi7_cropper (1).png' },
   { name: 'TigerPay X', logo: '/sponsor_logos/tigerpayx.svg' },
 ];
 

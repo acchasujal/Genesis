@@ -15,6 +15,7 @@ import KatanaTransition from './components/KatanaTransition';
 import Registration from './components/Registration';
 import ErrorBoundary from './ErrorBoundary';
 
+
 // Lazy-load the heavy 3D scene
 const Scene3D = lazy(() => import('./components/Scene3D'));
 
