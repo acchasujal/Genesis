@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
 import AboutGenesis from './components/AboutGenesis';
 import Tracks from './components/Tracks';
+import Prizes from './components/Prizes';
 import Timeline from './components/Timeline';
 import Sponsors from './components/Sponsors';
 import FAQ from './components/FAQ';
@@ -96,6 +97,7 @@ export default function App(): JSX.Element {
         <AboutUs />
         <AboutGenesis />
         <Tracks />
+        <Prizes />
         <Timeline />
         <Sponsors />
         <FAQ />

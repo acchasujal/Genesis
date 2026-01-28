@@ -1,176 +1,191 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Trophy, Medal } from 'lucide-react';
-import { TiltCard } from './ui/TiltCard';
-
-const prizeCategories = [
-  {
-    tier: 'Bronze',
-    amount: '₹5,000',
-    icon: Medal,
-    color: '#CD7F32',
-    scale: 0.95,
-    y: 30,
-  },
-  {
-    tier: 'Gold',
-    amount: '₹25,000',
-    icon: Trophy,
-    color: '#C33B33',
-    scale: 1.1,
-    y: 0,
-  },
-  {
-    tier: 'Silver',
-    amount: '₹10,000',
-    icon: Award,
-    color: '#4D8B86',
-    scale: 0.95,
-    y: 30,
-  },
-];
 
 export default function Prizes() {
+  const prizes = [
+    {
+      track: 'AI',
+      amount: '₹25,000',
+      description: 'Artificial Intelligence Track',
+      gradient: 'from-red-900/20 to-red-600/10',
+      borderColor: 'border-[#BE1E2D]/30',
+      glowColor: 'rgba(190, 30, 45, 0.4)',
+    },
+    {
+      track: 'Blockchain',
+      amount: '$400 USDC',
+      description: 'Blockchain Track',
+      gradient: 'from-red-900/20 to-red-600/10',
+      borderColor: 'border-[#BE1E2D]/30',
+      glowColor: 'rgba(190, 30, 45, 0.4)',
+    },
+    {
+      track: 'Sustainability',
+      amount: '₹25,000',
+      description: 'Sustainability Track',
+      gradient: 'from-red-900/20 to-red-600/10',
+      borderColor: 'border-[#BE1E2D]/30',
+      glowColor: 'rgba(190, 30, 45, 0.4)',
+    },
+  ];
+
   return (
-    <section id="prizes" className="relative min-h-screen py-20 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section id="prizes" className="relative py-20 px-4 overflow-hidden">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E0E] via-[#0E0E0E]/95 to-[#0E0E0E]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 50 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <h2
-            className="text-4xl md:text-6xl mb-4"
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl mb-4"
             style={{
-              background: 'linear-gradient(135deg, #C33B33, #4D8B86, #EDE8E0)',
+              fontFamily: '"Cinzel", serif',
+              fontWeight: 700,
+              color: '#FAF7F2',
+              textShadow: '0 0 20px rgba(190, 30, 45, 0.3)',
+            }}
+          >
+            Prizes & Incentives
+          </motion.h2>
+          <motion.p
+            className="text-2xl md:text-3xl lg:text-4xl"
+            style={{
+              fontFamily: '"Cinzel", serif',
+              fontWeight: 600,
+              background: 'linear-gradient(to right, #BE1E2D, #FF6B6B, #BE1E2D)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: '0 0 40px rgba(190, 30, 45, 0.5)',
             }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Prizes & Rewards
-          </h2>
-          <p className="text-lg" style={{ color: 'rgba(237, 232, 224, 0.7)' }}>
-            Compete for exciting cash prizes and recognition
-          </p>
+            Prizes and Goodies Worth ₹100,000
+          </motion.p>
         </motion.div>
 
-        {/* Prize Podium */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {prizeCategories.map((prize, index) => {
-            const Icon = prize.icon;
-            return (
+        {/* Prize Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {prizes.map((prize, index) => (
+            <motion.div
+              key={prize.track}
+              className={`relative group cursor-pointer ${prize.borderColor}`}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{ scale: 1.05, y: -10 }}
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                border: '1px solid rgba(190, 30, 45, 0.3)',
+                borderRadius: '8px',
+                padding: '2rem',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              {/* Glow effect on hover */}
               <motion.div
-                key={prize.tier}
-                className="relative"
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: prize.y }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                style={{ scale: prize.scale }}
-              >
-                <TiltCard
-                  className="relative p-8 backdrop-blur-xl border-t-4 overflow-hidden bg-slate-900/80 rounded-lg"
+                className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  boxShadow: `0 0 30px ${prize.glowColor}, inset 0 0 20px ${prize.glowColor}`,
+                  pointerEvents: 'none',
+                }}
+              />
+
+              {/* Content */}
+              <div className="relative z-10">
+                {/* Track Name */}
+                <motion.h3
+                  className="text-2xl md:text-3xl mb-4"
                   style={{
-                    borderTopColor: prize.color,
-                    boxShadow: `0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px ${prize.color}30`,
+                    fontFamily: '"Cinzel", serif',
+                    fontWeight: 700,
+                    color: '#BE1E2D',
+                    textShadow: '0 0 10px rgba(190, 30, 45, 0.5)',
                   }}
-                  rotateAmplitude={12}
-                  scaleOnHover={1.08}
-                  spotlight={true}
-                  spotlightColor={`${prize.color}25`}
                 >
-                  {/* Floating icon */}
-                  <motion.div
-                    className="relative mx-auto w-24 h-24 mb-6 flex items-center justify-center"
-                    animate={{
-                      y: [0, -10, 0],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: index * 0.5,
-                    }}
-                  >
-                    <Icon size={64} style={{ color: prize.color }} strokeWidth={1.5} />
-                  </motion.div>
+                  {prize.track}
+                </motion.h3>
 
-                  {/* Tier name */}
-                  <h3 className="text-3xl md:text-4xl text-center mb-4" style={{ color: prize.color }}>
-                    {prize.tier}
-                  </h3>
+                {/* Description */}
+                <p
+                  className="text-sm md:text-base mb-6"
+                  style={{
+                    fontFamily: '"Cinzel", serif',
+                    color: 'rgba(250, 247, 242, 0.7)',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  {prize.description}
+                </p>
 
-                  {/* Prize amount */}
-                  <p className="text-2xl text-center mb-6" style={{ color: '#EDE8E0' }}>
-                    {prize.amount}
-                  </p>
+                {/* Prize Amount */}
+                <motion.div
+                  className="text-4xl md:text-5xl"
+                  style={{
+                    fontFamily: '"Cinzel", serif',
+                    fontWeight: 900,
+                    color: '#FAF7F2',
+                    textShadow: '0 0 15px rgba(190, 30, 45, 0.4)',
+                  }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {prize.amount}
+                </motion.div>
 
-                  {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: prize.color }} />
-                </TiltCard>
+                {/* Decorative line */}
+                <motion.div
+                  className="mt-6 h-1 bg-gradient-to-r from-transparent via-[#BE1E2D] to-transparent"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: index * 0.15 + 0.3 }}
+                />
+              </div>
 
-                {/* Winner badge for Gold */}
-                {prize.tier === 'Gold' && (
-                  <motion.div
-                    className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-6 py-2 border-2"
-                    style={{
-                      borderColor: prize.color,
-                      backgroundColor: '#0E0E0E',
-                      color: prize.color,
-                    }}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.8 }}
-                    viewport={{ once: true }}
-                  >
-                    🏆 Winner
-                  </motion.div>
-                )}
-              </motion.div>
-            );
-          })}
+              {/* Corner accents */}
+              <div
+                className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 opacity-50 group-hover:opacity-100 transition-opacity"
+                style={{ borderColor: '#BE1E2D' }}
+              />
+              <div
+                className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 opacity-50 group-hover:opacity-100 transition-opacity"
+                style={{ borderColor: '#BE1E2D' }}
+              />
+            </motion.div>
+          ))}
         </div>
 
-        {/* Additional Info */}
+        {/* Additional info */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          className="text-center mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <TiltCard
-            className="max-w-3xl mx-auto p-8 backdrop-blur-xl border-l-4 bg-slate-900/70 rounded-2xl"
+          <p
+            className="text-base md:text-lg"
             style={{
-              borderLeftColor: '#C33B33',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(195, 59, 51, 0.2)',
+              fontFamily: '"Cinzel", serif',
+              color: 'rgba(250, 247, 242, 0.6)',
+              letterSpacing: '0.1em',
             }}
-            rotateAmplitude={8}
-            spotlight={true}
-            spotlightColor="rgba(195, 59, 51, 0.15)"
           >
-            <h3 className="text-2xl text-center mb-4" style={{ color: '#C33B33' }}>
-              Additional Perks
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6" style={{ color: 'rgba(237, 232, 224, 0.85)' }}>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#C33B33' }} />
-                <p>Certificates for all participants</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#4D8B86' }} />
-                <p>Networking with industry leaders</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#C33B33' }} />
-                <p>Mentorship from experts</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 mt-2" style={{ backgroundColor: '#4D8B86' }} />
-                <p>Exciting sponsor goodies</p>
-              </div>
-            </div>
-          </TiltCard>
+            Plus exciting goodies and swag for all participants
+          </p>
         </motion.div>
       </div>
     </section>
