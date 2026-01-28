@@ -1,132 +1,147 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Calendar, Users, Code, Trophy, Flag, Clock, Mic, CheckCircle, Coffee, Brain, Briefcase, Globe, Rocket, Target, Zap } from 'lucide-react';
+import { Users, Code, Flag, Mic, CheckCircle, Brain, Rocket, Zap, Sparkles, FileText, Monitor, Utensils, Crown } from 'lucide-react';
 
 const timelineData = [
-  // SECTION 1: ONLINE ROUND
+  // SECTION 1: PHASE 1
   {
     id: 1,
-    icon: Globe,
+    type: 'header',
+    icon: Sparkles,
     title: 'PHASE 1: ONLINE ROUND',
     date: '28 Jan - 4 Feb',
-    description: 'The journey begins with the online abstract submission and selection process.',
-    color: '#C33B33', // Red
+    description: 'Ideation & Submission',
+    color: '#FFD700', // Bright Gold
   },
   {
     id: 2,
-    icon: Calendar,
+    type: 'event',
+    icon: FileText,
     title: 'Problem Statements',
     date: '28 Jan | 6:00 PM',
-    description: 'Problem statements released. PPT submission begins.',
-    color: '#4D8B86', // Teal
+    description: 'PPT submission begins.',
+    color: '#C33B33', // Red
   },
   {
     id: 3,
-    icon: Clock,
+    type: 'event',
+    icon: Monitor,
     title: 'PPT Submission',
     date: '3 Feb | 11:59 PM',
-    description: 'Deadline for submitting project presentations.',
-    color: '#C33B33', 
+    description: 'Project presentation deadline.',
+    color: '#4D8B86', // Teal
   },
   {
     id: 4,
+    type: 'event',
     icon: CheckCircle,
-    title: 'Shortlisting',
+    title: 'Shortlist Announcement',
     date: '4 Feb | 8:00 PM',
-    description: 'Announcement of teams selected for the offline round.',
-    color: '#4D8B86',
+    description: 'Finalists announced.',
+    color: '#C33B33', // Red
   },
 
-  // SECTION 2: HACKATHON DAY 1
+  // SECTION 2: PHASE 2
   {
     id: 5,
+    type: 'header',
     icon: Rocket,
     title: 'PHASE 2: HACKATHON DAY 1',
-    date: '6 Feb',
-    description: 'The offline hackathon kicks off with 24 hours of coding.',
-    color: '#C33B33', 
+    date: '6 Feb 2026',
+    description: 'The 24-Hour Marathon',
+    color: '#FFD700', // Bright Gold
   },
   {
     id: 6,
+    type: 'event',
     icon: Users,
     title: 'Team Registration',
     date: '6 Feb | 8:00 AM',
-    description: 'Team registration and seating at the venue.',
-    color: '#4D8B86', 
+    description: 'Venue check-in.',
+    color: '#4D8B86', // Teal
   },
   {
     id: 7,
+    type: 'event',
     icon: Mic,
-    title: 'Official Inauguration',
+    title: 'Inauguration',
     date: '6 Feb | 8:30 AM',
-    description: 'Opening remarks and rules briefing.',
-    color: '#C33B33', 
+    description: 'Opening ceremony.',
+    color: '#C33B33', // Red
   },
   {
     id: 8,
-    icon: Code,
+    type: 'event',
+    icon: Zap,
     title: 'Hackathon Begins',
     date: '6 Feb | 9:00 AM',
-    description: 'The 24-hour coding challenge officially starts.',
-    color: '#4D8B86', 
+    description: 'Coding starts!',
+    color: '#4D8B86', // Teal
   },
   {
     id: 9,
-    icon: Coffee,
+    type: 'event',
+    icon: Utensils,
     title: 'Lunch Break',
     date: '6 Feb | 1:00 PM',
-    description: 'Mid-day break for participants.',
-    color: '#C33B33', 
+    description: 'Refuel & Recharge.',
+    color: '#C33B33', // Red
   },
   {
     id: 10,
+    type: 'event',
     icon: Brain,
     title: 'Mentoring Round 1',
     date: '6 Feb | 3:00 PM',
-    description: 'Feedback and guidance from industry mentors.',
-    color: '#4D8B86', 
+    description: 'Expert guidance.',
+    color: '#4D8B86', // Teal
   },
 
-  // SECTION 3: HACKATHON DAY 2
+  // SECTION 3: PHASE 3
   {
     id: 11,
+    type: 'header',
     icon: Flag,
     title: 'PHASE 3: HACKATHON DAY 2',
-    date: '7 Feb',
-    description: 'Final evaluations, pitches, and the closing ceremony.',
-    color: '#C33B33', 
+    date: '7 Feb 2026',
+    description: 'The Final Sprint',
+    color: '#FFD700', // Bright Gold
   },
   {
     id: 12,
-    icon: Briefcase,
+    type: 'event',
+    icon: Code,
     title: 'Judges Evaluation',
     date: '7 Feb | 9:00 AM',
-    description: 'Technical assessment of progress and code.',
-    color: '#4D8B86', 
+    description: 'Code assessment.',
+    color: '#C33B33', // Red
   },
   {
     id: 13,
-    icon: Target,
+    type: 'event',
+    icon: Zap,
     title: '2nd Elimination',
     date: '7 Feb | 12:30 PM',
-    description: 'Announcement of teams moving to the final pitch.',
-    color: '#C33B33', 
+    description: 'Finalists selection.',
+    color: '#4D8B86', // Teal
   },
   {
     id: 14,
-    icon: Zap,
-    title: 'Final Pitch',
+    type: 'event',
+    icon: Monitor,
+    title: 'Final Round',
     date: '7 Feb | 2:00 PM',
-    description: 'High-impact PPT and project presentations.',
-    color: '#4D8B86', 
+    description: 'Final Presentations.',
+    color: '#C33B33', // Red
   },
   {
     id: 15,
-    icon: Trophy,
+    type: 'event',
+    icon: Crown,
     title: 'Results & Closing',
     date: '7 Feb | 4:30 PM',
-    description: 'Winners announcement and Hackathon conclusion.',
-    color: '#C33B33', 
+    description: 'Prize Distribution.',
+    color: '#D4AF37', // Royal Gold
   },
 ];
 
@@ -347,7 +362,71 @@ export default function Timeline() {
           >
             {timelineData.map((item, index) => {
               const Icon = item.icon;
+              const isHeader = item.type === 'header';
 
+              if (isHeader) {
+                return (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    style={{
+                      position: 'relative',
+                      marginBottom: '2rem',
+                      marginTop: index === 0 ? 0 : '3rem',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                      <div
+                        style={{
+                          width: '40px',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {/* Optional icon near the beam for header? */}
+                        {/* The beam is at left: 2rem (desktop) or 1rem (mobile) */}
+                        {/* The container paddingLeft is 5rem or 3rem */}
+                        {/* So this div is already to the right of the beam */}
+                      </div>
+                      <div>
+                        <h3
+                          style={{
+                            fontSize: isMobile ? '1.5rem' : '2rem',
+                            fontWeight: 800,
+                            letterSpacing: '0.05em',
+                            textTransform: 'uppercase',
+                            color: item.color,
+                            margin: 0,
+                            lineHeight: 1.2,
+                            textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+                          }}
+                        >
+                          {item.title}
+                        </h3>
+                        <div style={{
+                          fontSize: '0.9rem',
+                          color: 'rgba(237, 232, 224, 0.6)',
+                          marginTop: '0.25rem',
+                          fontWeight: 500,
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem'
+                        }}>
+                          <span style={{ color: item.color }}>{item.date}</span>
+                          <span>•</span>
+                          <span>{item.description}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              }
+
+              // Event Item
               return (
                 <motion.div
                   key={item.id}
