@@ -215,7 +215,7 @@ export default function AboutGenesis() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            GENESIS is a 30-hour offline hackathon bringing together the brightest minds to innovate,
+            GENESIS is a 24-hour offline hackathon bringing together the brightest minds to innovate,
             collaborate, and create groundbreaking solutions. Join us for an intense weekend of coding,
             learning, and building the future.
           </motion.p>
@@ -223,10 +223,10 @@ export default function AboutGenesis() {
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-6">
             {[
-              { label: 'Registrations', value: '1000+', color: '#C33B33' },
-              { label: 'Finalist Teams', value: '45+', color: '#4D8B86' },
-              { label: 'Organizers', value: '40+', color: '#C33B33' },
-              { label: 'Tech Tracks', value: '6', color: '#4D8B86' },
+              { label: 'Registrations', value: '500+', color: '#C33B33' },
+              { label: 'Finalist Teams', value: '50', color: '#4D8B86' },
+              { label: 'Organizing Members', value: '40', color: '#C33B33' },
+              { label: 'Tech Tracks', value: '3', color: '#4D8B86' },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -274,7 +274,7 @@ export default function AboutGenesis() {
                 Focus Tracks
               </h3>
               <div className="flex flex-wrap gap-3">
-                {['AI', 'FinTech', 'Blockchain'].map(
+                {['AI', 'Sustainability', 'Blockchain'].map(
                   (track) => (
                     <span
                       key={track}

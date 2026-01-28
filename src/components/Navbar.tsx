@@ -77,6 +77,7 @@ const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Tracks', href: '#tracks' },
+  { label: 'Prizes', href: '#prizes' },
   { label: 'Sponsors', href: '#sponsors' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
@@ -90,7 +91,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      
+
       // Determine active section
       const sections = navItems.map(item => item.href.substring(1));
       for (const section of sections) {
@@ -137,7 +138,8 @@ export default function Navbar() {
               whileHover={{ scale: 1.05 }}
               onClick={() => scrollToSection('#home')}
             >
-              <span style={{ color: '#C33B33' }}>GENESIS</span> 2026
+              <img src="/Genesis_logo.png" alt="Genesis Logo" className="w-8 h-8 object-contain" />
+              <span><span style={{ color: '#C33B33' }}>GENESIS</span> 2026</span>
             </motion.div>
 
             {/* Desktop Nav Items */}
@@ -170,7 +172,7 @@ export default function Navbar() {
             {/* Desktop CTA Button */}
             <motion.button
               className="hidden lg:block px-6 xl:px-8 py-2.5 text-sm xl:text-base tracking-wide"
-              onClick={(e) => scrollToSection('#register')}
+              onClick={(e) => window.open('https://unstop.com/p/genesis-2026-vivekanand-education-societys-institute-of-technology-vesit-mumbai-1626873', '_blank')}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as any;
                 el._prevCursor = el.style.cursor;
@@ -271,11 +273,11 @@ export default function Navbar() {
                     className="w-full text-left px-4 py-3 transition-colors"
                     style={{
                       color: activeSection === item.href.substring(1) ? '#C33B33' : '#EDE8E0',
-                      backgroundColor: activeSection === item.href.substring(1) 
-                        ? 'rgba(195, 59, 51, 0.1)' 
+                      backgroundColor: activeSection === item.href.substring(1)
+                        ? 'rgba(195, 59, 51, 0.1)'
                         : 'transparent',
-                      borderLeft: activeSection === item.href.substring(1) 
-                        ? '3px solid #C33B33' 
+                      borderLeft: activeSection === item.href.substring(1)
+                        ? '3px solid #C33B33'
                         : '3px solid transparent',
                       fontSize: '16px',
                       minHeight: '44px',
@@ -292,17 +294,16 @@ export default function Navbar() {
                 {/* Mobile CTA */}
                 <motion.button
                   onClick={(e) => {
-                     e.currentTarget.style.cursor = 'none';
+                    e.currentTarget.style.cursor = 'none';
                     const el = e.currentTarget as CustomButtonElement;
                     el.style.cursor = 'none';
-                    if(el._cursorCtl) {
-                     el._cursorCtl.remove();
-                     delete el._cursorCtl;
+                    if (el._cursorCtl) {
+                      el._cursorCtl.remove();
+                      delete el._cursorCtl;
                     }
-                    scrollToSection('#register');
-                   
-                  } } 
-                  className="w-full mt-4 px-6 py-3 text-center"
+                    window.open('https://unstop.com/p/genesis-2026-vivekanand-education-societys-institute-of-technology-vesit-mumbai-1626873', '_blank');
+
+                  }} className="w-full mt-4 px-6 py-3 text-center"
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as any;
                     // hide native cursor for this element and store previous value

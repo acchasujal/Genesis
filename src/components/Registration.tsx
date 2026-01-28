@@ -39,7 +39,7 @@ export default function Registration() {
           Join us at GENESIS 2026
         </p>
         <motion.a
-          href="https://unstop.com"
+          href="https://unstop.com/p/genesis-2026-vivekanand-education-societys-institute-of-technology-vesit-mumbai-1626873"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-semibold transition-all duration-300"

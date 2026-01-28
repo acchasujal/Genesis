@@ -7,13 +7,13 @@ import { TiltCard } from './ui/TiltCard';
 export function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
-  
+
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
@@ -22,7 +22,7 @@ export function About() {
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <div className="absolute -top-20 left-0 right-0 h-40 bg-gradient-to-b from-indigo-950 to-transparent transform -skew-y-2"></div>
       </div>
-      
+
       {/* Geometric Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-64 h-64 border-2 border-[#00E0FF] transform rotate-45"></div>
@@ -113,7 +113,7 @@ export function About() {
                   </div>
                   <h3 className="text-2xl text-white mb-4">GENESIS 2026</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    Our flagship 30-hour hackathon where innovation meets execution. This year's DHH Music × Tech theme merges cultural expression with cutting-edge technology.
+                    Our flagship 24-hour hackathon where innovation meets execution. This year's DHH Music × Tech theme merges cultural expression with cutting-edge technology.
                   </p>
                 </div>
               </TiltCard>
@@ -154,7 +154,7 @@ export function About() {
                     </div>
                   </div>
                 </motion.div>
-                
+
                 <div className="relative">
                   <div className="aspect-square rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden border border-slate-700">
                     <div className="absolute inset-0 flex items-center justify-center">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy, useRef } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { useScroll } from 'framer-motion';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar';
@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
 import AboutGenesis from './components/AboutGenesis';
 import Tracks from './components/Tracks';
+import Prizes from './components/Prizes';
 import Timeline from './components/Timeline';
 import Sponsors from './components/Sponsors';
 import FAQ from './components/FAQ';
@@ -13,7 +14,7 @@ import Footer from './components/Footer';
 import KatanaTransition from './components/KatanaTransition';
 import Registration from './components/Registration';
 import ErrorBoundary from './ErrorBoundary';
-import backgroundMusic from './assets/traditional-japanese-2-437931_2MiIiv30 (1).mp3';
+
 
 // Lazy-load the heavy 3D scene
 const Scene3D = lazy(() => import('./components/Scene3D'));
@@ -22,7 +23,6 @@ export default function App(): JSX.Element {
   const { scrollYProgress } = useScroll();
   const [currentSection, setCurrentSection] = useState<number>(0);
   const [transitioning, setTransitioning] = useState<boolean>(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Initialize Lenis Smooth Scroll
   useEffect(() => {
@@ -43,41 +43,6 @@ export default function App(): JSX.Element {
 
     return () => {
       lenis.destroy();
-    };
-  }, []);
-
-  // Background Music Effect
-  useEffect(() => {
-    const audio = new Audio(backgroundMusic);
-    audio.loop = false;
-    audio.volume = 0.5; // Low volume (20%)
-    audioRef.current = audio;
-
-    // Attempt to play the audio
-    const playAudio = () => {
-      audio.play().catch((error) => {
-        console.log('Autoplay prevented. User interaction required:', error);
-      });
-    };
-
-    // Try to play immediately
-    playAudio();
-
-    // If autoplay is blocked, play on first user interaction
-    const handleInteraction = () => {
-      playAudio();
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
-    };
-
-    document.addEventListener('click', handleInteraction);
-    document.addEventListener('keydown', handleInteraction);
-
-    return () => {
-      audio.pause();
-      audio.currentTime = 0;
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
     };
   }, []);
 
@@ -108,7 +73,7 @@ export default function App(): JSX.Element {
   return (
     <div className="relative bg-[#0E0E0E] text-white overflow-x-hidden">
       {/* Global Noise Overlay for Texture */}
-      <div 
+      <div
         className="fixed inset-0 pointer-events-none z-[1]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E")`,
@@ -133,6 +98,7 @@ export default function App(): JSX.Element {
         <AboutUs />
         <AboutGenesis />
         <Tracks />
+        <Prizes />
         <Timeline />
         <Sponsors />
         <FAQ />

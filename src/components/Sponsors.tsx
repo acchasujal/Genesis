@@ -2,28 +2,27 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import CircularGallery from './CircularGallery';
 
-const previousSponsors = [
-  { name: 'Unstop', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/branding-guidelines/icon/unstop-icon-800x800.png' },
-  { name: 'GeeksforGeeks', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/GeeksForGeeks_logo.png/1280px-GeeksForGeeks_logo.png' },
-  { name: 'Admit Abroad ', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv4CRROP-YMYVuN87iSnfNE5efPANk_WL5qOCxwMAhx4K-PitFoL5pD49aoJ2Sf3QeTv0&usqp=CAU' },
-  { name: 'Trade Diary', logo: 'https://tradediary.in/assets/images/logo-dark.png' },
-];
 
 const currentSponsors = [
-  { name: '.xyz', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/.xyz_logo.svg/2560px-.xyz_logo.svg.png' },
-  { name: 'ShwarmaJi', logo: 'https://shawarmaji.co.in/assets/img/food-pics/logo.png' },
-  { name: 'Mcdonalds', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/36/McDonald%27s_Golden_Arches.svg' },
-  { name: 'InterviewCake', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/opportunity/gallery/60aba3315a79b_ic.png?d=600x600' },
-  { name: 'Fueler', logo: 'https://avatars.githubusercontent.com/u/91483435?s=280&v=4' },
-  { name: 'Gemini', logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png' },
-  { name: 'Interview Buddy', logo: 'https://interviewbuddy.net/favicon.png' },
-  { name: 'Give My Certificate', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPcYIJAWI9_tnLby1dQV-dmGtCSv4HdFubbQ&s' },
+  { name: 'ShwarmaJi', logo: '/sponsor_logos/shawarmaji-logo.png' },
+  { name: 'Unstop', logo: '/sponsor_logos/unstop-logo.png' },
+  { name: 'Give My Certificate', logo: '/sponsor_logos/givemycertificate.jpg' },
+  { name: 'Gemini', logo: '/sponsor_logos/gemini.png' },
+  { name: 'Hinflon', logo: '/sponsor_logos/hinflon.avif' },
+  { name: '.xyz', logo: '/sponsor_logos/xyz.png' },
+  { name: 'O2O', logo: '/sponsor_logos/O2O.svg' },
+  { name: 'Coding Gurus', logo: '/sponsor_logos/Coding Gurus - Light Logo.png' },
+  { name: 'BMC', logo: '/sponsor_logos/bmc-logo.png' },
+  { name: 'SUD Life', logo: '/sponsor_logos/sudlife.svg' },
+  { name: 'Cyrene AI', logo: '/sponsor_logos/CyreneAI.png' },
+  { name: 'Noah AI', logo: '/sponsor_logos/NoahAI.png' },
+  { name: 'Ludex AI', logo: '/sponsor_logos/Pi7_cropper (1).png' },
+  { name: 'TigerPay X', logo: '/sponsor_logos/tigerpayx.svg' },
 ];
 
 // Convert sponsors to CircularGallery format
 const galleryItems = [
-  ...currentSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name })),
-  ...previousSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name })),
+  ...currentSponsors.map(sponsor => ({ image: sponsor.logo, text: sponsor.name }))
 ];
 
 export default function Sponsors() {
