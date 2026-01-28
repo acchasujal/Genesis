@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, Mail, MapPin } from 'lucide-react';
+import { Instagram, Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -147,6 +147,38 @@ export default function Footer() {
                 <Instagram size={20} style={{ color: '#C33B33' }} />
                 <span>@questit_cell</span>
               </motion.a>
+
+              <motion.div
+                className="flex items-center gap-3 p-4 backdrop-blur-xl border"
+                style={{
+                  backgroundColor: 'rgba(14, 14, 14, 0.7)',
+                  borderColor: 'rgba(195, 59, 51, 0.3)',
+                  color: 'rgba(237, 232, 224, 0.85)',
+                }}
+              >
+                <Phone size={20} style={{ color: '#4D8B86' }} />
+                <div>
+                  <p className="text-sm font-semibold">Anish Tawade</p>
+                  <p className="text-xs" style={{ color: 'rgba(237, 232, 224, 0.65)' }}>+91 93265 97580</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="flex items-center gap-3 p-4 backdrop-blur-xl border"
+                style={{
+                  backgroundColor: 'rgba(14, 14, 14, 0.7)',
+                  borderColor: 'rgba(195, 59, 51, 0.3)',
+                  color: 'rgba(237, 232, 224, 0.85)',
+                }}
+              >
+                <Phone size={20} style={{ color: '#4D8B86' }} />
+                <div>
+                  <p className="text-sm font-semibold">Varun Rahatgaonkar</p>
+                  <p className="text-xs" style={{ color: 'rgba(237, 232, 224, 0.65)' }}>+91 93721 48550</p>
+                </div>
+              </motion.div>
+
+              
             </div>
           </motion.div>
         </div>
