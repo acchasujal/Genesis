@@ -27,7 +27,7 @@ const timelineData = [
     type: 'event',
     icon: Monitor,
     title: 'PPT Submission',
-    date: '4 Feb | 10:00 PM',
+    date: '4 Feb | 10:00 AM',
     description: 'Project presentation deadline.',
     color: '#4D8B86', // Teal
   },
