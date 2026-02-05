@@ -14,10 +14,78 @@ interface TrackPopupProps {
   };
 }
 
+// === SHORTLISTED TEAMS DATA STRUCTURE ===
+const shortlistedTeams: { [key: string]: string[] } = {
+  'AI': [
+    'BRUH - Shriraj Dyaram',
+    'Gryffin Coders - Arjun Prabhu',
+    'Debt First Search - Diksha Bagwe',
+    'LOLgorithm - Sakshi Haresh Kukreja',
+    'Collective - Radhe Wankhade',
+    'HacknCrack - Adarsh Singh',
+    'Debugging Baddies - Aary Jain',
+    'CodeJam - Harsh Duggar',
+    'The Vanguard - Sarthak Dhonde',
+    'CODE YODHA - Vipul Khairnar',
+    'TechieChen - Awwab Abdullah Mhaiskar',
+    'HackstreetGirls - Vaishnavi Sanjay Kumbhar',
+    'Coding Wizards - Nilesh Joshi',
+    'Mesh Minds - Meezaan Malik',
+    'Ruby - Sruti Baliga',
+    'SMURFS - Siddhart Gupta'
+  ],
+  'Sustainability': [
+    '4BITS - Ranjit Kadam',
+    'Bharat Bytes - Vedang Mendhurwar',
+    'BitWizards - Aastha Rai',
+    'ByteBlazers - Prajwal Kulkarni',
+    'Chaturgraha - Abhinav Singh',
+    'Code of Duty - Pragathi Balamurugan',
+    'Cypher Squad - Neel Kalekar',
+    'DevDominators - Niraj Chaudhari',
+    'Encephalons - Parth Mohite',
+    'HackNova - Sanket Patil',
+    'HackStorm - Swagat Patil',
+    'InnoBits - Twinkle Gupta',
+    'Javings - Veda Patki',
+    'Stalemate - Aditya Yadav',
+    'Supreme - Gaurang',
+    'Team DABS - Aadit Mascarenhas',
+    'Team IDOL - Gauri Doiphode',
+    'Zero to One - Sameeksha Sankpal'
+  ],
+  'CyreneAI': [
+    // TigerPayX PS
+    '4grams - Shravani Patil (TigerPayX)',
+    'ByteBuilders - Bhumit Peshavariya (TigerPayX)',
+    'abcc - Komal Singh (TigerPayX)',
+    'CodeChamps - Chirag Vispute (TigerPayX)',
+    'Techshastra - Mansi Mohite (TigerPayX)',
+    
+    // Cyrene AI - PS 1
+    'attack_on_syntax - Shubham Jha (Cyrene AI PS1)',
+    'goose - Aryan Dangat (Cyrene AI PS1)',
+    'cache me if you can - Vanshi Gatti (Cyrene AI PS1)',
+    'Consensus Crew - Sahil Lund (Cyrene AI PS1)',
+    
+    // Cyrene AI - PS 2
+    'marlbros - Sushant Tulasi (Cyrene AI PS2)',
+    'sunrisers - Aditya Raorane (Cyrene AI PS2)',
+    'vectorflow - Chaitanya Kelkar (Cyrene AI PS2)',
+    'ethtown - Harshwardhan Khamkar (Cyrene AI PS2)',
+    
+    // Noah AI
+    'Git-ana - Chinmay Wankhede (Noah AI)',
+    'BotArmy - Manish Raje (Noah AI)',
+    'Techietrons - Aziz Zoomkhawala (Noah AI)'
+  ]
+};
+
 import { useState } from 'react';
 
 export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isTeamsOpen, setIsTeamsOpen] = useState(false);
 
   // Ensure these images exist in your /public/backgrounds/ folder
   const backgroundImages: { [key: string]: string } = {
@@ -35,6 +103,9 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
   };
+
+  // Get shortlisted teams for current track
+  const teams = shortlistedTeams[track.name] || [];
 
   return (
     <AnimatePresence>
@@ -85,23 +156,21 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-white/20 flex flex-wrap gap-4 items-center">
-                  {/* --- ANIMATION ADDED HERE --- */}
+                  {/* Got it button */}
                   <motion.button
                     onClick={onClose}
-                    // Removed 'transition-colors' from className so motion handles it
                     className="px-6 py-3 rounded-lg font-medium outline-none"
                     style={{
                       backgroundColor: '#D4A84B',
                       color: '#0E0E0E',
                       border: '2px solid #D4A84B',
                     }}
-                    // Animation props:
                     whileHover={{
                       scale: 1.05,
-                      filter: "brightness(1.1)", // Makes it slightly brighter on hover
+                      filter: "brightness(1.1)",
                     }}
                     whileTap={{
-                      scale: 0.95 // Shrinks slightly on click
+                      scale: 0.95
                     }}
                     transition={{
                       type: "spring",
@@ -111,9 +180,8 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                   >
                     Got it!
                   </motion.button>
-                  {/* -------------------------- */}
 
-                  {/* --- DOWNLOAD PS DROPDOWN --- */}
+                  {/* Download PS Dropdown */}
                   {track.problemStatements && track.problemStatements.length > 0 && (
                     <div
                       className="relative"
@@ -146,23 +214,15 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                       <AnimatePresence>
                         {isDropdownOpen && (
                           <motion.div
-                            // 1. Updated Animation: Animate from y: 10 (below) to y: 0 to match bottom anchoring
                             initial={{ opacity: 0, y: 10, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
-
-                            // 2. Updated Classes: 
-                            // 'right-full' puts it on the left. 
-                            // 'mr-3' adds spacing between button and menu.
-                            // 'bottom-0' aligns the bottom of the menu with the bottom of the button.
                             className="absolute right-full mr-3 bottom-0 w-72 rounded-xl overflow-hidden shadow-2xl z-50"
-
                             style={{
                               background: 'linear-gradient(145deg, rgba(20, 20, 20, 0.98), rgba(10, 10, 10, 0.98))',
                               border: '1px solid rgba(212, 168, 75, 0.3)',
                               backdropFilter: 'blur(20px)',
-                              // Optional: Ensure it grows upwards if the content is dynamic
                               display: 'flex',
                               flexDirection: 'column',
                               justifyContent: 'flex-end'
@@ -207,6 +267,107 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                               ))}
                             </div>
                           </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )}
+
+                  {/* === NEW: Show Shortlisted Teams Button === */}
+                  {teams.length > 0 && (
+                    <div
+                      className="relative"
+                      onMouseEnter={() => setIsTeamsOpen(true)}
+                      onMouseLeave={() => setIsTeamsOpen(false)}
+                    >
+                      <motion.button
+                        className="px-6 py-3 rounded-lg font-medium outline-none flex items-center gap-2"
+                        style={{
+                          backgroundColor: '#D4A84B',
+                          color: '#0E0E0E',
+                          border: '2px solid #D4A84B',
+                        }}
+                        whileHover={{
+                          scale: 1.05,
+                          filter: 'brightness(0.95)'
+                        }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setIsTeamsOpen(!isTeamsOpen)}
+                      >
+                        Show Shortlisted Teams
+                        <motion.span
+                          animate={{ rotate: isTeamsOpen ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          ▼
+                        </motion.span>
+                      </motion.button>
+
+                      <AnimatePresence>
+                        {isTeamsOpen && (
+                          <>
+                            <div 
+                              className="fixed inset-0 z-[60]" 
+                              onClick={() => setIsTeamsOpen(false)}
+                            />
+                            <motion.div
+                              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                              transition={{ duration: 0.2, ease: "easeOut" }}
+                              className="absolute right-full mr-3 bottom-0 w-80 rounded-xl shadow-2xl z-[70]"
+                              style={{
+                                background: 'linear-gradient(145deg, rgba(20, 20, 20, 0.98), rgba(10, 10, 10, 0.98))',
+                                border: '1px solid rgba(212, 168, 75, 0.3)',
+                                backdropFilter: 'blur(20px)',
+                                maxHeight: '400px',
+                                display: 'flex',
+                                flexDirection: 'column'
+                              }}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <div className="text-xs uppercase tracking-wider px-5 py-3 text-gray-400 font-semibold border-b border-white/10">
+                                Shortlisted Teams
+                              </div>
+                              <div 
+                                className="overflow-y-auto p-2"
+                                style={{
+                                  flex: '1 1 auto',
+                                  minHeight: 0
+                                }}
+                              >
+                                {teams.map((team, index) => (
+                                  <div
+                                    key={index}
+                                    className="px-3 py-3 rounded-lg transition-all duration-200"
+                                    style={{
+                                      marginTop: index > 0 ? '4px' : '0',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.background = 'rgba(212, 168, 75, 0.15)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.background = 'transparent';
+                                    }}
+                                  >
+                                    <div className="flex items-center gap-3">
+                                      <div
+                                        className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0"
+                                        style={{
+                                          backgroundColor: 'rgba(212, 168, 75, 0.2)',
+                                          color: '#D4A84B',
+                                        }}
+                                      >
+                                        {index + 1}
+                                      </div>
+                                      <div className="flex flex-col flex-1 min-w-0">
+                                        <span className="font-medium text-white text-sm truncate">{team}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          </>
                         )}
                       </AnimatePresence>
                     </div>
