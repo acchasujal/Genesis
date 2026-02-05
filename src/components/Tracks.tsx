@@ -24,7 +24,7 @@ const tracks = [
     icon: DollarSign,
     color: '#4D8B86',
     description: 'Renewable Energy Systems, Circular Economy, ESG Analytics',
-    psDescription: 'The Sustainability track invites you to build eco-friendly solutions for Mumbai’s unique urban environment. You’ll tackle real-world issues like improving waste management, creating smarter water systems, and boosting green spaces to help the Brihanmumbai Municipal Corporation (BMC) build a cleaner, more resilient city.',
+    psDescription: 'The Sustainability track invites you to build eco-friendly solutions for Mumbai\'s unique urban environment. You\'ll tackle real-world issues like improving waste management, creating smarter water systems, and boosting green spaces to help the Brihanmumbai Municipal Corporation (BMC) build a cleaner, more resilient city.',
     problemStatements: [
       { id: 'S1', title: 'S01     ', url: 'https://docs.google.com/document/d/1WIk25HQ0ggmk01_HOMxNIVZMzlV98NkpndPZ4PiSaq0/edit?tab=t.t4bnzr4g8fu4' },
       { id: 'S2', title: 'S02     ', url: 'https://docs.google.com/document/d/1WIk25HQ0ggmk01_HOMxNIVZMzlV98NkpndPZ4PiSaq0/edit?tab=t.k2zwehwdj6fa' },
@@ -72,7 +72,7 @@ export default function Tracks() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
             </span>
             <span className="text-red-400 text-xs font-bold tracking-widest uppercase">
-              Problem Statements Released
+              Shortlisted Teams Released
             </span>
           </motion.div>
 
@@ -144,7 +144,7 @@ export default function Tracks() {
                         className="text-[10px] font-extrabold tracking-widest text-white/90 uppercase"
                         style={{ writingMode: 'vertical-rl' }}
                       >
-                        PS LIVE
+                        Shortlisted Teams LIVE
                       </span>
                     </div>
                   </div>
