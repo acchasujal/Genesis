@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-
+import { useState } from 'react';
 
 interface TrackPopupProps {
   isOpen: boolean;
@@ -14,74 +14,25 @@ interface TrackPopupProps {
   };
 }
 
-// === SHORTLISTED TEAMS DATA STRUCTURE ===
-const shortlistedTeams: { [key: string]: string[] } = {
+// === WINNERS DATA STRUCTURE ===
+const winners: { [key: string]: string[] } = {
   'AI': [
-    'BRUH - Shriraj Dyaram',
-    'Gryffin Coders - Arjun Prabhu',
-    'Debt First Search - Diksha Bagwe',
-    'LOLgorithm - Sakshi Haresh Kukreja',
-    'Collective - Radhe Wankhade',
-    'HacknCrack - Adarsh Singh',
-    'Debugging Baddies - Aary Jain',
-    'CodeJam - Harsh Duggar',
-    'The Vanguard - Sarthak Dhonde',
-    'CODE YODHA - Vipul Khairnar',
-    'TechieChen - Awwab Abdullah Mhaiskar',
-    'HackstreetGirls - Vaishnavi Sanjay Kumbhar',
-    'Coding Wizards - Nilesh Joshi',
-    'Mesh Minds - Meezaan Malik',
-    'Ruby - Sruti Baliga',
-    'SMURFS - Siddhart Gupta'
+    'Debt First Search',
+    'Griffin Coders',
+    'Smurfs'
   ],
   'Sustainability': [
-    '4BITS - Ranjit Kadam',
-    'Bharat Bytes - Vedang Mendhurwar',
-    'BitWizards - Aastha Rai',
-    'ByteBlazers - Prajwal Kulkarni',
-    'Chaturgraha - Abhinav Singh',
-    'Code of Duty - Pragathi Balamurugan',
-    'Cypher Squad - Neel Kalekar',
-    'DevDominators - Niraj Chaudhari',
-    'Encephalons - Parth Mohite',
-    'HackNova - Sanket Patil',
-    'HackStorm - Swagat Patil',
-    'InnoBits - Twinkle Gupta',
-    'Javings - Veda Patki',
-    'Stalemate - Aditya Yadav',
-    'Supreme - Gaurang',
-    'Team DABS - Aadit Mascarenhas',
-    'Team IDOL - Gauri Doiphode',
-    'Zero to One - Sameeksha Sankpal'
+    'Byte Blazers',
+    'Dev Dominators',
+    'Javings'
   ],
   'CyreneAI': [
-    // TigerPayX PS
-    '4grams - Shravani Patil (TigerPayX)',
-    'ByteBuilders - Bhumit Peshavariya (TigerPayX)',
-    'abcc - Komal Singh (TigerPayX)',
-    'CodeChamps - Chirag Vispute (TigerPayX)',
-    'Techshastra - Mansi Mohite (TigerPayX)',
-    
-    // Cyrene AI - PS 1
-    'attack_on_syntax - Shubham Jha (Cyrene AI PS1)',
-    'goose - Aryan Dangat (Cyrene AI PS1)',
-    'cache me if you can - Vanshi Gatti (Cyrene AI PS1)',
-    'Consensus Crew - Sahil Lund (Cyrene AI PS1)',
-    
-    // Cyrene AI - PS 2
-    'marlbros - Sushant Tulasi (Cyrene AI PS2)',
-    'sunrisers - Aditya Raorane (Cyrene AI PS2)',
-    'vectorflow - Chaitanya Kelkar (Cyrene AI PS2)',
-    'ethtown - Harshwardhan Khamkar (Cyrene AI PS2)',
-    
-    // Noah AI
-    'Git-ana - Chinmay Wankhede (Noah AI)',
-    'BotArmy - Manish Raje (Noah AI)',
-    'Techietrons - Aziz Zoomkhawala (Noah AI)'
+    'Attack on Syntax',
+    'Marlbros',
+    'ABCC',
+    'Bot Army'
   ]
 };
-
-import { useState } from 'react';
 
 export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -104,8 +55,56 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
     backgroundRepeat: 'no-repeat',
   };
 
-  // Get shortlisted teams for current track
-  const teams = shortlistedTeams[track.name] || [];
+  // Get winners for current track
+  const teams = winners[track.name] || [];
+  
+  // Determine if this is the CyreneAI track (unranked winners)
+  const isCyreneAI = track.name === 'CyreneAI';
+  
+  // Medal/Trophy configuration
+  const getRankingStyle = (index: number) => {
+    if (isCyreneAI) {
+      // All CyreneAI winners get trophy and gold styling
+      return {
+        emoji: '🏆',
+        color: '#D4A84B',
+        bgColor: 'rgba(212, 168, 75, 0.2)',
+        label: 'Winner'
+      };
+    }
+    
+    // Ranked winners for AI and Sustainability
+    switch (index) {
+      case 0: // 1st place
+        return {
+          emoji: '🥇',
+          color: '#D4A84B',
+          bgColor: 'rgba(212, 168, 75, 0.2)',
+          label: '1st'
+        };
+      case 1: // 2nd place
+        return {
+          emoji: '🥈',
+          color: '#C0C0C0',
+          bgColor: 'rgba(192, 192, 192, 0.2)',
+          label: '2nd'
+        };
+      case 2: // 3rd place
+        return {
+          emoji: '🥉',
+          color: '#CD7F32',
+          bgColor: 'rgba(205, 127, 50, 0.2)',
+          label: '3rd'
+        };
+      default:
+        return {
+          emoji: '',
+          color: '#D4A84B',
+          bgColor: 'rgba(212, 168, 75, 0.2)',
+          label: (index + 1).toString()
+        };
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -272,7 +271,7 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                     </div>
                   )}
 
-                  {/* === NEW: Show Shortlisted Teams Button === */}
+                  {/* === UPDATED: Show Winners Button === */}
                   {teams.length > 0 && (
                     <div
                       className="relative"
@@ -293,7 +292,7 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsTeamsOpen(!isTeamsOpen)}
                       >
-                        Show Shortlisted Teams
+                        Show Winners
                         <motion.span
                           animate={{ rotate: isTeamsOpen ? 180 : 0 }}
                           transition={{ duration: 0.2 }}
@@ -325,8 +324,8 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                               }}
                               onClick={(e) => e.stopPropagation()}
                             >
-                              <div className="text-xs uppercase tracking-wider px-5 py-3 text-gray-400 font-semibold border-b border-white/10">
-                                Shortlisted Teams
+                              <div className="text-xs uppercase tracking-wider px-8 py-3 text-gray-400 font-semibold border-b border-white/10">
+                                {isCyreneAI ? 'Winners' : 'Top 3 Winners'}
                               </div>
                               <div 
                                 className="overflow-y-auto p-2"
@@ -335,36 +334,46 @@ export function TrackPopup({ isOpen, onClose, track }: TrackPopupProps) {
                                   minHeight: 0
                                 }}
                               >
-                                {teams.map((team, index) => (
-                                  <div
-                                    key={index}
-                                    className="px-3 py-3 rounded-lg transition-all duration-200"
-                                    style={{
-                                      marginTop: index > 0 ? '4px' : '0',
-                                    }}
-                                    onMouseEnter={(e) => {
-                                      e.currentTarget.style.background = 'rgba(212, 168, 75, 0.15)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                      e.currentTarget.style.background = 'transparent';
-                                    }}
-                                  >
-                                    <div className="flex items-center gap-3">
-                                      <div
-                                        className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0"
-                                        style={{
-                                          backgroundColor: 'rgba(212, 168, 75, 0.2)',
-                                          color: '#D4A84B',
-                                        }}
-                                      >
-                                        {index + 1}
-                                      </div>
-                                      <div className="flex flex-col flex-1 min-w-0">
-                                        <span className="font-medium text-white text-sm truncate">{team}</span>
+                                {teams.map((team, index) => {
+                                  const rankStyle = getRankingStyle(index);
+                                  return (
+                                    <div
+                                      key={index}
+                                      className="px-3 py-3 rounded-lg transition-all duration-200"
+                                      style={{
+                                        marginTop: index > 0 ? '4px' : '0',
+                                      }}
+                                      onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = 'rgba(212, 168, 75, 0.15)';
+                                      }}
+                                      onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = 'transparent';
+                                      }}
+                                    >
+                                      <div className="flex items-center gap-3">
+                                        <div
+                                          className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-lg flex-shrink-0"
+                                          style={{
+                                            backgroundColor: rankStyle.bgColor,
+                                            color: rankStyle.color,
+                                          }}
+                                        >
+                                          {rankStyle.emoji}
+                                        </div>
+                                        <div className="flex flex-col flex-1 min-w-0">
+                                          <span 
+                                            className="font-bold text-sm mb-0.5"
+                                            style={{ color: rankStyle.color }}
+                                          >
+                                            {!isCyreneAI && `${rankStyle.label} Place`}
+                                            {isCyreneAI && 'Winner'}
+                                          </span>
+                                          <span className="font-medium text-white text-sm truncate">{team}</span>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  );
+                                })}
                               </div>
                             </motion.div>
                           </>
