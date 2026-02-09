@@ -62,17 +62,47 @@ export default function Tracks() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          {/* Header Banner */}
+          {/* Header Banner - UPDATED FOR WINNERS */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/30 mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border backdrop-blur-sm relative overflow-hidden mb-6"
+            style={{
+              background: 'linear-gradient(135deg, rgba(212, 168, 75, 0.15), rgba(195, 59, 51, 0.15))',
+              borderColor: 'rgba(212, 168, 75, 0.4)',
+            }}
           >
+            {/* Sparkle animation */}
+            <motion.span
+              className="absolute inset-0"
+              animate={{
+                background: [
+                  'radial-gradient(circle at 20% 50%, rgba(212, 168, 75, 0.3) 0%, transparent 50%)',
+                  'radial-gradient(circle at 80% 50%, rgba(212, 168, 75, 0.3) 0%, transparent 50%)',
+                  'radial-gradient(circle at 20% 50%, rgba(212, 168, 75, 0.3) 0%, transparent 50%)',
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
             <span className="relative flex h-2 w-2">
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: '#D4A84B' }}></span>
+              <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: '#D4A84B' }}></span>
             </span>
-            <span className="text-red-400 text-xs font-bold tracking-widest uppercase">
-              Shortlisted Teams Released
+            <span 
+              className="text-lg md:text-xl font-black tracking-widest uppercase relative z-10"
+              style={{
+                background: 'linear-gradient(135deg, #D4A84B, #C33B33, #D4A84B)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite',
+              }}
+            >
+              Winners Announced! 🎉
             </span>
           </motion.div>
 
@@ -128,11 +158,15 @@ export default function Tracks() {
                   spotlightColor={`${track.color}20`}
                 >
 
-                  {/* === NEW: Vertical Right-Edge "PS LIVE" Strip === */}
+                  {/* Vertical Right-Edge Strip - UPDATED FOR WINNERS */}
                   <div className="absolute top-8 right-0 z-20">
                     <div className="flex flex-col items-center gap-3 py-3 px-1.5 rounded-l-xl bg-white/5 border-y border-l border-white/10 backdrop-blur-md shadow-xl">
                       {/* Pulsing Dot */}
                       <span className="relative flex h-2 w-2">
+                        <span
+                          className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                          style={{ backgroundColor: track.color }}
+                        ></span>
                         <span
                           className="relative inline-flex rounded-full h-2 w-2"
                           style={{ backgroundColor: track.color }}
@@ -144,7 +178,7 @@ export default function Tracks() {
                         className="text-[10px] font-extrabold tracking-widest text-white/90 uppercase"
                         style={{ writingMode: 'vertical-rl' }}
                       >
-                        Shortlisted Teams LIVE
+                        Winners LIVE
                       </span>
                     </div>
                   </div>
@@ -200,6 +234,14 @@ export default function Tracks() {
           track={tracks[selectedTrack]}
         />
       )}
+      
+      {/* Add gradient animation keyframes */}
+      <style jsx>{`
+        @keyframes gradient-shift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+      `}</style>
     </section>
   );
 }
